@@ -1,2 +1,3 @@
-# Tester-students
-Tester for students. React+Electron+MaterialUI
+# React Electron MaterialUI
+
+Tester for students
