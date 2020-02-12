@@ -1,0 +1,45 @@
+/*#FBF5E7*/
+body{
+    background: #fff;
+    margin:0 !important;
+    font-family:  'Segoe UI', 'Open Sans', 'Helvetica Neue';
+}
+a {
+    text-decoration: none;
+    outline: none;
+}
+nav a {
+	position: relative;
+	display: inline-block;
+	margin: 15px 15px;
+	color: rgb(218, 218, 218);
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 400;
+	text-shadow: 0 0 1px rgba(255,255,255,0.3);
+    font-size: 1.1em;
+    transition: all 0.1s linear;
+}
+nav a:hover {
+    color: rgb(255, 255, 255) ;
+    border-bottom: rgb(255, 255, 255) 1px solid ;
+    transform: scale(0.95);
+}
+.active {
+    border-bottom: rgb(255, 255, 255) 3px solid ;
+    color: rgb(255, 255, 255);
+}
+
+#taskBtnAddImg{
+    color: #FFFFFF;
+    border-color: #006F51;
+    background: #006F51;
+    position:absolute;
+    right: 10px;
+    top: 10px;
+    opacity:.5;
+    transition: .5s all linear
+}
+#taskBtnAddImg:hover{
+    opacity: 1;
+}
