@@ -8,9 +8,9 @@ import "./styles/main.css"
 
 
 
-ReactDOM.render(React.createElement(
+ReactDOM.render(
     <HashRouter>
         <App/>
-    </HashRouter>)
-, document.getElementById("app")
+    </HashRouter>
+, document.getElementById("root")
 )    

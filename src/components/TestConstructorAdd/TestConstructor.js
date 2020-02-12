@@ -67,7 +67,7 @@ export default function FullScreenDialog(props) {
       correct:false
     }
     setTasks(tasks.map(task=>{
-      if(task.id == id_task)
+      if(task.id === id_task)
         task.answers.push(newAnswer);
         return task;
        }
@@ -75,7 +75,7 @@ export default function FullScreenDialog(props) {
   }
   const removeAnswer = (id_task) =>{
     setTasks(tasks.map(task=>{
-      if(task.id == id_task)
+      if(task.id === id_task)
         task.answers.splice(-1,1);
         return task
     }))
