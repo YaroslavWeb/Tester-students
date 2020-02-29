@@ -12,7 +12,7 @@ const WorkAnswersSingle =(props) => {
             <FormLabel>Выберите один или несколько ответов</FormLabel>
                 {props.actionTask.answers.map(answer=>{
                     return(
-                        <FormControlLabel value={answer.answer} control={<Checkbox />} label={answer.answer} />
+                        <FormControlLabel value={answer.answer} key = {answer.id} control={<Checkbox />} label={answer.answer} />
                     )
                 })}
         </FormControl>
