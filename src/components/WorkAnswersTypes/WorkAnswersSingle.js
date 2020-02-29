@@ -17,11 +17,10 @@ const WorkAnswersSingle =(props) => {
     
         <FormControl fullWidth={true}>
             
-            <FormLabel>Выберите один ответ</FormLabel>
-            
+            <FormLabel style={{color:'black', padding:'15px',fontWeight:'bold'}}>Выберите один ответ</FormLabel>
 
             <RadioGroup value={value} onChange={handleChange}>
-                <Grid container direction="row" justify="space-between" alignItems="flex-start">
+                <Grid container direction="row" justify="space-between" alignItems="flex-start" style={{marginTop:'2vh', padding:'15px',borderRadius: '25px'}}>
                 {props.actionTask.answers.map(answer=>{
                     return(
                         <Grid item xs={12} sm={6} md={4} lg={3}  style={{padding:'center'}} key={answer.id}>
