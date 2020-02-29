@@ -17,10 +17,11 @@ function createMainWindow() {
     height: 720,
     minWidth: 1280,
     minHeight: 720,
-
     webPreferences: {
     }
-  })
+  }
+);
+
 
 Menu.setApplicationMenu(null);
 
@@ -39,7 +40,6 @@ Menu.setApplicationMenu(null);
     }))
     window.webContents.openDevTools()
   }
-
   window.on('closed', () => {
     mainWindow = null
   })

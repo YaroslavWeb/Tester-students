@@ -7,7 +7,7 @@ const WorkAnswersSingle =() => {
     return(
         <FormControl>
             <FormLabel>Напишите ответ</FormLabel>
-            <TextField id="outlined-basic" label="Ваш ответ" variant="outlined" margin="normal"/>
+            <TextField id="outlined-basic"  label="Ваш ответ" variant="outlined" margin="normal"/>
         </FormControl>
     )
 }

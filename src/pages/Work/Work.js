@@ -23,17 +23,23 @@ const Work = () =>{
   return (
     <div>
      <WorkHeader workTestTheme={workTest[0].theme} workTestTime={workTest[0].time}/>
-     <Grid container style={{margin:20}}>
-      
-       <Grid item xs={12}>{actionTask.question}</Grid>
-       <Grid item xs={12}>
+     <Grid container direction="column" justify="space-around" alignItems="stretch" style={{padding:20}}>
+       <Grid item xs={12} >{actionTask.question}</Grid>
         { 
-          actionTask.type == 'Одиночный выбор'? <WorkAnswersSingle actionTask={actionTask}/>:
-          actionTask.type == 'Множественный выбор'? <WorkAnswersMulti actionTask={actionTask}/>:
+          actionTask.type == 'Одиночный выбор'? 
+          <Grid item xs={12} style={{padding:'center'}}>
+          <WorkAnswersSingle actionTask={actionTask} />
+          </Grid>:
+          actionTask.type == 'Множественный выбор'?  
+          <Grid item xs={12} style={{padding:'center'}}>
+            <WorkAnswersMulti actionTask={actionTask}/>
+            </Grid>:
+             <Grid item xs={12} style={{padding:'center'}}>
           <WorkAnswersText actionTask={actionTask}/>
+          </Grid>
         }
-       </Grid>
-       <Grid item xs={12}>        
+       
+       <Grid item xs={12} style = {{marginTop:'auto'}}>        
         <Button variant="contained" size="large" color="primary" onClick={()=>{
             counterTask++;
             setActionTask(workTest[0].tasks[counterTask])
@@ -42,7 +48,7 @@ const Work = () =>{
           Следующий
         </Button>
        </Grid>
-     </Grid>
+       </Grid>
     </div>
   )
 } 
