@@ -31,7 +31,7 @@ export default function MainHeader(props) {
     <div >
       <AppBar position="static" style = {{background:'#006F51'}}>
         <Toolbar style = {{ display: 'flex', justifyContent: 'space-between'}}>
-          <Typography variant='h5'>
+          <Typography variant='h5' >
             {props.workTestTheme}
           </Typography>
             <div className={classes.root}>

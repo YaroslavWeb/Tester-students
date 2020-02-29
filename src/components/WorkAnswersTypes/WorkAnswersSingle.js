@@ -23,13 +23,15 @@ const WorkAnswersSingle =(props) => {
                 <Grid container direction="row" justify="space-between" alignItems="flex-start" style={{marginTop:'2vh', padding:'15px',borderRadius: '25px'}}>
                 {props.actionTask.answers.map(answer=>{
                     return(
-                        <Grid item xs={12} sm={6} md={4} lg={3}  style={{padding:'center'}} key={answer.id}>
+                   
+                        <Grid item xs={12} sm={6} md={3} lg={3}  style={{padding:'center'}} key={answer.id}>
                         <FormControlLabel value={answer.answer}  control={<Radio />} label={answer.answer} />
                         </Grid>
+                   
                     )
                 })}</Grid>
             </RadioGroup>
-             
+
         </FormControl>
        
     )
