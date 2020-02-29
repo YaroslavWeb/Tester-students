@@ -23,30 +23,29 @@ const Work = () =>{
   return (
     <div>
      <WorkHeader workTestTheme={workTest[0].theme} workTestTime={workTest[0].time}/>
-     <Grid container direction="column" justify="space-around" alignItems="stretch" style={{padding:20}}>
+     <Grid container style={{padding:20, height:'90vh'}}>
        <Grid item xs={12} >{actionTask.question}</Grid>
+       <Grid item xs={12} style={{padding:'center'}}>
         { 
           actionTask.type == 'Одиночный выбор'? 
-          <Grid item xs={12} style={{padding:'center'}}>
-          <WorkAnswersSingle actionTask={actionTask} />
-          </Grid>:
-          actionTask.type == 'Множественный выбор'?  
-          <Grid item xs={12} style={{padding:'center'}}>
-            <WorkAnswersMulti actionTask={actionTask}/>
-            </Grid>:
-             <Grid item xs={12} style={{padding:'center'}}>
+          <WorkAnswersSingle actionTask={actionTask} />:
+          actionTask.type == 'Множественный выбор'? 
+          <WorkAnswersMulti actionTask={actionTask}/>:
           <WorkAnswersText actionTask={actionTask}/>
-          </Grid>
         }
+        
+        </Grid>
        
-       <Grid item xs={12} style = {{marginTop:'auto'}}>        
-        <Button variant="contained" size="large" color="primary" onClick={()=>{
+       <Grid item xs={12} > 
+       <Grid container  direction="row" justify="flex-end" alignItems="flex-end" style={{height:'100%'}}>   
+        <Button variant="contained" size="large" color="primary" style={{alignSelf: 'flex-end'}} onClick={()=>{
             counterTask++;
             setActionTask(workTest[0].tasks[counterTask])
           }} 
           disabled={counterTask === maxSteps-1}>
           Следующий
         </Button>
+        </Grid>    
        </Grid>
        </Grid>
     </div>
