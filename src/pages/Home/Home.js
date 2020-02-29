@@ -26,7 +26,6 @@ const Home =(props) => {
   const {students,tests } = React.useContext(StateContext)
     return (      
       <div>
-        {window.location.href}
         <MainHeader/>
           <div style={{margin:'20px'}}>
           <Autocomplete

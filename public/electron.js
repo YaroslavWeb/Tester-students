@@ -1,16 +1,20 @@
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const Menu = electron.Menu
 const path = require("path");
 const isDev = require("electron-is-dev");
 let mainWindow;
 function createWindow() {
     mainWindow = new BrowserWindow({ 
-        width: 1200, 
-        height: 800,
+        width: 1280, 
+        height: 720,
+        minWidth: 900,
+        minHeight: 600,
+        show: false,
         icon: ""
     });
-     
+    Menu.setApplicationMenu(null);
 
     mainWindow.loadURL(
         isDev
@@ -18,6 +22,10 @@ function createWindow() {
         : `file://${path.join(__dirname, "../build/index.html")}`
     );
     mainWindow.on("closed", () => (mainWindow = null));
+
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show()
+      })
 }
 
 app.on("ready", createWindow);
