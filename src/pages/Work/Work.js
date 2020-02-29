@@ -5,6 +5,9 @@ import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 
 import WorkAnswersSingle from '../../components/WorkAnswersTypes/WorkAnswersSingle'
+import WorkAnswersMulti from '../../components/WorkAnswersTypes/WorkAnswersMulti'
+import WorkAnswersText from '../../components/WorkAnswersTypes/WorkAnswersText'
+
 
 let counterTask = 0
 
@@ -25,9 +28,9 @@ const Work = () =>{
        <Grid item xs={12}>{actionTask.question}</Grid>
        <Grid item xs={12}>
         { 
-          actionTask.type == 'Одиночный выбор'? <WorkAnswersSingle/>:
-          actionTask.type == 'Множественный выбор'? <div>Множественный выбор</div>:
-          <div>Ввод текста</div>
+          actionTask.type == 'Одиночный выбор'? <WorkAnswersSingle actionTask={actionTask}/>:
+          actionTask.type == 'Множественный выбор'? <WorkAnswersMulti actionTask={actionTask}/>:
+          <WorkAnswersText actionTask={actionTask}/>
         }
        </Grid>
        <Grid item xs={12}>        

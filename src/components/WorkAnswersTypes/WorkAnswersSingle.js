@@ -7,18 +7,21 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
 const WorkAnswersSingle =(props) => {
-    const [value, setValue] = React.useState('female');
+    const [value, setValue] = React.useState();
 
     const handleChange = event => {
       setValue(event.target.value);
     };
+
     return(
         <FormControl>
-            <FormLabel>Выбор ответа</FormLabel>
-            <RadioGroup aria-label="gender" value={value} onChange={handleChange}>
-                <FormControlLabel value="female" control={<Radio />} label="Female" />
-                <FormControlLabel value="male" control={<Radio />} label="Male" />
-                <FormControlLabel value="other" control={<Radio />} label="Other" />
+            <FormLabel>Выберите один ответ</FormLabel>
+            <RadioGroup value={value} onChange={handleChange}>
+                {props.actionTask.answers.map(answer=>{
+                    return(
+                        <FormControlLabel value={answer.answer} control={<Radio />} label={answer.answer} />
+                    )
+                })}
             </RadioGroup>
         </FormControl>
     )

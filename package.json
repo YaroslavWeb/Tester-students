@@ -1,8 +1,8 @@
 {
-  "name": "react-electron",
+  "name": "tester-students",
   "version": "0.1.0",
-  "description": "Simple boilerplate for developing an Electron app with React",
-  "author": "willjw3",
+  "description": "Test editor and tester for students",
+  "author": "IrGUPS",
   "build": {
     "appId": "react.electron",
     "win": {
