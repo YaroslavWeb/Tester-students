@@ -14,6 +14,7 @@ function createWindow() {
         show: false,
         icon: ""
     });
+    mainWindow.webContents.openDevTools()
     Menu.setApplicationMenu(null);
 
     mainWindow.loadURL(

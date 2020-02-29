@@ -9,7 +9,9 @@ import StateContext from '../context/StateContext'
 import studentReducer from '../reducer/studentReducer'
 import testsReducer from '../reducer/testsReducer'
 
+
 const App = () =>{
+  
   const [students, setStudents] = useState([
     {id:1, name:'Карпухин А.С.', group:'ПИ-16', marks:[
       {id:1, mark:'4', theme: 'if else'},
