@@ -33,16 +33,19 @@ const Work = () =>{
           <WorkAnswersMulti actionTask={actionTask}/>:
           <WorkAnswersText actionTask={actionTask}/>
         }
+        
         </Grid>
        
-       <Grid item xs={12}>        
-        <Button variant="contained" size="large" color="primary" onClick={()=>{
+       <Grid item xs={12} > 
+       <Grid container  direction="row" justify="flex-end" alignItems="flex-end" style={{height:'100%'}}>   
+        <Button variant="contained" size="large" color="primary" style={{alignSelf: 'flex-end'}} onClick={()=>{
             counterTask++;
             setActionTask(workTest[0].tasks[counterTask])
           }} 
           disabled={counterTask === maxSteps-1}>
           Следующий
         </Button>
+        </Grid>    
        </Grid>
        </Grid>
     </div>
