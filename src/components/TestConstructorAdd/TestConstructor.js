@@ -167,7 +167,7 @@ export default function FullScreenDialog(props) {
               </Grid>
               <Grid style={{padding:5}} item xs={12} sm={4} md={2} lg={2}>
                 <Button
-                  style={{height:'80%', width:'100%', color: '#FFFFFF', borderColor:'#006F51',background: '#006F51'}}
+                  style={{height:'100%', width:'100%', color: '#FFFFFF', borderColor:'#006F51',background: '#006F51'}}
                   variant="contained" 
                   color="primary"
                   startIcon={<AddIcon />}

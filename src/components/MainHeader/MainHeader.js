@@ -28,12 +28,12 @@ export default function MainHeader() {
     <div>
     <div className={classes.root}>
       <AppBar position="static" style = {{background:'#006F51'}}>
-        <Toolbar style={{ display: 'flex', justifyContent: 'space-between'}}>
+        {/* style={{ display: 'flex', justifyContent: 'space-between'}} */}
+        <Toolbar >
+          <LoginDialog />
           <Typography variant='h5'>
-            Основы программирования
+            Тестирование студентов
           </Typography>
-			
-           <LoginDialog/>
         </Toolbar>
      </AppBar>
    </div>

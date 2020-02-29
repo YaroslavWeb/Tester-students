@@ -8,6 +8,7 @@ import { HashRouter as Router, Route } from 'react-router-dom'
 import StateContext from '../context/StateContext'
 import studentReducer from '../reducer/studentReducer'
 import testsReducer from '../reducer/testsReducer'
+import Authorization from "../pages/Authorization/Authorization"
 
 const App = () =>{
   const [students, setStudents] = useState([
