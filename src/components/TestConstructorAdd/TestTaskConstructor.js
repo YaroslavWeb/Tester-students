@@ -3,7 +3,6 @@ import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Slide from '@material-ui/core/Slide'
-import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate'
 import DoneIcon from '@material-ui/icons/Done'
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -13,8 +12,14 @@ import ButtonGroup from '@material-ui/core/ButtonGroup'
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
+import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 const TestTaskConstructor = (props) => {
+  function getImg(evt){
+    var files = evt.target.files;
+    var file = files[0];
+    console.log(file.name);
+
+}
   const taskTypes = [
     {taskType:"Одиночный выбор"},
     {taskType:"Множественный выбор"},
@@ -32,12 +37,20 @@ const TestTaskConstructor = (props) => {
                variant="outlined"
                InputProps={{
                 startAdornment: (
-                  <Button 
-                    id="taskBtnAddImg"
-                    variant="contained" 
-                  >
-                    <AddPhotoAlternateIcon/>
+                  <div >
+                <input style={{display: 'none'}}
+                id="contained-button-file"
+                  accept="image/*"
+                  multiple
+                  type="file"
+                />
+                <label htmlFor="contained-button-file">
+                  <Button variant="contained" component="span" id="taskBtnAddImg">
+                  <AddPhotoAlternateIcon/>
                   </Button>
+                </label>
+                </div>
+                          
                 ),
               }}
                /> 
