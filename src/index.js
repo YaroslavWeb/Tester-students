@@ -6,8 +6,6 @@ import App from "./renderer/App"
 
 import "./styles/main.css"
 
-
-
 ReactDOM.render(
     <HashRouter>
         <App/>

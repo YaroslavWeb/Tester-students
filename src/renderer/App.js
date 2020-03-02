@@ -4,13 +4,17 @@ import Students from '../pages/Students'
 import Test from '../pages/Test'
 import Info from '../pages/Info'
 import Work from '../pages/Work'
+import Authorization from "../pages/Authorization/Authorization"
 import { HashRouter as Router, Route } from 'react-router-dom'
 import StateContext from '../context/StateContext'
 import studentReducer from '../reducer/studentReducer'
 import testsReducer from '../reducer/testsReducer'
-import Authorization from "../pages/Authorization/Authorization"
+
+const db = window.require('electron').remote.getGlobal('database');
+
 
 const App = () =>{
+  
   const [students, setStudents] = useState([
     {id:1, name:'Карпухин А.С.', group:'ПИ-16', marks:[
       {id:1, mark:'4', theme: 'if else'},
