@@ -25,7 +25,7 @@ const Work = () =>{
      <WorkHeader workTestTheme={workTest[0].theme} workTestTime={workTest[0].time}/>
      <Grid container style={{padding:20, height:'90vh'}}>
        <Grid item xs={12} >{actionTask.question}</Grid>
-       <Grid item xs={12} style={{padding:'center'}}>
+       <Grid item xs={12}>
         { 
           actionTask.type == 'Одиночный выбор'? 
           <WorkAnswersSingle actionTask={actionTask} />:
