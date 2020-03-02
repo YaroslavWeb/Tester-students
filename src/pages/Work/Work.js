@@ -7,8 +7,7 @@ import Button from '@material-ui/core/Button'
 import WorkAnswersSingle from '../../components/WorkAnswersTypes/WorkAnswersSingle'
 import WorkAnswersMulti from '../../components/WorkAnswersTypes/WorkAnswersMulti'
 import WorkAnswersText from '../../components/WorkAnswersTypes/WorkAnswersText'
-
-
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 let counterTask = 0
 
 const Work = () =>{
@@ -24,8 +23,13 @@ const Work = () =>{
     <div>
      <WorkHeader workTestTheme={workTest[0].theme} workTestTime={workTest[0].time}/>
      <Grid container style={{padding:20, height:'90vh'}}>
-       <Grid item xs={12} >{actionTask.question}</Grid>
-       <Grid item xs={12}>
+       
+       <Grid item xs={12} style = {{height:'45vh', backgroundColor: 'rgba(0,113,83, 0.1)',
+       border:'1px solid rgba(0,113,83)',borderRadius:'3px',padding:'20px',boxShadow: '0.4em 0.4em 5px rgba(122,122,122,0.5)'}}>
+         {actionTask.question}
+         </Grid>
+       
+       <Grid item xs={12} style = {{ backgroundColor: 'rgba(0,113,83, 0.1)', border:'1px solid rgba(0,113,83)',borderRadius:'3px',boxShadow: '0.4em 0.4em 5px rgba(122,122,122,0.5)'}}>
         { 
           actionTask.type == 'Одиночный выбор'? 
           <WorkAnswersSingle actionTask={actionTask} />:
@@ -38,13 +42,15 @@ const Work = () =>{
        
        <Grid item xs={12} > 
        <Grid container  direction="row" justify="flex-end" alignItems="flex-end" style={{height:'100%'}}>   
-        <Button variant="contained" size="large" color="primary" style={{alignSelf: 'flex-end'}} onClick={()=>{
+       
+        <Button variant="contained" size="large" style={{alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}} onClick={()=>{
             counterTask++;
             setActionTask(workTest[0].tasks[counterTask])
           }} 
           disabled={counterTask === maxSteps-1}>
-          Следующий
+            <NavigateNextIcon/>
         </Button>
+        
         </Grid>    
        </Grid>
        </Grid>
