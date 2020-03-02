@@ -12,7 +12,7 @@ db.students = new Datastore({
     autoload: true
 })
 db.students.insert({name : "Putin V.V.", year: 1952});
-// global.database = db;
+global.database = db;
 
 let mainWindow;
 
@@ -23,7 +23,10 @@ function createWindow() {
         minWidth: 900,
         minHeight: 600,
         show: false,
-        icon: ""
+        icon: "",
+        webPreferences: {
+            nodeIntegration: true
+        }
     });
     mainWindow.webContents.openDevTools()
     Menu.setApplicationMenu(null);
@@ -52,8 +55,3 @@ app.on("activate", () => {
         createWindow();
     }
 });
-
-
-ipc.on('update-notify-value', function (event, arg) {
-    win.webContents.send('targetPriceVal', arg)
-  })

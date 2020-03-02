@@ -10,7 +10,7 @@ import StateContext from '../context/StateContext'
 import studentReducer from '../reducer/studentReducer'
 import testsReducer from '../reducer/testsReducer'
 
-// const db = window.require('electron').remote.getGlobal('database');
+const db = window.require('electron').remote.getGlobal('database');
 
 
 const App = () =>{
