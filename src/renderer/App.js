@@ -12,23 +12,9 @@ import testsReducer from '../reducer/testsReducer'
 
 const db = window.require('electron').remote.getGlobal('database');
 
-
 const App = () =>{
   
-  const [students, setStudents] = useState([
-    {id:1, name:'Карпухин А.С.', group:'ПИ-16', marks:[
-      {id:1, mark:'4', theme: 'if else'},
-      {id:2, mark:'1', theme: 'For while'}
-    ]},
-    {id:2, name:'Алтаев А.С.', group:'ПИ-16', marks:[
-      {id:1, mark:'3', theme: 'if else'},
-      {id:2, mark:'3', theme: 'For while'}
-    ]},
-    {id:3, name:'Сергеев А.С.', group:'ИС-16', marks:[
-      {id:1, mark:'4', theme: 'if else'},
-      {id:2, mark:'2', theme: 'For while'},
-    ]}
-  ]);
+  const [students, setStudents] = useState([]);
 
   const [tests, setTests] = useState([
     {id:1, theme:'If else', time:240, attempts:3, tasks:[
@@ -55,7 +41,7 @@ const App = () =>{
       {id:1, type:'Одиночный выбор', score:1, section:1, question:'В чём разница If и Case?', answers:[
         {id:1, title:'Ответ №1', correct:true, answer:'Он такой-то'},
         {id:2, title:'Ответ №2', correct:false, answer:'Он вот такой'},
-        {id:3, title:'Ответ №3', correct:false, answer:'Он не такой'},
+        {id:3, title:'Ответ №3', correct:false, answebr:'Он не такой'},
         {id:4, title:'Ответ №4', correct:false, answer:'Он какой-то вот такой'}
       ]},
       {id:2, type:'Ввод текста', score:2, section:1, question:'Зачем нужен else?', answers:[
@@ -66,6 +52,18 @@ const App = () =>{
       ]}
     ]}
   ]);
+
+  useEffect(()=>{
+    db.students.find({}, (err, docs)=>{
+      setStudents(docs)
+    })
+  },[])
+
+  useEffect(()=>{
+    students.forEach(student => {
+      db.students.update({_id:student._id}, {$push:{...student}}, {});
+    });
+  }, [students])
 
   const addTest = (theme, time, attempts, tasks) =>{
     let newTest = {
@@ -109,7 +107,7 @@ const App = () =>{
 
     namesArr.forEach(puple => {
       puplesObj.push({
-        id: Math.random() * (1000 - 4) + 4,
+        id: performance.now(),
         name:puple,
         group,
         marks: tests.map(test=>{
@@ -125,7 +123,7 @@ const App = () =>{
   }
   const editStudent = (id, name, group, newMarks) =>{
     const editedStudents = students.map(student=>{
-      if(student.id == id){
+      if(student._id == id){
         const newStudent ={...student, name, group}
         for (const key in student.marks) {
           newStudent.marks[key].mark = newMarks[key]
@@ -167,6 +165,7 @@ const App = () =>{
  
   return(
     <StateContext.Provider value={{students, tests, addTest, removeTest, editTest}}>
+    {console.log(students)}
       <Router>
         <div>
         <main>

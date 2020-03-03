@@ -47,7 +47,7 @@ const Work = () =>{
             counterTask++;
             setActionTask(workTest[0].tasks[counterTask])
           }} 
-          disabled={counterTask === maxSteps-1}>
+          disabled={counterTask == maxSteps-1}>
             <NavigateNextIcon/>
         </Button>
         

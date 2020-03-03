@@ -8,10 +8,11 @@ const isDev = require("electron-is-dev");
 const Datastore = require('nedb');
 let db = {};
 db.students = new Datastore({
-    filename:'./students.json',
+    filename:'./students.db',
     autoload: true
 })
-db.students.insert({name : "Putin V.V.", year: 1952});
+
+
 global.database = db;
 
 let mainWindow;
