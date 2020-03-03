@@ -27,6 +27,7 @@ const Work = () =>{
        <Grid item xs={12} style = {{height:'45vh', backgroundColor: 'rgba(0,113,83, 0.1)',
        border:'1px solid rgba(0,113,83)',borderRadius:'3px',padding:'20px',boxShadow: '0.4em 0.4em 5px rgba(122,122,122,0.5)'}}>
          {actionTask.question}
+         <img src='file://D:/Diplom_2.0/Tester-students/src/assets/images/Screenshot_1.png'/>
          </Grid>
        
        <Grid item xs={12} style = {{ backgroundColor: 'rgba(0,113,83, 0.1)', border:'1px solid rgba(0,113,83)',borderRadius:'3px',boxShadow: '0.4em 0.4em 5px rgba(122,122,122,0.5)'}}>

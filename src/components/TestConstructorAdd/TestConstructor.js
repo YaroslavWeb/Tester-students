@@ -15,11 +15,12 @@ import TestTaskConstructor from './TestTaskConstructor'
 import Divider from '@material-ui/core/Divider'
 import TestCancelDialog from './TestCancelDialog';
 import StateContext from '../../context/StateContext'
-
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 const useStyles = makeStyles(theme => ({
   appBar: {
     position: 'relative',
-    background: '#006F51'
+    background: '#006F51',
+    padding: "0"
   },
   title: {
     marginLeft: theme.spacing(2),
@@ -105,7 +106,7 @@ export default function FullScreenDialog(props) {
         TransitionComponent={Transition}
         scroll='paper'
       >
-        <DialogTitle>
+        <DialogTitle style = {{padding:'0'}}>
           <AppBar className={classes.appBar}>
             <Toolbar> 
                <TestCancelDialog closeConstructor = {handleClose}/>
@@ -166,14 +167,20 @@ export default function FullScreenDialog(props) {
                 />
               </Grid>
               <Grid style={{padding:5}} item xs={12} sm={4} md={2} lg={2}>
-                <Button
-                  style={{height:'100%', width:'100%', color: '#FFFFFF', borderColor:'#006F51',background: '#006F51'}}
-                  variant="contained" 
-                  color="primary"
-                  startIcon={<AddIcon />}
-                >
-                  Справка
-                </Button>
+                <div >
+                <input style={{display: 'none'}}
+                id="contained-button-file"
+                  accept="image/*"
+                  multiple
+                  type="file"
+                />
+                <label htmlFor="contained-button-file">
+                  <Button variant="contained" component="span" id="taskBtnAddFile"  
+                  style={{height:'56px', width:'100%', color: '#FFFFFF', borderColor:'#006F51',background: '#006F51'}} startIcon={<AddIcon />}> 
+                  <LibraryBooksIcon/>
+                  </Button>
+                </label>
+                </div>
               </Grid>
             </Grid>
             <Divider variant="fullWidth"/>
