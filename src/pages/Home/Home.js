@@ -11,6 +11,8 @@ import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button';
+import Authorization from '../Authorization';
+
 const useStyles = makeStyles({
   card: {
     minWidth: 275,
@@ -26,19 +28,8 @@ const Home =(props) => {
     return (      
       <div>
         <MainHeader/>
-          <div style={{margin:'20px'}}>
-          <Autocomplete
-              options={students}
-              getOptionLabel={option => option.name}
-              style={{width: '30%'}}
-              renderInput={params => (
-                <TextField {...params} 
-                label='ФИО'
-                variant="outlined" fullWidth 
-               />
-
-              )}/>
-          </div>
+        <Authorization/>
+         
         <Grid container>
         {tests.map(test=>{
           return(  

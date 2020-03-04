@@ -1,47 +1,137 @@
-import React from 'react'
-import StateContext from '../../context/StateContext'
-import MainHeader from '../../components/MainHeader'
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import Grid from '@material-ui/core/Grid'
-import Grow from '@material-ui/core/Grow';
-import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import Typography from '@material-ui/core/Typography'
+ import React from 'react'
+ import StateContext from '../../context/StateContext'
+ import TextField from '@material-ui/core/TextField';
+ import Autocomplete from '@material-ui/lab/Autocomplete';
+ import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import {Link} from 'react-router-dom'
 import Button from '@material-ui/core/Button';
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
-const useStyles = makeStyles({
-    card: {
-      minWidth: 275,
-      boxShadow: '0.4em 0.4em 5px rgba(122,122,122,0.5)',
-    },
-    pos: {
-      marginBottom: 12,
-    },
-  });
-  const Authorization =(props) => {
-    const classes = useStyles();
-    const {students,tests } = React.useContext(StateContext)
-      return (      
-        <div>
-          {window.location.href}
-          <MainHeader/>
-            <div style={{margin:'20px'}}>
-            <Autocomplete
-                options={students}
-                getOptionLabel={option => option.name}
-                style={{width: '30%'}}
-                renderInput={params => (
-                  <TextField {...params} 
-                  label='ФИО'
-                  variant="outlined" fullWidth 
-                 />
-                )}/>
-            </div>
-        </div>
-      )
-    }
-    export default Authorization
+  return (
+    <Typography
+      component="div"
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box p={3}>{children}</Box>}
+    </Typography>
+  );
+}
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`
+  };
+}
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper
+  },
+  paper: {
+    padding: theme.spacing(1),
+    textAlign: "center",
+    display: "flex",
+    justifyContent: "center",
+  }
+}));
   
+  const Authorization =(props) => {
+
+const classes = useStyles();
+const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+const {students,tests } = React.useContext(StateContext)
+let inputLogin,inputPassword;
+  return (
+      <Grid container justify="center" alignItems="center" style={{marginTop:'20px'}} >
+        
+        <form  style ={{justifyContent:'center', alignItems:'center',alignContent:'center', 
+        boxShadow: '0.2em 0.2em 5px rgba(122,122,122,0.5)' }}> 
+        {/*border:'1px solid #006F51', */}
+          <Grid item>
+          <AppBar position="static" style={{backgroundColor:' #006F51'}}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="simple tabs example"
+        >
+          <Tab label="Студент" {...a11yProps(0)} />
+          <Tab label="Преподаватель" {...a11yProps(1)} />
+        </Tabs>
+      </AppBar>
+    
+      <TabPanel value={value} index={0} >
+       
+        <Autocomplete
+          options={students}
+          getOptionLabel={option => option.name}
+           renderInput={params => (
+            <TextField {...params} 
+              label='ФИО'
+              variant="outlined" 
+              fullWidth 
+              />
+         )}/> 
+          <div style={{marginTop:'20px', display:'flex',justifyContent:'flex-end'}}>
+           <Link to='/students'>
+            <Button
+              style ={{marginTop:'10px'}}
+               onClick={ () => {}}
+              
+               variant="outlined"
+               style ={{color: '#006F51'}}>
+               Войти
+            </Button>
+           </Link>  
+           </div>
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+        <TextField
+            label="Логин" 
+            inputRef={node => inputLogin = node}
+            variant="outlined" 
+           fullWidth
+          /> <br/>
+          <TextField
+            label="Пароль"
+            type = "password"
+            inputRef={node => inputPassword = node}
+            variant="outlined"
+           style={{marginTop:'15px'}}
+           fullWidth
+          />
+          <div style={{marginTop:'20px', display:'flex',justifyContent:'flex-end'}}>
+              <Link to='/students'>
+              <Button
+              style ={{marginTop:'10px'}}
+               onClick={ () => {}}
+               autoFocus
+               variant="outlined"
+               style ={{color: '#006F51'}}>
+               Войти
+               </Button>
+              </Link>  
+              </div>
+        </TabPanel>
+        </Grid>
+        </form>
+        
+      </Grid>
+   );}
+    export default Authorization
