@@ -1,8 +1,6 @@
 import React from 'react'
 import StateContext from '../../context/StateContext'
 import MainHeader from '../../components/MainHeader'
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import Grid from '@material-ui/core/Grid'
 import Grow from '@material-ui/core/Grow';
 import Card from '@material-ui/core/Card'
@@ -11,7 +9,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button';
-import Authorization from '../Authorization';
+import Authorization from '../../components/Authorization';
 
 const useStyles = makeStyles({
   card: {
@@ -24,14 +22,22 @@ const useStyles = makeStyles({
 });
 const Home =(props) => {
   const classes = useStyles();
-  const {students,tests } = React.useContext(StateContext)
+  const {students} = React.useContext(StateContext)
+  const [authVisible, setAuthVisible] = React.useState(true)
+  const [exitVisible, setExitVisible] = React.useState(false)
+  const [stud, setStud] = React.useState()
+  const [curTest, setCurTest] = React.useState([])
+
     return (      
       <div>
-        <MainHeader/>
-        <Authorization/>
+        <MainHeader exitVisible={exitVisible} setExitVisible={setExitVisible} setStud={setStud} setAuthVisible={setAuthVisible} setCurTest={setCurTest} />
+        
          
         <Grid container>
-        {tests.map(test=>{
+          
+        {authVisible ? <Authorization setStud={setStud} setCurTest={setCurTest} setAuthVisible={setAuthVisible} setExitVisible={setExitVisible}/>:false}
+
+        {curTest.map(test=>{
           return(  
           <Grow
             in={true}

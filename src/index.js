@@ -5,7 +5,6 @@ import { HashRouter } from 'react-router-dom'
 import App from "./renderer/App"
 
 import "./styles/main.css"
-import Authorization from "./pages/Authorization"
 
 ReactDOM.render(
     <HashRouter>

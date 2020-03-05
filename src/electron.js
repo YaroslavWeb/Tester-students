@@ -12,6 +12,10 @@ db.students = new Datastore({
     autoload: true
 })
 
+db.tests = new Datastore({
+    filename:'./tests.db',
+    autoload: true
+})
 
 global.database = db;
 

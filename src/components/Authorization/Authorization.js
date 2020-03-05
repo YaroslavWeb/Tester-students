@@ -1,8 +1,8 @@
- import React from 'react'
- import StateContext from '../../context/StateContext'
- import TextField from '@material-ui/core/TextField';
- import Autocomplete from '@material-ui/lab/Autocomplete';
- import Grid from '@material-ui/core/Grid'
+import React from 'react'
+import StateContext from '../../context/StateContext'
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
   
-  const Authorization =(props) => {
+const Authorization =(props) => {
 
 const classes = useStyles();
 const [value, setValue] = React.useState(0);
@@ -56,14 +56,13 @@ const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-const {students,tests } = React.useContext(StateContext)
-let inputLogin,inputPassword;
+const {students,tests} = React.useContext(StateContext)
+
+let inputLogin,inputPassword,inputStud;
   return (
       <Grid container justify="center" alignItems="center" style={{marginTop:'20px'}} >
         
-        <form  style ={{justifyContent:'center', alignItems:'center',alignContent:'center', 
-        boxShadow: '0.2em 0.2em 5px rgba(122,122,122,0.5)' }}> 
-        {/*border:'1px solid #006F51', */}
+        <form  style ={{justifyContent:'center', alignItems:'center',alignContent:'center', boxShadow: '0.2em 0.2em 5px rgba(122,122,122,0.5)' }}> 
           <Grid item>
           <AppBar position="static" style={{backgroundColor:' #006F51'}}>
         <Tabs
@@ -81,24 +80,27 @@ let inputLogin,inputPassword;
         <Autocomplete
           options={students}
           getOptionLabel={option => option.name}
-           renderInput={params => (
-            <TextField {...params} 
-              label='ФИО'
-              variant="outlined" 
-              fullWidth 
-              />
+          renderInput={params => (
+          <TextField {...params} 
+            label='ФИО'
+            variant="outlined" 
+            inputRef={node => inputStud = node}
+            fullWidth 
+            />
          )}/> 
           <div style={{marginTop:'20px', display:'flex',justifyContent:'flex-end'}}>
-           <Link to='/students'>
             <Button
               style ={{marginTop:'10px'}}
-               onClick={ () => {}}
-              
+               onClick={() => {
+                props.setAuthVisible(false)
+                props.setCurTest(tests)
+                props.setStud(inputStud.value)
+                props.setExitVisible(true)
+               }}
                variant="outlined"
                style ={{color: '#006F51'}}>
                Войти
             </Button>
-           </Link>  
            </div>
         </TabPanel>
         <TabPanel value={value} index={1}>
@@ -106,22 +108,20 @@ let inputLogin,inputPassword;
             label="Логин" 
             inputRef={node => inputLogin = node}
             variant="outlined" 
-           fullWidth
+            fullWidth
           /> <br/>
           <TextField
             label="Пароль"
             type = "password"
             inputRef={node => inputPassword = node}
             variant="outlined"
-           style={{marginTop:'15px'}}
-           fullWidth
+            style={{marginTop:'15px'}}
+            fullWidth
           />
           <div style={{marginTop:'20px', display:'flex',justifyContent:'flex-end'}}>
               <Link to='/students'>
               <Button
               style ={{marginTop:'10px'}}
-               onClick={ () => {}}
-               autoFocus
                variant="outlined"
                style ={{color: '#006F51'}}>
                Войти

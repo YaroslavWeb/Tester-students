@@ -1,42 +1,34 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { blue } from '@material-ui/core/colors';
+import Fab from '@material-ui/core/Fab';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import LoginDialog from '../LoginDialog'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-const useStyles = makeStyles(theme => ({
-  avatar: {
-    backgroundColor: blue[100],
-    color: blue[600]
-  },
-  root: {
-        flexGrow: 1,
-      },
-      menuButton: {
-        marginRight: theme.spacing(2),
-      },
-      title: {
-        flexGrow: 1,
-      },
-}));
 
-export default function MainHeader() {
-  const classes = useStyles();
+export default function MainHeader(props) {
   return (
     <div>
-    <div className={classes.root}>
       <AppBar position="static" style = {{background:'#006F51'}}>
-        {/* style={{ display: 'flex', justifyContent: 'space-between'}} */}
-        <Toolbar >
-          <LoginDialog />
+        <Toolbar style = {{display: 'flex', justifyContent: 'space-between'}}>
           <Typography variant='h5'>
             Тестирование студентов
           </Typography>
+        {props.exitVisible ? 
+          <Fab style={{background:'#006F51'}} onClick={
+            ()=>{
+              props.setExitVisible(false)
+              props.setCurTest([])
+              props.setStud(null)
+              props.setAuthVisible(true)
+            }}
+              color="primary" aria-label="add">
+            <ExitToAppIcon />
+          </Fab>
+          :false
+        }
         </Toolbar>
      </AppBar>
    </div>
-    </div>
   );
 }

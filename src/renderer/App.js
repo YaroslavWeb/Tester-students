@@ -4,7 +4,6 @@ import Students from '../pages/Students'
 import Test from '../pages/Test'
 import Info from '../pages/Info'
 import Work from '../pages/Work'
-import Authorization from "../pages/Authorization/Authorization"
 import { HashRouter as Router, Route } from 'react-router-dom'
 import StateContext from '../context/StateContext'
 import studentReducer from '../reducer/studentReducer'
@@ -16,55 +15,16 @@ const App = () =>{
   
   const [students, setStudents] = useState([]);
 
-  const [tests, setTests] = useState([
-    {id:1, theme:'If else', time:240, attempts:3, tasks:[
-      {id:1, type:'Одиночный выбор', score:1, section:1, question:'В чём разница If и Case?', answers:[
-        {id:1, title:'Ответ №1', correct:true, answer:'Он такой-то'},
-        {id:2, title:'Ответ №2', correct:false, answer:'Он вот такой'},
-        {id:3, title:'Ответ №3', correct:false, answer:'Он не такой'},
-        {id:4, title:'Ответ №4', correct:false, answer:'Он какой-то вот такой'}
-      ]},
-      {id:2, type:'Ввод текста', score:2, section:1, question:'Зачем нужен else?', answers:[
-        {id:1, title:'Ответ №1', correct:true, answer:'Он такой-то'},
-        {id:2, title:'Ответ №2', correct:false, answer:'Он вот такой'},
-        {id:3, title:'Ответ №3', correct:false, answer:'Он не такой'},
-        {id:4, title:'Ответ №4', correct:false, answer:'Он какой-то вот такой'}
-      ]},
-      {id:3, type:'Множественный выбор', score:2, section:1, question:'Зачем нужен Switch?', answers:[
-        {id:1, title:'Ответ №1', correct:true, answer:'Он такой-то'},
-        {id:2, title:'Ответ №2', correct:false, answer:'Он вот такой'},
-        {id:3, title:'Ответ №3', correct:false, answer:'Он не такой'},
-        {id:4, title:'Ответ №4', correct:false, answer:'Он какой-то вот такой'}
-      ]}
-    ]},
-    {id:2, theme:'For while', time:240, attempts:3, tasks:[
-      {id:1, type:'Одиночный выбор', score:1, section:1, question:'В чём разница If и Case?', answers:[
-        {id:1, title:'Ответ №1', correct:true, answer:'Он такой-то'},
-        {id:2, title:'Ответ №2', correct:false, answer:'Он вот такой'},
-        {id:3, title:'Ответ №3', correct:false, answebr:'Он не такой'},
-        {id:4, title:'Ответ №4', correct:false, answer:'Он какой-то вот такой'}
-      ]},
-      {id:2, type:'Ввод текста', score:2, section:1, question:'Зачем нужен else?', answers:[
-        {id:1, title:'Ответ №1', correct:true, answer:'Он такой-то'},
-        {id:2, title:'Ответ №2', correct:false, answer:'Он вот такой'},
-        {id:3, title:'Ответ №3', correct:false, answer:'Он не такой'},
-        {id:4, title:'Ответ №4', correct:false, answer:'Он какой-то вот такой'}
-      ]}
-    ]}
-  ]);
+  const [tests, setTests] = useState([]);
 
+  
   useEffect(()=>{
-    db.students.find({}, (err, docs)=>{
-      setStudents(docs)
-    })
+    db.students.find({}, (err, docs)=>{setStudents(docs)})
+    db.tests.find({}, (err, docs)=>{setTests(docs)})
   },[])
-
-  useEffect(()=>{
-    students.forEach(student => {
-      db.students.update({_id:student._id}, {$push:{...student}}, {});
-    });
-  }, [students])
-
+  
+  console.log(tests);
+  
   const addTest = (theme, time, attempts, tasks) =>{
     let newTest = {
       id:tests.length+1,
@@ -165,7 +125,6 @@ const App = () =>{
  
   return(
     <StateContext.Provider value={{students, tests, addTest, removeTest, editTest}}>
-    {console.log(students)}
       <Router>
         <div>
         <main>
