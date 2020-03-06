@@ -1,5 +1,4 @@
 import React from 'react'
-import StateContext from '../../context/StateContext'
 import MainHeader from '../../components/MainHeader'
 import Grid from '@material-ui/core/Grid'
 import Grow from '@material-ui/core/Grow';
@@ -20,56 +19,61 @@ const useStyles = makeStyles({
     marginBottom: 12,
   },
 });
-const Home =(props) => {
+const Home =() => {
   const classes = useStyles();
-  const {students} = React.useContext(StateContext)
   const [authVisible, setAuthVisible] = React.useState(true)
   const [exitVisible, setExitVisible] = React.useState(false)
   const [stud, setStud] = React.useState()
   const [curTest, setCurTest] = React.useState([])
-
+  
     return (      
       <div>
         <MainHeader exitVisible={exitVisible} setExitVisible={setExitVisible} setStud={setStud} setAuthVisible={setAuthVisible} setCurTest={setCurTest} />
-        
          
-        <Grid container>
-          
-        {authVisible ? <Authorization setStud={setStud} setCurTest={setCurTest} setAuthVisible={setAuthVisible} setExitVisible={setExitVisible}/>:false}
-
-        {curTest.map(test=>{
-          return(  
+        {authVisible
+        ?<Authorization setStud={setStud} setCurTest={setCurTest} setAuthVisible={setAuthVisible} setExitVisible={setExitVisible}/>
+        :
           <Grow
             in={true}
             timeout={1500}
-            key={test.id}
           >
-            <Grid style={{padding:20}}  item xs={12} sm={6} md={4} lg={3} xl={2}>
-              <Card test={test} className={classes.card} variant="outlined">
-              <CardContent>
-                <Typography variant="h5" component="h2">
-                  Тема:{test.theme}
-                </Typography>
-        
-                <Typography variant="body2" component="p">
-                  Кол-во вопросов: {test.tasks.length}
-                </Typography>
-                <Typography variant="body2" component="p">
-                  Длительность теста: {test.time} сек.
-                </Typography>
-              </CardContent>
-        
-              <CardActions>
-                <Button variant="outlined" onClick={()=>{window.location.replace('#/work?test='+test.id)}}>
-                  Начать тест
-                </Button>
-              </CardActions>
-            </Card>
-            </Grid>
-          </Grow>
-          )
-        })}
-      </Grid>
+          <Grid container>
+            <Grid item style={{paddingTop:20, paddingLeft:20}} xs={12}>Студент: {stud[0].name}</Grid>
+            <Grid item style={{paddingLeft:20}} xs={12}>Группа: {stud[0].group}</Grid>
+            {
+              curTest.map((test,i)=>{
+              return(  
+                <Grid item style={{padding:20}} key={test.id} item xs={12} sm={6} md={4} lg={3} xl={2}>
+                  <Card test={test} className={classes.card} variant="outlined">
+                    <CardContent>
+                      <Typography variant="h5" component="h2">
+                        Тема:{test.theme}
+                      </Typography>
+              
+                      <Typography variant="body2" component="p">
+                        Кол-во вопросов: {test.tasks.length}
+                      </Typography>
+                      <Typography variant="body2" component="p">
+                        Длительность теста: {test.time} сек.
+                      </Typography>
+                      <Typography variant="body2" component="p">
+                        Оценка: {stud[0].marks[i].mark}%
+                      </Typography>
+                    </CardContent>
+            
+                    <CardActions>
+                      <Button variant="outlined" onClick={()=>{window.location.replace('#/work?test='+test.id)}}>
+                        Начать тест
+                      </Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+                )
+              })
+            }
+          </Grid>
+        </Grow>
+        }
       </div>
     )
   }

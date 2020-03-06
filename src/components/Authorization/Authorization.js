@@ -40,12 +40,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper
   },
-  paper: {
-    padding: theme.spacing(1),
-    textAlign: "center",
-    display: "flex",
-    justifyContent: "center",
-  }
+
 }));
   
 const Authorization =(props) => {
@@ -94,7 +89,7 @@ let inputLogin,inputPassword,inputStud;
                onClick={() => {
                 props.setAuthVisible(false)
                 props.setCurTest(tests)
-                props.setStud(inputStud.value)
+                props.setStud(students.filter(student=>student.name == inputStud.value))
                 props.setExitVisible(true)
                }}
                variant="outlined"

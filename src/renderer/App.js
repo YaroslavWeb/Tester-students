@@ -6,8 +6,6 @@ import Info from '../pages/Info'
 import Work from '../pages/Work'
 import { HashRouter as Router, Route } from 'react-router-dom'
 import StateContext from '../context/StateContext'
-import studentReducer from '../reducer/studentReducer'
-import testsReducer from '../reducer/testsReducer'
 
 const db = window.require('electron').remote.getGlobal('database');
 
@@ -17,14 +15,11 @@ const App = () =>{
 
   const [tests, setTests] = useState([]);
 
-  
   useEffect(()=>{
     db.students.find({}, (err, docs)=>{setStudents(docs)})
     db.tests.find({}, (err, docs)=>{setTests(docs)})
   },[])
-  
-  console.log(tests);
-  
+
   const addTest = (theme, time, attempts, tasks) =>{
     let newTest = {
       id:tests.length+1,
@@ -79,7 +74,8 @@ const App = () =>{
         })
       })
     });
-    setStudents(students.concat(puplesObj))
+    db.students.insert(puplesObj)
+    db.students.find({}, (err, docs)=>{setStudents(docs)})
   }
   const editStudent = (id, name, group, newMarks) =>{
     const editedStudents = students.map(student=>{
@@ -102,7 +98,7 @@ const App = () =>{
         return test;
       })
       setTests(editedTest)
-    }
+  }
   const removeStudents = (ids) =>{
     setStudents(students.filter(student => !ids.includes(student.id)))
   }
