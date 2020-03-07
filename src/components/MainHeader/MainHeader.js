@@ -1,12 +1,13 @@
-import React from 'react';
-import Fab from '@material-ui/core/Fab';
+import React, {useState} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import LogoutDialog from '../LogoutDialog/LogoutDialog';
 
 
 export default function MainHeader(props) {
+  const [logoutStudent, setLogoutStudent] = useState(true)
+
   return (
     <div>
       <AppBar position="static" style = {{background:'#006F51'}}>
@@ -15,16 +16,13 @@ export default function MainHeader(props) {
             Тестирование студентов
           </Typography>
         {props.exitVisible ? 
-          <Fab style={{background:'#006F51'}} onClick={
-            ()=>{
-              props.setExitVisible(false)
-              props.setCurTest([])
-              props.setStud(null)
-              props.setAuthVisible(true)
-            }}
+          <LogoutDialog exitVisible={props.exitVisible} setExitVisible={props.setExitVisible} 
+          setStud={props.setStud} setAuthVisible={props.setAuthVisible} setCurTest={props.setCurTest}
+          logoutStudent = {logoutStudent}
+           style={{background:'#006F51'}} 
               color="primary" aria-label="add">
-            <ExitToAppIcon />
-          </Fab>
+          
+          </LogoutDialog>
           :false
         }
         </Toolbar>

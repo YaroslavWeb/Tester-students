@@ -54,6 +54,10 @@ const Authorization =(props) => {
 
 const classes = useStyles();
 const [value, setValue] = React.useState(0);
+const [loginStudent, setLoginStudent] = React.useState(false);
+
+// const handleClick = () => setLoginStudent(true)
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -85,9 +89,8 @@ let inputLogin,inputPassword,inputStud;
           getOptionLabel={option => option.name}
           renderInput={params => (
           <TextField {...params} 
-            error
-            label='ФИО'
-            helperText="Введите имя"
+            error ={loginStudent}
+            helperText="Введите ФИО"
             variant="outlined" 
             inputRef={node => inputStud = node}
             fullWidth 
@@ -98,12 +101,14 @@ let inputLogin,inputPassword,inputStud;
             <Button
               style ={{marginTop:'10px'}}
                onClick={() => {
+                 if (inputStud.value == '' || inputStud.value == undefined) {
+                   setLoginStudent(true);
+                 } else {
                 props.setAuthVisible(false)
                 props.setCurTest(tests)
                 props.setStud(students.filter(student=>student.name == inputStud.value))
                 props.setExitVisible(true)}
-               }
-              //onClick = {setWarning}
+               }}
                variant="outlined"
                style ={{color: '#006F51'}}>
                Войти

@@ -8,20 +8,18 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import {Link} from 'react-router-dom'
-
 
 const styles = theme => ({
   root: {
     margin: 0,
-    padding: theme.spacing(4),
+    padding: theme.spacing(2),
   },
   closeButton: {
     position: 'absolute',
-    right: theme.spacing(2),
-    top: theme.spacing(2),
+    right: theme.spacing(1),
+    top: theme.spacing(1),
     color: theme.palette.grey[500],
-  }
+  },
 });
 
 const DialogTitle = withStyles(styles)(props => {
@@ -40,19 +38,20 @@ const DialogTitle = withStyles(styles)(props => {
 
 const DialogContent = withStyles(theme => ({
   root: {
-    padding: theme.spacing(4),
+    padding: theme.spacing(2),
   },
 }))(MuiDialogContent);
 
 const DialogActions = withStyles(theme => ({
   root: {
     margin: 0,
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
   },
 }))(MuiDialogActions);
 
-const ExitWorkDialog = (props) => {
+export default function CustomizedDialogs() {
   const [open, setOpen] = React.useState(false);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -61,37 +60,36 @@ const ExitWorkDialog = (props) => {
   };
 
   return (
-    <div> 
-      <IconButton aria-label="close" color = "inherit" onClick={handleClickOpen}>
-        <CloseIcon />
-      </IconButton>
-
+    <div>
+      <Button variant="contained" size="large" style={{alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}} onClick={handleClickOpen}>
+        Завершить тест
+      </Button>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Покинуть тест
+          Тест завершен!
         </DialogTitle>
         <DialogContent dividers>
-          Вы действительно хотите завершить тестирование?
+          <Typography gutterBottom>
+            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
+            in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+          </Typography>
+          <Typography gutterBottom>
+            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
+            lacus vel augue laoreet rutrum faucibus dolor auctor.
+          </Typography>
+          <Typography gutterBottom>
+            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
+            scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
+            auctor fringilla.
+          </Typography>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus variant="outlined" onClick={handleClose}>
-            Отмена
+          <Button autoFocus onClick={handleClose} variant="contained" size="large" 
+          style={{alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}}>
+            Закрыть
           </Button>
-        <Link to='/'>
-          <Button
-            onClick={ () => {
-          }}
-            autoFocus
-            variant="outlined"
-            color="primary">
-             Подтверждаю
-          </Button>
-          </Link>
-          
         </DialogActions>
       </Dialog>
     </div>
   );
 }
-export default ExitWorkDialog
-

@@ -8,24 +8,20 @@ import WorkAnswersSingle from '../../components/WorkAnswersTypes/WorkAnswersSing
 import WorkAnswersMulti from '../../components/WorkAnswersTypes/WorkAnswersMulti'
 import WorkAnswersText from '../../components/WorkAnswersTypes/WorkAnswersText'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-let counterTask = 0
+import CompleteTestDialog from '../../components/CompleteTestDialog'
 
+let counterTask = 0;
 const Work = () =>{
   const link = window.location.href;
   const index = parseInt(link.split("test=")[1].split("")[0], 10);
-
-  console.log(link);
-  console.log(index);
-  
   const {tests} = React.useContext(StateContext)
   const workTest = tests.filter(test => test.id == index)
-  
   const [actionTask, setActionTask]= useState(workTest[0].tasks[0])
   const maxSteps = workTest[0].tasks.length;
 
   return (
     <div>
-     <WorkHeader workTestTheme={workTest[0].theme} workTestTime={workTest[0].time}/>
+     <WorkHeader workTestTheme={workTest[0].theme} workTestTime={workTest[0].time} />
      <Grid container style={{padding:20, height:'90vh'}}>
        
        <Grid item xs={12} style = {{height:'45vh', backgroundColor: 'rgba(0,113,83, 0.1)',
@@ -47,15 +43,15 @@ const Work = () =>{
        
        <Grid item xs={12} > 
        <Grid container  direction="row" justify="flex-end" alignItems="flex-end" style={{height:'100%'}}>   
-       
-        <Button variant="contained" size="large" style={{alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}} onClick={()=>{
+        {counterTask == maxSteps-1 ?
+            <CompleteTestDialog/>
+        :  <Button variant="contained" size="large" style={{alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}} onClick={()=>{
             counterTask++;
             setActionTask(workTest[0].tasks[counterTask])
-          }} 
-          disabled={counterTask == maxSteps-1}>
+          console.log(counterTask)
+          }}>
             <NavigateNextIcon/>
-        </Button>
-        
+        </Button>}
         </Grid>    
        </Grid>
        </Grid>

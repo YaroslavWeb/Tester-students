@@ -66,7 +66,7 @@ export default function MainHeader(props) {
          
             {LinearDeterminate(props.workTestTime)}
             </div>
-           <ExitWorkDialog/>
+           <ExitWorkDialog />
         </Toolbar>
      </AppBar>
    </div>
