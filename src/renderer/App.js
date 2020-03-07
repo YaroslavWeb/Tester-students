@@ -69,6 +69,7 @@ const App = () =>{
           return{
             id: test.id,
             theme: test.theme,
+            attempts:test.attempts,
             mark:'-'
           }
         })
