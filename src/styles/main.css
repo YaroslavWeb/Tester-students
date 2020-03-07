@@ -44,3 +44,17 @@ nav a:hover {
     opacity: 1;
 }
 
+#AuthorizationForm {
+    justify-content: center; 
+    align-content: center; 
+    box-shadow: 0.2em 0.2em 5px rgba(122,122,122,0.5);  
+     position:absolute;
+    top:30%;
+    animation: show 2s;
+    
+  }
+  @keyframes show {
+
+    from {opacity: 0;} to {opacity: 1;}
+    }
+
