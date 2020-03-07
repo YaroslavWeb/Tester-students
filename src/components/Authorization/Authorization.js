@@ -1,4 +1,4 @@
-import React from 'react'
+import React  from 'react'
 import StateContext from '../../context/StateContext'
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -40,6 +40,13 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper
   },
+  form: {
+    justifyContent:'center', 
+    alignContent:'center', 
+    boxShadow: '0.2em 0.2em 5px rgba(122,122,122,0.5)',
+    position:'absolute',
+    top:'30%'
+  }
 
 }));
   
@@ -47,18 +54,23 @@ const Authorization =(props) => {
 
 const classes = useStyles();
 const [value, setValue] = React.useState(0);
+const [loginStudent, setLoginStudent] = React.useState(false);
+
+// const handleClick = () => setLoginStudent(true)
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 const {students,tests} = React.useContext(StateContext)
 
+
 let inputLogin,inputPassword,inputStud;
   return (
       <Grid container justify="center" alignItems="center" style={{marginTop:'20px'}} >
         
-        <form  style ={{justifyContent:'center', alignItems:'center',alignContent:'center', boxShadow: '0.2em 0.2em 5px rgba(122,122,122,0.5)' }}> 
-          <Grid item>
+        <form  id='AuthorizationForm'> 
+          <Grid item >
           <AppBar position="static" style={{backgroundColor:' #006F51'}}>
         <Tabs
           value={value}
@@ -77,20 +89,25 @@ let inputLogin,inputPassword,inputStud;
           getOptionLabel={option => option.name}
           renderInput={params => (
           <TextField {...params} 
-            label='ФИО'
+            error ={loginStudent}
+            helperText="Введите ФИО"
             variant="outlined" 
             inputRef={node => inputStud = node}
             fullWidth 
+            
             />
          )}/> 
           <div style={{marginTop:'20px', display:'flex',justifyContent:'flex-end'}}>
             <Button
               style ={{marginTop:'10px'}}
                onClick={() => {
+                 if (inputStud.value == '' || inputStud.value == undefined) {
+                   setLoginStudent(true);
+                 } else {
                 props.setAuthVisible(false)
                 props.setCurTest(tests)
                 props.setStud(students.filter(student=>student.name == inputStud.value))
-                props.setExitVisible(true)
+                props.setExitVisible(true)}
                }}
                variant="outlined"
                style ={{color: '#006F51'}}>

@@ -66,13 +66,13 @@ const LogoutDialog = (props) => {
       <IconButton color = "inherit" onClick={handleClickOpen}>
         <ExitToAppIcon/>
       </IconButton>
-
+      {props.logoutStudent == null ? 
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
           Подтвердить выход
         </DialogTitle>
         <DialogContent dividers>
-          Вы действительно хотите выйти из режима преподователя?
+          Вы действительно хотите выйти?
         </DialogContent>
         <DialogActions>
           <Button autoFocus variant="outlined" onClick={handleClose}>
@@ -89,8 +89,36 @@ const LogoutDialog = (props) => {
             </Link> 
         </DialogActions>
       </Dialog>
-    </div>
-  );
-}
+        : <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+          Подтвердить выход
+        </DialogTitle>
+        <DialogContent dividers>
+          Вы действительно хотите выйти?
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus variant="outlined" onClick={handleClose}>
+            Отмена
+          </Button>
+          
+          <Button
+            onClick={
+              ()=>{
+                props.setExitVisible(false)
+                props.setCurTest([])
+                props.setStud(null)
+                props.setAuthVisible(true)
+              }}
+            autoFocus
+            variant="outlined"
+            style ={{color: '#006F51'}}> 
+              Подтверждаю
+            </Button>
+            
+        </DialogActions>
+        </Dialog>}  
+      </div>
+        );
+      }
 export default LogoutDialog
 

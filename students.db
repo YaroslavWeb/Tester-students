@@ -1,5 +1,10 @@
 {"id":114880.21000000299,"name":"Алтаев А.С.","group":"ПИ-16","marks":[{"id":1,"mark":"100","theme":"if else","attempts":3},{"id":2,"mark":"25","theme":"For while","attempts":3}],"_id":"4Bf56FbrbLgCW0bm"}
 {"id":45779.50000000419,"name":"Панов И.В.","group":"ИС-19","marks":[{"id":1,"theme":"If else","mark":"-","attempts":3},{"id":2,"theme":"While For","mark":"-","attempts":3}],"_id":"ESw8NH8GXX0K25nC"}
 {"id":116911.62999998778,"name":"Сергеев А.С.","group":"ИС-16","marks":[{"id":1,"mark":"50","theme":"if else","attempts":3},{"id":2,"mark":"10","theme":"For while","attempts":3}],"_id":"PgWjp1lrvky74HiS"}
+<<<<<<< HEAD
 {"id":87936.09000000288,"name":"Пепси К.К.","group":"ПИ-19","marks":[{"id":1,"theme":"If else","mark":"-","attempts":3},{"id":2,"theme":"While For","mark":"-","attempts":3}],"_id":"VEEPKlovMpzF7Rvz"}
 {"id":87934.26499998895,"name":"Кейдж Д.Д.","group":"ПИ-19","marks":[{"id":1,"theme":"If else","mark":"-","attempts":3},{"id":2,"theme":"While For","mark":"-","attempts":3}],"_id":"WhI7PFBTr98oLZ4n"}
+=======
+{"id":87936.09000000288,"name":"Пепси К.К.","group":"ПИ-19","marks":[{"id":1,"theme":"If else","mark":"-"},{"id":2,"theme":"While For","mark":"-"}],"_id":"VEEPKlovMpzF7Rvz"}
+{"id":87934.26499998895,"name":"Кейдж Д.Д.","group":"ПИ-19","marks":[{"id":1,"theme":"If else","mark":"-"},{"id":2,"theme":"While For","mark":"-"}],"_id":"WhI7PFBTr98oLZ4n"}
+>>>>>>> 566c645074aa8194bd5a34f086d9d0e9ac38893e
