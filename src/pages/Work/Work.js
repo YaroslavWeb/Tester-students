@@ -13,9 +13,9 @@ import CompleteTestDialog from '../../components/CompleteTestDialog'
 let counterTask = 0;
 const Work = () =>{
   const link = window.location.href;
-  const index = parseInt(link.split("test=")[1].split("")[0], 10);
+  const index = link.split("test=");
   const {tests} = React.useContext(StateContext)
-  const workTest = tests.filter(test => test.id == index)
+  const workTest = tests.filter(test => test._id == index[1])
   const [actionTask, setActionTask]= useState(workTest[0].tasks[0])
   const maxSteps = workTest[0].tasks.length;
 

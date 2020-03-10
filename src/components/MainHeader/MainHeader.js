@@ -11,11 +11,16 @@ export default function MainHeader(props) {
   return (
     <div>
       <AppBar position="static" style = {{background:'#006F51'}}>
-        <Toolbar style = {{display: 'flex', justifyContent: 'space-between'}}>
-          <Typography variant='h5'>
-            Тестирование студентов
-          </Typography>
+        
         {props.exitVisible ? 
+         <Toolbar style = {{display: 'flex', justifyContent: 'space-between'}}>
+           <div>
+        <Typography variant='h5'>
+        {props.stud[0].name} 
+        <span style ={{backgroundColor:'#006F51',fontSize:'0.9rem', color:'white', padding:'5px', boxShadow:'-1px -1px 6px #002c20,1px 1px 6px #00b282' }}>
+          {props.stud[0].group}
+        </span>
+        </Typography></div>
           <LogoutDialog 
             exitVisible={props.exitVisible} 
             setExitVisible={props.setExitVisible} 
@@ -25,10 +30,13 @@ export default function MainHeader(props) {
             logoutStudent = {logoutStudent}
             style={{background:'#006F51'}} 
             color="primary" aria-label="add">
-          </LogoutDialog>
-          :false
+          </LogoutDialog></Toolbar>
+          :<Toolbar style = {{display: 'flex', justifyContent: 'space-between'}}>
+          <Typography variant='h5'>
+          Тестирование студентов
+          </Typography></Toolbar>
         }
-        </Toolbar>
+       
      </AppBar>
    </div>
   );

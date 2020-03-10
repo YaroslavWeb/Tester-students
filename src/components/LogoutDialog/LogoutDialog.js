@@ -15,7 +15,7 @@ import {Link} from 'react-router-dom'
 const styles = theme => ({
   root: {
     margin: 0,
-    padding: theme.spacing(4),
+    padding: theme.spacing(2),
   },
   closeButton: {
     position: 'absolute',
@@ -39,18 +39,8 @@ const DialogTitle = withStyles(styles)(props => {
   );
 });
 
-const DialogContent = withStyles(theme => ({
-  root: {
-    padding: theme.spacing(4),
-  },
-}))(MuiDialogContent);
 
-const DialogActions = withStyles(theme => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(2),
-  },
-}))(MuiDialogActions);
+
 
 const LogoutDialog = (props) => {
   const [open, setOpen] = React.useState(false);
@@ -71,10 +61,10 @@ const LogoutDialog = (props) => {
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
           Подтвердить выход
         </DialogTitle>
-        <DialogContent dividers>
+        <MuiDialogContent dividers>
           Вы действительно хотите выйти?
-        </DialogContent>
-        <DialogActions>
+        </MuiDialogContent>
+        <MuiDialogActions>
           <Button autoFocus variant="outlined" onClick={handleClose}>
             Отмена
           </Button>
@@ -87,17 +77,18 @@ const LogoutDialog = (props) => {
               Подтверждаю
             </Button>
             </Link> 
-        </DialogActions>
+        </MuiDialogActions>
       </Dialog>
         : <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
           Подтвердить выход
         </DialogTitle>
-        <DialogContent dividers>
+        <MuiDialogContent dividers>
           Вы действительно хотите выйти?
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus variant="outlined" onClick={handleClose}>
+        </MuiDialogContent>
+        <MuiDialogActions style = {{paddingBottom: '0', justifyContent:'space-between'}}>
+         
+          <Button autoFocus variant="outlined" onClick={handleClose} >
             Отмена
           </Button>
           
@@ -114,8 +105,8 @@ const LogoutDialog = (props) => {
             style ={{color: '#006F51'}}> 
               Подтверждаю
             </Button>
-            
-        </DialogActions>
+           
+        </MuiDialogActions>
         </Dialog>}  
       </div>
         );
