@@ -25,23 +25,22 @@ const Home =() => {
   const [exitVisible, setExitVisible] = React.useState(false)
   const [stud, setStud] = React.useState()
   const [curTest, setCurTest] = React.useState([])
-  
-    return (      
-      <div>
+  return (      
+    <div>
         <MainHeader stud = {stud} exitVisible={exitVisible} setExitVisible={setExitVisible} setStud={setStud} setAuthVisible={setAuthVisible} setCurTest={setCurTest} />
          
         {authVisible
         ?<Authorization setStud={setStud} setCurTest={setCurTest} setAuthVisible={setAuthVisible} setExitVisible={setExitVisible}/>
         :
-          <Grow
-            in={true}
-            timeout={1500}
-          >
+        <Grow
+        in={true}
+        timeout={1500}
+        >
           <Grid container>
-            {/* <Grid item style={{paddingTop:20, paddingLeft:20}} xs={12}>Студент: {stud[0].name}</Grid> */}
-            {/* <Grid item style={{paddingLeft:20}} xs={12}>Группа: {stud[0].group}</Grid> */}
-            {
-              curTest.map((test,i)=>{
+            {curTest.map((test,i)=>{
+              console.log(stud);
+              
+            const markArray = stud[0].marks.filter(mark => mark.id_test === test._id)
               return(  
                 <Grid item style={{padding:20}} key={test._id} item xs={12} sm={6} md={4} lg={3} xl={2}>
                   <Card test={test} className={classes.card} variant="outlined">
@@ -57,7 +56,7 @@ const Home =() => {
                         Длительность теста: {test.time} сек.
                       </Typography>
                       <Typography variant="body2" component="p">
-                        Оценка: {stud[0].marks[i].mark}%
+                        Оценка: {markArray.length ? markArray[0].mark : '-'}%
                       </Typography>
                     </CardContent>
             
