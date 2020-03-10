@@ -37,7 +37,7 @@ export default function MainHeader() {
                     Тесты
                   </NavLink>
                   <NavLink to='/info' activeClassName = 'active'>
-                    Мануал ЛК
+                    Инструкция
                   </NavLink>
             </nav>
            <LogoutDialog/>

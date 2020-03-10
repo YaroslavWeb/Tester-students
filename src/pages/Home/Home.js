@@ -28,7 +28,7 @@ const Home =() => {
   
     return (      
       <div>
-        <MainHeader exitVisible={exitVisible} setExitVisible={setExitVisible} setStud={setStud} setAuthVisible={setAuthVisible} setCurTest={setCurTest} />
+        <MainHeader stud = {stud} exitVisible={exitVisible} setExitVisible={setExitVisible} setStud={setStud} setAuthVisible={setAuthVisible} setCurTest={setCurTest} />
          
         {authVisible
         ?<Authorization setStud={setStud} setCurTest={setCurTest} setAuthVisible={setAuthVisible} setExitVisible={setExitVisible}/>
@@ -38,8 +38,8 @@ const Home =() => {
             timeout={1500}
           >
           <Grid container>
-            <Grid item style={{paddingTop:20, paddingLeft:20}} xs={12}>Студент: {stud[0].name}</Grid>
-            <Grid item style={{paddingLeft:20}} xs={12}>Группа: {stud[0].group}</Grid>
+            {/* <Grid item style={{paddingTop:20, paddingLeft:20}} xs={12}>Студент: {stud[0].name}</Grid> */}
+            {/* <Grid item style={{paddingLeft:20}} xs={12}>Группа: {stud[0].group}</Grid> */}
             {
               curTest.map((test,i)=>{
               return(  
@@ -62,7 +62,7 @@ const Home =() => {
                     </CardContent>
             
                     <CardActions>
-                      <Button variant="outlined" onClick={()=>{window.location.replace('#/work?test='+test.id)}}>
+                      <Button variant="outlined" onClick={()=>{window.location.replace('#/work?test='+test._id)}}>
                         Начать тест
                       </Button>
                     </CardActions>
