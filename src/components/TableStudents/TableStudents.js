@@ -68,7 +68,7 @@ export default function StudentsTable(props) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("name");
   const [selected, setSelected] = React.useState([]);
-  const {students} = React.useContext(StateContext);
+  const {students,tests} = React.useContext(StateContext);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -167,10 +167,12 @@ export default function StudentsTable(props) {
                         {row.name}
                       </TableCell>
                       <TableCell align="left">{row.group}</TableCell>
-
+                      {/* Отрисовка оценок студента*/}
                       {row.marks.map(mark => {
                         return (
-                          <TableCell key={mark.id} style={{fontWeight:'bold', fontSize:'1.5rem'}} align="left">{mark.mark}</TableCell>
+                          <TableCell key={mark.id} style={{fontWeight:'bold', fontSize:'1.5rem'}} align="left">
+                            {mark.mark}
+                          </TableCell>
                         )
                       })}
                       

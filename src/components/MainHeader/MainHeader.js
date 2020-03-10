@@ -16,12 +16,15 @@ export default function MainHeader(props) {
             Тестирование студентов
           </Typography>
         {props.exitVisible ? 
-          <LogoutDialog exitVisible={props.exitVisible} setExitVisible={props.setExitVisible} 
-          setStud={props.setStud} setAuthVisible={props.setAuthVisible} setCurTest={props.setCurTest}
-          logoutStudent = {logoutStudent}
-           style={{background:'#006F51'}} 
-              color="primary" aria-label="add">
-          
+          <LogoutDialog 
+            exitVisible={props.exitVisible} 
+            setExitVisible={props.setExitVisible} 
+            setStud={props.setStud} 
+            setAuthVisible={props.setAuthVisible}
+            setCurTest={props.setCurTest}
+            logoutStudent = {logoutStudent}
+            style={{background:'#006F51'}} 
+            color="primary" aria-label="add">
           </LogoutDialog>
           :false
         }
