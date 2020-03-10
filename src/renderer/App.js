@@ -22,7 +22,6 @@ const App = () =>{
 
   const addTest = (theme, time, attempts, tasks) =>{
     let newTest = {
-      id:tests.length+1,
       theme,
       time,
       attempts,
@@ -41,18 +40,9 @@ const App = () =>{
             }
           })
       }})
-    },
-    newMark={
-      id:newTest.id,
-      theme:newTest.theme,
-      attempts:newTest.attempts,
-      mark:'-'
     }
-
-    db.students.update({},{$push:{marks:{...newMark}}},{multi: true})
+    // db.students.update({},{$push:{marks:{...newMark}}},{multi: true})
     db.tests.insert(newTest)
-
-    db.students.find({}, (err, docs)=>{setStudents(docs)})
     db.tests.find({}, (err, docs)=>{setTests(docs)})
   }
   const addStudent = (name, group) =>{
@@ -61,16 +51,17 @@ const App = () =>{
         .map(val => val.trim())
         .filter(val => val !== '')
       
-    let puplesObj = [];
-
+    let puplesObj = [],
+        markID = 1;
     namesArr.forEach(puple => {
+      markID = 1;
       puplesObj.push({
-        id: performance.now(),
         name:puple,
         group,
         marks: tests.map(test=>{
           return{
-            id: test.id,
+            id: markID++,
+            id_test:test._id,
             theme: test.theme,
             attempts:test.attempts,
             mark:'-'
@@ -82,35 +73,32 @@ const App = () =>{
     db.students.find({}, (err, docs)=>{setStudents(docs)})
   }
   const editStudent = (id, name, group, newMarks) =>{
-    students.map(student=>{
-      if(student.id == id){
+    students.forEach(student => {
+      if(student._id == id){
         const newStudent ={...student, name, group}
         for (const key in student.marks) {
           newStudent.marks[key].mark = newMarks[key]
         }
-        db.students.update({id:newStudent.id},{$set:newStudent})
-        return newStudent;
+        db.students.update({_id:newStudent._id},{$set:newStudent})
       }
-      return student;
-    })
-    
+    });
     db.students.find({}, (err, docs)=>{setStudents(docs)})
   }
   const editTest = (id, theme, time, attempts) =>{
     let editTest
-    tests.map(test=>{
-      if(test.id == id){
-          editTest ={...test, theme, time, attempts}
-        }
-        return test;
-      })
+    tests.forEach(test => {
+      if(test._id == id){
+        editTest ={...test, theme, time, attempts}}
+      });
+      console.log(editTest);
       
-      db.tests.update({id:editTest.id}, {$set:editTest})
-      db.tests.find({}, (err, docs)=>{setTests(docs)})
+    db.tests.update({_id:editTest._id}, {$set:editTest})
+    db.tests.find({}, (err, docs)=>{setTests(docs)})
   }
   const removeStudents = (ids) =>{
+    console.log(ids);
     for (const key in ids) {
-      db.students.remove({id:ids[key]})
+      db.students.remove({_id:ids[key]})
     }
     db.students.find({}, (err, docs)=>{setStudents(docs)})
   }
@@ -118,17 +106,8 @@ const App = () =>{
     db.students.remove({group}, {multi: true})
     db.students.find({}, (err, docs)=>{setStudents(docs)})
   }
-  const removeTest = (id_test, theme_test) =>{
-
-    // students.forEach(student => {
-    //   for(const key in student.marks) {
-    //     if(student.marks[key].theme == theme_test){
-    //     }
-    //   }
-    // });
-    db.students.remove({marks:theme_test},{multi:true})
-    db.tests.remove({id:id_test})
-    db.students.find({}, (err, docs)=>{setStudents(docs)})
+  const removeTest = (id_test) =>{
+    db.tests.remove({_id:id_test})
     db.tests.find({}, (err, docs)=>{setTests(docs)})
   }
  

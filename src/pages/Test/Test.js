@@ -2,7 +2,7 @@ import React from 'react'
 import TeacherHeader from '../../components/TeacherHeader'
 import StateContext from '../../context/StateContext'
 import Grid from '@material-ui/core/Grid'
-import Grow from '@material-ui/core/Grow';
+import Grow from '@material-ui/core/Grow'
 import TestCard from '../../components/TestCard'
 import TestAddCard from '../../components/TestAddCard'
 import TestAlert from '../../components/UseAlert'
@@ -24,7 +24,7 @@ const Test = () => {
         <Grow
           in={true}
           timeout={1500}
-          key={test.id}
+          key={test._id}
         >
           <Grid style={{padding:20}}  item xs={12} sm={6} md={4} lg={3} xl={2}>
             <TestCard 

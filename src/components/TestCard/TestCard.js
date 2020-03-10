@@ -44,7 +44,7 @@ export default function TestCard(props) {
           setAlert= {props.setAlert}
           test = {props.test}/>
 
-        <TestCardDialogRemove id_test = {props.test.id} theme_test = {props.test.theme}/>
+        <TestCardDialogRemove id_test = {props.test._id}/>
       </CardActions>
     </Card>
   );

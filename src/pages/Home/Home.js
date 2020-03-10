@@ -43,7 +43,7 @@ const Home =() => {
             {
               curTest.map((test,i)=>{
               return(  
-                <Grid item style={{padding:20}} key={test.id} item xs={12} sm={6} md={4} lg={3} xl={2}>
+                <Grid item style={{padding:20}} key={test._id} item xs={12} sm={6} md={4} lg={3} xl={2}>
                   <Card test={test} className={classes.card} variant="outlined">
                     <CardContent>
                       <Typography variant="h5" component="h2">
@@ -62,7 +62,7 @@ const Home =() => {
                     </CardContent>
             
                     <CardActions>
-                      <Button variant="outlined" onClick={()=>{window.location.replace('#/work?test='+test.id)}}>
+                      <Button variant="outlined" onClick={()=>{window.location.replace('#/work?test='+test._id)}}>
                         Начать тест
                       </Button>
                     </CardActions>

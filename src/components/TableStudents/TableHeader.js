@@ -29,7 +29,7 @@ function TableHeader(props) {
 
   tests.forEach(test => {
     headCellsTests.push({
-      id:`theme${test.id}`,
+      id:`theme${test._id}`,
       numeric: false,
       disablePadding: false, 
       label: test.theme

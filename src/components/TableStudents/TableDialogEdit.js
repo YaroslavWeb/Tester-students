@@ -127,7 +127,7 @@ const TableDialogEdit = (props) => {
                 if(editFIO.value !== '' 
                 && editGroup.value !== '')
                 {
-                    props.editStudent(props.student.id, editFIO.value, editGroup.value, newMarks)
+                    props.editStudent(props.student._id, editFIO.value, editGroup.value, newMarks)
                     handleClose()
                     props.setAlert({visible: true, text:'Студент успешно изменён!', severity: 'success'})
                     setTimeout(() => {props.setAlert({visible: false, text:' ', severity: 'success'})}, 5000);

@@ -67,7 +67,7 @@ export default function FullScreenDialog(props) {
               </Typography>
               <Button autoFocus color="inherit" onClick={()=>{
                 if(titleTest.value!=="" && timeTest.value!=="" && attemptsTest.value!==""){
-                editTest(props.test.id, titleTest.value, timeTest.value, attemptsTest.value)
+                editTest(props.test._id, titleTest.value, timeTest.value, attemptsTest.value)
                 handleClose()                
               } else {
                 props.setAlert({visible: true, text:'Проверьте введенные данные!',severity: 'error'})

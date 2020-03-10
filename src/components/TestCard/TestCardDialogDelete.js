@@ -82,8 +82,8 @@ const TestCardDialogRemove = (props) => {
           </Button>
           <Button
             onClick={()=>{
-                 removeTest(props.id_test, props.theme_test); 
-                 handleClose()
+              removeTest(props.id_test); 
+              handleClose()
             }}
             autoFocus
             variant="outlined"

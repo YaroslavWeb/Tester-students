@@ -80,7 +80,7 @@ export default function StudentsTable(props) {
   }
   const handleSelectAllClick = event => {
     if (event.target.checked) {
-      const newSelecteds = students.map(n => n.id);
+      const newSelecteds = students.map(n => n._id);
       setSelected(newSelecteds);
       return;
     }
@@ -136,7 +136,7 @@ export default function StudentsTable(props) {
             <TableBody>
               {stableSort(students, getSorting(order, orderBy)).map(
                 (row, index) => {
-                  const isItemSelected = isSelected(row.id);
+                  const isItemSelected = isSelected(row._id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
@@ -145,12 +145,12 @@ export default function StudentsTable(props) {
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.id}
+                      key={row._id}
                       selected={isItemSelected}
                     >
                       <TableCell padding = "checkbox" align = "right" >
                         <Checkbox
-                          onClick={event => handleClick(event, row.id)}
+                          onClick={event => handleClick(event, row._id)}
                           checked={isItemSelected}
                           inputProps={{ "aria-labelledby": labelId }}
                         />
@@ -167,11 +167,13 @@ export default function StudentsTable(props) {
                         {row.name}
                       </TableCell>
                       <TableCell align="left">{row.group}</TableCell>
-                      {/* Отрисовка оценок студента*/}
-                      {row.marks.map(mark => {
-                        return (
-                          <TableCell key={mark.id} style={{fontWeight:'bold', fontSize:'1.5rem'}} align="left">
-                            {mark.mark}
+                      {tests.map(test => {
+                        const cellKey = test._id +'_' + row._id
+                        const markArray = row.marks.filter(mark => mark.id_test === test._id)
+                        
+                        return(
+                          <TableCell key={cellKey} style={{fontWeight:'bold', fontSize:'1.5rem'}} align="left">
+                            {markArray.length ? markArray[0].mark : '-'}
                           </TableCell>
                         )
                       })}
