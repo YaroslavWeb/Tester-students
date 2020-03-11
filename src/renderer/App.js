@@ -72,12 +72,13 @@ const App = () =>{
     db.students.insert(puplesObj)
     db.students.find({}, (err, docs)=>{setStudents(docs)})
   }
-  const editStudent = (id, name, group, newMarks) =>{
+  const editStudent = (id, name, group, newMarks, newAttempts) =>{
     students.forEach(student => {
       if(student._id == id){
         const newStudent ={...student, name, group}
         for (const key in student.marks) {
           newStudent.marks[key].mark = newMarks[key]
+          newStudent.marks[key].attempts = newAttempts[key]
         }
         db.students.update({_id:newStudent._id},{$set:newStudent})
       }

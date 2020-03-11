@@ -1,14 +1,14 @@
 import React from 'react'
 import MainHeader from '../../components/MainHeader'
 import Grid from '@material-ui/core/Grid'
-import Grow from '@material-ui/core/Grow';
+import Grow from '@material-ui/core/Grow'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button';
-import Authorization from '../../components/Authorization';
+import Button from '@material-ui/core/Button'
+import Authorization from '../../components/Authorization'
 
 const useStyles = makeStyles({
   card: {
@@ -37,7 +37,7 @@ const Home =() => {
         timeout={1500}
         >
           <Grid container>
-            {curTest.map((test,i)=>{
+            {curTest.map((test)=>{
               const markArray = stud[0].marks.filter(mark => mark.id_test === test._id)
               return(  
                 <Grid item style={{padding:20}} key={test._id} item xs={12} sm={6} md={4} lg={3} xl={2}>
