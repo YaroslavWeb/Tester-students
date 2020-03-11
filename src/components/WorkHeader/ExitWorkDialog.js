@@ -71,7 +71,9 @@ const ExitWorkDialog = (props) => {
           Покинуть тест
         </DialogTitle>
         <DialogContent dividers>
-          Вы действительно хотите завершить тестирование?
+          <div style={{marginBottom:'5px'}}>
+          Вы действительно хотите завершить тестирование? </div><br/>
+          При досрочном выходе из теста попытка будет зачтена без выставления оценки.
         </DialogContent>
         <DialogActions>
           <Button autoFocus variant="outlined" onClick={handleClose}>
@@ -94,4 +96,3 @@ const ExitWorkDialog = (props) => {
   );
 }
 export default ExitWorkDialog
-

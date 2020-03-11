@@ -59,7 +59,7 @@ const Home =() => {
                     </CardContent>
             
                     <CardActions>
-                      <Button variant="outlined" onClick={()=>{window.location.replace('#/work?test='+test._id)}}>
+                      <Button variant="outlined" style = {{color:'#006F51',borderColor:'#006F51'}}onClick={()=>{window.location.replace('#/work?test='+test._id)}}>
                         Начать тест
                       </Button>
                     </CardActions>

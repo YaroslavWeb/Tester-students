@@ -35,20 +35,6 @@ const DialogTitle = withStyles(styles)(props => {
     </MuiDialogTitle>
   );
 });
-
-const DialogContent = withStyles(theme => ({
-  root: {
-    padding: theme.spacing(2),
-  },
-}))(MuiDialogContent);
-
-const DialogActions = withStyles(theme => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-}))(MuiDialogActions);
-
 export default function CustomizedDialogs() {
   const [open, setOpen] = React.useState(false);
 
@@ -65,30 +51,26 @@ export default function CustomizedDialogs() {
         Завершить тест
       </Button>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+        <DialogTitle id="customized-dialog-title">
           Тест завершен!
         </DialogTitle>
-        <DialogContent dividers>
-          <Typography gutterBottom>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-            in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+        <MuiDialogContent dividers style= {{paddingTop:'20px',  paddingRight:'80px', paddingBottom:'40px', paddingLeft:'10px'}}>
+          <Typography style ={{marginBottom:'5px',  paddingRight:'80px'}} >
+           Итоговая оценка: 
           </Typography>
-          <Typography gutterBottom>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-            lacus vel augue laoreet rutrum faucibus dolor auctor.
+          <Typography style ={{marginBottom:'5px'}}>
+            Потрачено времени:
           </Typography>
-          <Typography gutterBottom>
-            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-            scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-            auctor fringilla.
+          <Typography style ={{marginBottom:'5px'}}>
+            Осталось попыток:
           </Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose} variant="contained" size="large" 
-          style={{alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}}>
-            Закрыть
+        </MuiDialogContent>
+        <MuiDialogActions>
+          <Button autoFocus onClick={handleClose} variant="outlined"  
+          style={{alignSelf: 'flex-end', color: '#006F51', borderColor:'#006F51'}} > 
+            Покинуть тест
           </Button>
-        </DialogActions>
+        </MuiDialogActions>
       </Dialog>
     </div>
   );

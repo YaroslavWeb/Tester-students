@@ -61,6 +61,7 @@ const Work = () =>{
                       taskCounter++
                       setTaskCounter(taskCounter)
                       setActionTask(workTest[0].tasks[taskCounter])
+                      
                     }}>
                     <NavigateNextIcon/>
                  </Button>}

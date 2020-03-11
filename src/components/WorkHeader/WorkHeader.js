@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import ExitWorkDialog from './ExitWorkDialog'
 import LinearProgress from "@material-ui/core/LinearProgress";
+import CompleteTestDialog from '../CompleteTestDialog/CompleteTestDialog'
 const useStyles = makeStyles(theme => ({
   root: {
         flexGrow: 1,
@@ -23,15 +24,12 @@ const useStyles = makeStyles(theme => ({
 function LinearDeterminate(workTestTime) {
   const classes = useStyles();
   const [completed, setCompleted] = React.useState(0);
-  
   React.useEffect(() => { 
     function progress() {
       setCompleted(oldCompleted => {
-        if (oldCompleted === 100) {
-          return 0;
-        }
-        
-        const diff = workTestTime /1000; //передавать время теста
+      if   (oldCompleted === 100) 
+      {return 0}
+        const diff = workTestTime /1000; //передавать время теста делить на 10000
         return Math.min(oldCompleted + diff, 100);
       });
     }
@@ -44,7 +42,7 @@ function LinearDeterminate(workTestTime) {
 
   return (
     <div className={classes.root}>
-      <LinearProgress variant="determinate" value={0} />
+      <LinearProgress variant="determinate"   value={0}/>
       <LinearProgress
         variant="determinate"
         value={completed}
@@ -63,7 +61,6 @@ export default function MainHeader(props) {
             {props.workTestTheme}
           </Typography>
             <div className={classes.root}>
-         
             {LinearDeterminate(props.workTestTime)}
             </div>
            <ExitWorkDialog />

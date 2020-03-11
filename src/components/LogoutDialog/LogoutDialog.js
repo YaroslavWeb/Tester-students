@@ -18,9 +18,9 @@ const styles = theme => ({
     padding: theme.spacing(2),
   },
   closeButton: {
-    position: 'absolute',
+    position:'absolute',
     right: theme.spacing(2),
-    top: theme.spacing(2),
+    top: theme.spacing(1),
     color: theme.palette.grey[500],
   }
 });
@@ -38,9 +38,6 @@ const DialogTitle = withStyles(styles)(props => {
     </MuiDialogTitle>
   );
 });
-
-
-
 
 const LogoutDialog = (props) => {
   const [open, setOpen] = React.useState(false);
@@ -61,11 +58,11 @@ const LogoutDialog = (props) => {
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
           Подтвердить выход
         </DialogTitle>
-        <MuiDialogContent dividers>
+        <MuiDialogContent dividers style={{padding:'25px'}}>
           Вы действительно хотите выйти?
         </MuiDialogContent>
-        <MuiDialogActions>
-          <Button autoFocus variant="outlined" onClick={handleClose}>
+        <MuiDialogActions style = {{paddingTop:'15px', paddingBottom:'15px'}}>
+          <Button autoFocus variant="outlined" style = {{display:'flex', justifyContent:'space-between', marginRight:'15px'}} onClick={handleClose}>
             Отмена
           </Button>
           <Link to='/'>
@@ -73,7 +70,7 @@ const LogoutDialog = (props) => {
             onClick={ () => {}}
             autoFocus
             variant="outlined"
-            style ={{color: '#006F51'}}> 
+            style ={{color: '#006F51',borderColor:'#006F51'}}> 
               Подтверждаю
             </Button>
             </Link> 
