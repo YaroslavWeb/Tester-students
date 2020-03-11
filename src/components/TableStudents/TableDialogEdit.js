@@ -75,9 +75,7 @@ const TableDialogEdit = (props) => {
           Изменить студентика
         </DialogTitle>
         <DialogContent dividers>
-        <form 
-        autoComplete="off"
-        >
+        <form autoComplete="off">
           <TextField 
             defaultValue={props.student.name}
             inputRef={node => editFIO = node}
@@ -124,8 +122,7 @@ const TableDialogEdit = (props) => {
                   newMarks.push(element.value)
                 });
                 e.preventDefault()
-                if(editFIO.value !== '' 
-                && editGroup.value !== '')
+                if(editFIO.value !== '' && editGroup.value !== '')
                 {
                     props.editStudent(props.student._id, editFIO.value, editGroup.value, newMarks)
                     handleClose()

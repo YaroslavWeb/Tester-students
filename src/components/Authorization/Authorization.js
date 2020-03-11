@@ -3,7 +3,6 @@ import StateContext from '../../context/StateContext'
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Grid from '@material-ui/core/Grid'
-import { makeStyles } from '@material-ui/core/styles'
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -35,33 +34,14 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper
-  },
-  form: {
-    justifyContent:'center', 
-    alignContent:'center', 
-    boxShadow: '0.2em 0.2em 5px rgba(122,122,122,0.5)',
-    position:'absolute',
-    top:'30%'
-  }
-
-}));
   
 const Authorization =(props) => {
 
-const classes = useStyles();
 const [value, setValue] = React.useState(0);
 const [loginStudent, setLoginStudent] = React.useState(false);
 
-// const handleClick = () => setLoginStudent(true)
+const handleChange = (event, newValue) => {setValue(newValue)};
 
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 const {students,tests} = React.useContext(StateContext)
 
 
@@ -106,7 +86,7 @@ let inputLogin,inputPassword,inputStud;
                  } else {
                 props.setAuthVisible(false)
                 props.setCurTest(tests)
-                props.setStud(students.filter(student=>student.name == inputStud.value))
+                props.setStud(students.filter(student=>student.name === inputStud.value))
                 props.setExitVisible(true)}
                }}
                variant="outlined"

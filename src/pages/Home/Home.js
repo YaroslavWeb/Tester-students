@@ -38,9 +38,7 @@ const Home =() => {
         >
           <Grid container>
             {curTest.map((test,i)=>{
-              console.log(stud);
-              
-            const markArray = stud[0].marks.filter(mark => mark.id_test === test._id)
+              const markArray = stud[0].marks.filter(mark => mark.id_test === test._id)
               return(  
                 <Grid item style={{padding:20}} key={test._id} item xs={12} sm={6} md={4} lg={3} xl={2}>
                   <Card test={test} className={classes.card} variant="outlined">
