@@ -1,15 +1,17 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import TextField from '@material-ui/core/TextField';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import EditIcon from '@material-ui/icons/Edit';
-import Typography from '@material-ui/core/Typography';
+import React from 'react'
+import { withStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
+import Dialog from '@material-ui/core/Dialog'
+import StateContext from '../../context/StateContext'
+import TextField from '@material-ui/core/TextField'
+import MuiDialogTitle from '@material-ui/core/DialogTitle'
+import MuiDialogContent from '@material-ui/core/DialogContent'
+import MuiDialogActions from '@material-ui/core/DialogActions'
+import IconButton from '@material-ui/core/IconButton'
+import CloseIcon from '@material-ui/icons/Close'
+import EditIcon from '@material-ui/icons/Edit'
+import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
   root: {
@@ -52,7 +54,7 @@ const DialogActions = withStyles(theme => ({
 }))(MuiDialogActions);
 
 const TableDialogEdit = (props) => {
-
+  const {tests} = React.useContext(StateContext)
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -62,7 +64,8 @@ const TableDialogEdit = (props) => {
     setOpen(false);
   };
 
-  let editFIO, editGroup, editMarks=[], newMarks=[]; 
+  let editFIO, editGroup, listCounter = 0,
+      editMarks=[], newMarks=[],  editAttempts=[], newAttempts=[]; 
   
   return (
     <div>
@@ -86,55 +89,66 @@ const TableDialogEdit = (props) => {
             variant="outlined" 
           />
           <TextField
-             defaultValue={props.student.group}
-             inputRef={node => editGroup = node}
-             margin="normal"
-             fullWidth={true}
-             id="outlined-basic"
-             label="Группа"
-             variant="outlined" 
+            defaultValue={props.student.group}
+            inputRef={node => editGroup = node}
+            margin="normal"
+            fullWidth={true}
+            id="outlined-basic"
+            label="Группа"
+            variant="outlined" 
           />
-          <hr/>
-          <Typography variant="h6">Оценки</Typography>
-          {props.student.marks.map(mark =>{
+          {tests.map(test => {
+            listCounter++
+            const markArray = props.student.marks.filter(mark => mark.id_test === test._id)
             return(
-              <TextField
-                key={mark.id}
-                defaultValue={mark.mark}
-                inputRef={node => editMarks[mark.id] = node}
-                margin="normal"
-                fullWidth={true}
-                label={mark.theme}
-                variant="outlined" 
-              />
+              <Grid container key={test._id}>
+                <Grid item xs={12} style={{borderTop: '2px solid #E0E0E0', paddingTop:'5px'}}>
+                  <Typography variant="h6">{test.theme}</Typography>
+                </Grid>
+                
+                <Grid item xs={6}>
+                  <TextField
+                    defaultValue={markArray.length ? markArray[0].mark : '-'}
+                    inputRef={node => editMarks[listCounter] = node}
+                    margin="normal"
+                    label='Оценка'
+                    variant="outlined" 
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    defaultValue={markArray.length ? markArray[0].attempts : test.attempts}
+                    inputRef={node => editAttempts[listCounter] = node}
+                    margin="normal"
+                    label='Попытки'
+                    variant="outlined" 
+                  />
+                </Grid>
+              </Grid>
             )
           })}
         </form>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus variant="outlined" onClick={handleClose}>
+          <Button variant="outlined" onClick={handleClose}>
             Отмена
           </Button>
           <Button
-            onClick={
-              e=>{
-                editMarks.forEach(element => {
-                  newMarks.push(element.value)
-                });
-                e.preventDefault()
+            onClick={()=>{
+                editMarks.forEach(item => {newMarks.push(item.value)})
+                editAttempts.forEach(item => {newAttempts.push(item.value)})
                 if(editFIO.value !== '' && editGroup.value !== '')
                 {
-                    props.editStudent(props.student._id, editFIO.value, editGroup.value, newMarks)
-                    handleClose()
-                    props.setAlert({visible: true, text:'Студент успешно изменён!', severity: 'success'})
-                    setTimeout(() => {props.setAlert({visible: false, text:' ', severity: 'success'})}, 5000);
+                  props.editStudent(props.student._id, editFIO.value, editGroup.value, newMarks, newAttempts)
+                  handleClose()
+                  props.setAlert({visible: true, text:'Студент успешно изменён!', severity: 'success'})
+                  setTimeout(() => {props.setAlert({visible: false, text:' ', severity: 'success'})}, 5000);
                 }  
                 else {
-                    props.setAlert({visible: true, text:'Некорректные данные!',severity: 'error'})
-                    setTimeout(() => {props.setAlert({visible: false, text:' ',severity: 'error'})}, 5000);
+                  props.setAlert({visible: true, text:'Некорректные данные!',severity: 'error'})
+                  setTimeout(() => {props.setAlert({visible: false, text:' ',severity: 'error'})}, 5000);
                 }
             }}
-            autoFocus
             variant="outlined"
             color="primary">
             Сохранить
