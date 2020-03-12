@@ -8,7 +8,7 @@ import WorkAnswersMulti from '../../components/WorkAnswersTypes/WorkAnswersMulti
 import WorkAnswersText from '../../components/WorkAnswersTypes/WorkAnswersText'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import CompleteTestDialog from '../../components/CompleteTestDialog'
-
+import styles from './Work.style'
 const Work = () =>{
   // Получение id теста и id студента из url,  который проходит студент
   const link = window.location.href
@@ -37,15 +37,15 @@ const Work = () =>{
      <WorkHeader workTestTheme={workTest[0].theme} workTestTime={workTest[0].time} workStudent ={workStudent[0]}/>
      <Grid container style={{padding:20, height:'90vh'}}>
        
-       <Grid item xs={12} 
-       style = {{height:'45vh', backgroundColor: 'rgba(0,113,83, 0.1)',
-       border:'1px solid rgba(0,113,83)', borderRadius:'3px',
-       padding:'20px',boxShadow: '0.4em 0.4em 5px rgba(122,122,122,0.5)'}}>
+       <Grid item xs={12}  style = {styles.question}>
          {actionTask.question}
-         <img src='file://E:/programming/Tester-students/public/img/scr1.png'/>
+         <Grid container  justify="center" alignItems="center">
+          <Grid item xs={12} > 
+            <img style = {{width:'100%'}} src='file://D:\Diplom_2.0\Tester-students\public\img\Screenshot_2.png'/>
+          </Grid>
+        </Grid>
        </Grid>
-       
-       <Grid item xs={12} style = {{ backgroundColor: 'rgba(0,113,83, 0.1)', border:'1px solid rgba(0,113,83)',borderRadius:'3px',boxShadow: '0.4em 0.4em 5px rgba(122,122,122,0.5)'}}>
+       <Grid item xs={12} style = {styles.workAnswers}>
         { 
           actionTask.type == 'Одиночный выбор'? 
           <WorkAnswersSingle actionTask={actionTask} />:
