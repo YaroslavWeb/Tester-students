@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Authorization from '../../components/Authorization'
-
+import StateContext from '../../context/StateContext'
 const useStyles = makeStyles({
   card: {
     minWidth: 275,
@@ -20,11 +20,20 @@ const useStyles = makeStyles({
   },
 });
 const Home =() => {
-  const classes = useStyles();
   const [authVisible, setAuthVisible] = React.useState(true)
   const [exitVisible, setExitVisible] = React.useState(false)
   const [stud, setStud] = React.useState()
   const [curTest, setCurTest] = React.useState([])
+  const {tests, students} = React.useContext(StateContext)
+  const classes = useStyles();
+  const link = window.location.href
+  const index = link.split("student_id=")
+  // if (index[1]) {
+  //   setAuthVisible(false);
+  //   setExitVisible(true);
+  //   setStud(students.filter(student => student._id == index[1]))
+  //   setCurTest(tests)
+  // } 
   return (      
     <div>
         <MainHeader stud = {stud} exitVisible={exitVisible} setExitVisible={setExitVisible} setStud={setStud} setAuthVisible={setAuthVisible} setCurTest={setCurTest} />
@@ -59,7 +68,8 @@ const Home =() => {
                     </CardContent>
             
                     <CardActions>
-                      <Button variant="outlined" style = {{color:'#006F51',borderColor:'#006F51'}}onClick={()=>{window.location.replace('#/work?test='+test._id)}}>
+                      <Button variant="outlined" style = {{color:'#006F51',borderColor:'#006F51'}}
+                        onClick={()=>{window.location.replace('#/work?test='+test._id +'&student='+stud[0]._id)}}>
                         Начать тест
                       </Button>
                     </CardActions>

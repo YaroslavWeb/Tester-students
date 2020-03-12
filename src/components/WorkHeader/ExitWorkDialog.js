@@ -8,8 +8,6 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import {Link} from 'react-router-dom'
-
 
 const styles = theme => ({
   root: {
@@ -79,16 +77,14 @@ const ExitWorkDialog = (props) => {
           <Button autoFocus variant="outlined" onClick={handleClose}>
             Отмена
           </Button>
-        <Link to='/'>
+         {console.log(props.workStudent)} 
           <Button
-            onClick={ () => {
-          }}
+            onClick={()=>{window.location.replace('#/?student_id='+props.workStudent._id)}}
             autoFocus
             variant="outlined"
             color="primary">
              Подтверждаю
           </Button>
-          </Link>
           
         </DialogActions>
       </Dialog>
