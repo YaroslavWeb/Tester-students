@@ -83,11 +83,12 @@ let inputLogin,inputPassword,inputStud;
                onClick={() => {
                  if (inputStud.value == '' || inputStud.value == undefined) {
                    setLoginStudent(true);
-                 } else {
-                props.setAuthVisible(false)
-                props.setCurTest(tests)
-                props.setStud(students.filter(student=>student.name === inputStud.value))
-                props.setExitVisible(true)}
+                 }
+                 else {
+                  props.setAuthVisible(false)
+                  props.setCurTest(tests)
+                  props.setStud(students.filter(student=>student.name === inputStud.value))
+                }
                }}
                variant="outlined"
                style ={{color: '#006F51'}}>

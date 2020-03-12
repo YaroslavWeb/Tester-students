@@ -62,13 +62,12 @@ const LogoutDialog = (props) => {
           Вы действительно хотите выйти?
         </MuiDialogContent>
         <MuiDialogActions style = {{paddingTop:'15px', paddingBottom:'15px'}}>
-          <Button autoFocus variant="outlined" style = {{display:'flex', justifyContent:'space-between', marginRight:'15px'}} onClick={handleClose}>
+          <Button variant="outlined" style = {{display:'flex', justifyContent:'space-between', marginRight:'15px'}} onClick={handleClose}>
             Отмена
           </Button>
           <Link to='/'>
           <Button
             onClick={ () => {}}
-            autoFocus
             variant="outlined"
             style ={{color: '#006F51',borderColor:'#006F51'}}> 
               Подтверждаю
@@ -76,34 +75,34 @@ const LogoutDialog = (props) => {
             </Link> 
         </MuiDialogActions>
       </Dialog>
-        : <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Подтвердить выход
-        </DialogTitle>
-        <MuiDialogContent dividers>
-          Вы действительно хотите выйти?
-        </MuiDialogContent>
-        <MuiDialogActions style = {{paddingBottom: '0', justifyContent:'space-between'}}>
-         
-          <Button autoFocus variant="outlined" onClick={handleClose} >
-            Отмена
-          </Button>
+        : 
+      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+          <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+            Подтвердить выход
+          </DialogTitle>
+          <MuiDialogContent dividers>
+            Вы действительно хотите выйти?
+          </MuiDialogContent>
+          <MuiDialogActions style = {{paddingBottom: '0', justifyContent:'space-between'}}>
           
-          <Button
-            onClick={
-              ()=>{
-                props.setExitVisible(false)
-                props.setCurTest([])
-                props.setStud(null)
-                props.setAuthVisible(true)
-              }}
-            autoFocus
-            variant="outlined"
-            style ={{color: '#006F51'}}> 
-              Подтверждаю
+            <Button autoFocus variant="outlined" onClick={handleClose} >
+              Отмена
             </Button>
-           
-        </MuiDialogActions>
+            
+            <Button
+              onClick={
+                ()=>{
+                  props.setCurTest([])
+                  props.setStud(null)
+                  props.setAuthVisible(true)
+                }}
+              autoFocus
+              variant="outlined"
+              style ={{color: '#006F51'}}> 
+                Подтверждаю
+              </Button>
+            
+          </MuiDialogActions>
         </Dialog>}  
       </div>
         );

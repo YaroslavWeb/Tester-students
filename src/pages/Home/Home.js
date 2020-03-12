@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import MainHeader from '../../components/MainHeader'
 import Grid from '@material-ui/core/Grid'
 import Grow from '@material-ui/core/Grow'
@@ -21,25 +21,27 @@ const useStyles = makeStyles({
 });
 const Home =() => {
   const [authVisible, setAuthVisible] = React.useState(true)
-  const [exitVisible, setExitVisible] = React.useState(false)
   const [stud, setStud] = React.useState()
   const [curTest, setCurTest] = React.useState([])
   const {tests, students} = React.useContext(StateContext)
-  const classes = useStyles();
+  const classes = useStyles()
   const link = window.location.href
   const index = link.split("student_id=")
-  // if (index[1]) {
-  //   setAuthVisible(false);
-  //   setExitVisible(true);
-  //   setStud(students.filter(student => student._id == index[1]))
-  //   setCurTest(tests)
-  // } 
+  
+  useEffect(()=>{
+    if (index[1]){
+      setStud(students.filter(student => student._id == index[1]))
+      setCurTest(tests)
+      setAuthVisible(false)
+    }
+  },[])
+  
   return (      
     <div>
-        <MainHeader stud = {stud} exitVisible={exitVisible} setExitVisible={setExitVisible} setStud={setStud} setAuthVisible={setAuthVisible} setCurTest={setCurTest} />
+        <MainHeader stud={stud} setStud={setStud} authVisible={authVisible} setAuthVisible={setAuthVisible} setCurTest={setCurTest} />
          
         {authVisible
-        ?<Authorization setStud={setStud} setCurTest={setCurTest} setAuthVisible={setAuthVisible} setExitVisible={setExitVisible}/>
+        ?<Authorization setStud={setStud} setCurTest={setCurTest} setAuthVisible={setAuthVisible}/>
         :
         <Grow
         in={true}
