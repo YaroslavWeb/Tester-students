@@ -70,14 +70,15 @@ const ExitWorkDialog = (props) => {
         </DialogTitle>
         <DialogContent dividers>
           <div style={{marginBottom:'5px'}}>
-          Вы действительно хотите завершить тестирование? </div><br/>
-          При досрочном выходе из теста попытка будет зачтена без выставления оценки.
+            Вы действительно хотите завершить тестирование? 
+            <br/>
+            При досрочном выходе из теста попытка будет зачтена без выставления оценки.
+          </div>
         </DialogContent>
         <DialogActions>
           <Button autoFocus variant="outlined" onClick={handleClose}>
             Отмена
           </Button>
-         {console.log(props.workStudent)} 
           <Button
             onClick={()=>{window.location.replace('#/?student_id='+props.workStudent._id)}}
             autoFocus

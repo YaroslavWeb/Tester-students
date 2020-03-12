@@ -30,6 +30,7 @@ function createWindow() {
         show: false,
         icon: "",
         webPreferences: {
+            webSecurity:false,
             nodeIntegration: true
         }
     });
