@@ -1,13 +1,12 @@
 import React,{useState} from 'react'
-import WorkHeader from '../../components/WorkHeader'
 import StateContext from '../../context/StateContext'
+import WorkHeader from '../../components/WorkHeader'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
-
 import WorkAnswersSingle from '../../components/WorkAnswersTypes/WorkAnswersSingle'
 import WorkAnswersMulti from '../../components/WorkAnswersTypes/WorkAnswersMulti'
 import WorkAnswersText from '../../components/WorkAnswersTypes/WorkAnswersText'
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import CompleteTestDialog from '../../components/CompleteTestDialog'
 
 const Work = () =>{
@@ -39,7 +38,7 @@ const Work = () =>{
        border:'1px solid rgba(0,113,83)', borderRadius:'3px',
        padding:'20px',boxShadow: '0.4em 0.4em 5px rgba(122,122,122,0.5)'}}>
          {actionTask.question}
-         <img src={process.env.PUBLIC_URL + './assets/imagesScreenshot_1.png'} />
+         <img src='file://E:/programming/Tester-students/public/icon.png' />
        </Grid>
        
        <Grid item xs={12} style = {{ backgroundColor: 'rgba(0,113,83, 0.1)', border:'1px solid rgba(0,113,83)',borderRadius:'3px',boxShadow: '0.4em 0.4em 5px rgba(122,122,122,0.5)'}}>

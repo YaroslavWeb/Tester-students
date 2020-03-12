@@ -76,6 +76,7 @@ const App = () =>{
     students.forEach(student => {
       if(student._id == id){
         const newStudent ={...student, name, group}
+        // изменяет существующую оценку
         for (const key in student.marks) {
           newStudent.marks[key].mark = newMarks[key]
           newStudent.marks[key].attempts = newAttempts[key]
