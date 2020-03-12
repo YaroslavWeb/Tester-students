@@ -10,13 +10,17 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import CompleteTestDialog from '../../components/CompleteTestDialog'
 
 const Work = () =>{
-  // Получение id теста из url, который проходит студент
+  // Получение id теста и id студента из url,  который проходит студент
   const link = window.location.href
-  const index = link.split("test=")
-  const {tests} = React.useContext(StateContext)
+  let indexes = link.split("?")
+  indexes = indexes[1].split("&")
+  const testId = indexes[0].split('test=')
+  const studId = indexes[1].split('student=')
+  const {tests, students} = React.useContext(StateContext)
   // Запись актуального теста
-  const workTest = tests.filter(test => test._id == index[1])
-  
+  const workTest = tests.filter(test => test._id == testId[1])
+  // Запись актуального студента
+  const workStudent = students.filter(student => student._id == studId[1])
   /* 
   Стейт хранит список всех заданий теста 
   По умолчанию берётся первое задание
@@ -30,7 +34,7 @@ const Work = () =>{
   
   return (
     <div>
-     <WorkHeader workTestTheme={workTest[0].theme} workTestTime={workTest[0].time} />
+     <WorkHeader workTestTheme={workTest[0].theme} workTestTime={workTest[0].time} workStudent ={workStudent[0]}/>
      <Grid container style={{padding:20, height:'90vh'}}>
        
        <Grid item xs={12} 
@@ -54,12 +58,13 @@ const Work = () =>{
         <Grid item xs={12} > 
           <Grid container direction="row" justify="flex-end" alignItems="flex-end" style={{height:'100%'}}>   
               {taskCounter == maxSteps-1 
-                ?<CompleteTestDialog/>
+                ?<CompleteTestDialog  workStudent ={workStudent[0]}/>
                 :<Button variant="contained" size="large" style={{alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}}
                     onClick={()=>{
                       taskCounter++
                       setTaskCounter(taskCounter)
                       setActionTask(workTest[0].tasks[taskCounter])
+                      
                     }}>
                     <NavigateNextIcon/>
                  </Button>}

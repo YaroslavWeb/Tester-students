@@ -8,8 +8,6 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import {Link} from 'react-router-dom'
-
 
 const styles = theme => ({
   root: {
@@ -71,22 +69,22 @@ const ExitWorkDialog = (props) => {
           Покинуть тест
         </DialogTitle>
         <DialogContent dividers>
-          Вы действительно хотите завершить тестирование?
+          <div style={{marginBottom:'5px'}}>
+          Вы действительно хотите завершить тестирование? </div><br/>
+          При досрочном выходе из теста попытка будет зачтена без выставления оценки.
         </DialogContent>
         <DialogActions>
           <Button autoFocus variant="outlined" onClick={handleClose}>
             Отмена
           </Button>
-        <Link to='/'>
+         {console.log(props.workStudent)} 
           <Button
-            onClick={ () => {
-          }}
+            onClick={()=>{window.location.replace('#/?student_id='+props.workStudent._id)}}
             autoFocus
             variant="outlined"
             color="primary">
              Подтверждаю
           </Button>
-          </Link>
           
         </DialogActions>
       </Dialog>
@@ -94,4 +92,3 @@ const ExitWorkDialog = (props) => {
   );
 }
 export default ExitWorkDialog
-
