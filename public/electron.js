@@ -19,10 +19,10 @@ db.tests = new Datastore({
 
 global.database = db;
 
-let mainWindow;
+let win;
 
 function createWindow() {
-    mainWindow = new BrowserWindow({
+    win = new BrowserWindow({
         width: 1280,
         height: 720,
         minWidth: 900,
@@ -30,23 +30,24 @@ function createWindow() {
         show: false,
         icon: "",
         webPreferences: {
+            plugins:true,
             webSecurity:false,
             nodeIntegration: true,
-            plugins:true
+            webviewTag:true,
         }
     });
-    mainWindow.webContents.openDevTools()
+    win.webContents.openDevTools()
     Menu.setApplicationMenu(null);
-
-    mainWindow.loadURL(
+    
+    win.loadURL(
         isDev ?
         "http://localhost:3000" :
         `file://${path.join(__dirname, "../build/index.html")}`
     );
-    mainWindow.on("closed", () => (mainWindow = null));
+    win.on("closed", () => (win = null));
 
-    mainWindow.once('ready-to-show', () => {
-        mainWindow.show()
+    win.once('ready-to-show', () => {
+        win.show()
     })
 }
 
@@ -58,7 +59,7 @@ app.on("window-all-closed", () => {
 });
 
 app.on("activate", () => {
-    if (mainWindow === null) {
+    if (win === null) {
         createWindow();
     }
 });

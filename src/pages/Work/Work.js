@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState} from 'react'
 import StateContext from '../../context/StateContext'
 import WorkHeader from '../../components/WorkHeader'
 import Grid from '@material-ui/core/Grid'
@@ -9,6 +9,7 @@ import WorkAnswersText from '../../components/WorkAnswersTypes/WorkAnswersText'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import CompleteTestDialog from '../../components/CompleteTestDialog'
 import styles from './Work.style'
+
 const Work = () =>{
   const {tests, students} = React.useContext(StateContext)
   // Получение id теста и id студента из url,  который проходит студент
@@ -37,6 +38,7 @@ const Work = () =>{
     <div>
      <WorkHeader workTestTheme={workTest[0].theme} workTestTime={workTest[0].time} workStudent ={workStudent[0]}/>
      <Grid container style={{padding:20, height:'90vh'}}>
+      <webview style={{width:'500px', height:'500px'}} src="file://E:/programming/Tester-students/public/assets/doc/док.pdf" plugins="true"></webview>
        <Grid item xs={12}  style = {styles.question}>
         <div>
           {actionTask.question}
