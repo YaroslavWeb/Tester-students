@@ -36,6 +36,7 @@ const DialogTitle = withStyles(styles)(props => {
   );
 });
 export default function CustomizedDialogs() {
+  // Перенести в Work и прокидывать сюда и в хедер
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -50,7 +51,7 @@ export default function CustomizedDialogs() {
       <Button variant="contained" size="large" style={{alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}} onClick={handleClickOpen}>
         Завершить тест
       </Button>
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+      <Dialog  aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title">
           Тест завершен!
         </DialogTitle>

@@ -9,7 +9,7 @@ import WorkAnswersText from '../../components/WorkAnswersTypes/WorkAnswersText'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import CompleteTestDialog from '../../components/CompleteTestDialog'
 import styles from './Work.style'
-
+import DescriptionIcon from '@material-ui/icons/Description';
 const Work = () =>{
   const {tests, students} = React.useContext(StateContext)
   // Получение id теста и id студента из url,  который проходит студент
@@ -32,22 +32,33 @@ const Work = () =>{
   // Максимальное количество заданий
   let maxSteps = workTest[0].tasks.length;
 
-  let [taskCounter, setTaskCounter] = useState(0);
+  let [taskCounter, setTaskCounter] = useState(1);
   
   return (
     <div>
-     <WorkHeader workTestTheme={workTest[0].theme} workTestTime={workTest[0].time} workStudent ={workStudent[0]}/>
+     <WorkHeader taskCounter = {taskCounter} maxSteps = {maxSteps} workTestTheme={workTest[0].theme} workTestTime={workTest[0].time} workStudent ={workStudent[0]}/>
      <Grid container style={{padding:20, height:'90vh'}}>
-      <webview style={{width:'500px', height:'500px'}} src="file://E:/programming/Tester-students/public/assets/doc/док.pdf" plugins="true"></webview>
-       <Grid item xs={12}  style = {styles.question}>
+      {/* <webview style={{width:'500px', height:'500px'}} src="file://D:/Diplom_2.0/Tester-students/public/assets/doc/док.pdf" plugins="true"></webview> */}
+      {/* src="file://E:/programming/Tester-students/public/assets/doc/док.pdf" */}
+        <Grid item xs={12}  style = {styles.question}>
+        <Grid container  justify="flex-end" alignItems="flex-end" >  
+          <Button>
+          <DescriptionIcon style = {{color :'#006F51'}}/>
+        </Button>
+        </Grid>
         <div>
-          {actionTask.question}
+         {actionTask.question}
         </div>
+        
+      
+      
         <div id="image_container">
           <div id="imageMin" onClick={()=>{
-            window.open('file://E:/programming/Tester-students/public/assets/img/scr1.png', '_blank')
+            window.open('file://D:/Diplom_2.0/Tester-students/public/assets/img/scr1.png', 'Изображение')
+            //file://E:/programming/Tester-students/public/assets/img/scr1.png
           }}>
-            <img style={{width:'100%'}} src='file://E:/programming/Tester-students/public/assets/img/scr1.png'/>
+            <img style={{width:'100%'}} src='file://D:/Diplom_2.0/Tester-students/public/assets/img/scr1.png'/>
+            {/* file://E:/programming/Tester-students/public/assets/img/scr1.png */}
           </div>
         </div>
        </Grid>
@@ -63,7 +74,7 @@ const Work = () =>{
        
         <Grid item xs={12} > 
           <Grid container direction="row" justify="flex-end" alignItems="flex-end" style={{height:'100%'}}>   
-              {taskCounter == maxSteps-1 
+              {taskCounter == maxSteps
                 ?<CompleteTestDialog  workStudent ={workStudent[0]}/>
                 :<Button variant="contained" size="large" style={{alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}}
                     onClick={()=>{
