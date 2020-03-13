@@ -31,7 +31,8 @@ function createWindow() {
         icon: "",
         webPreferences: {
             webSecurity:false,
-            nodeIntegration: true
+            nodeIntegration: true,
+            plugins:true
         }
     });
     mainWindow.webContents.openDevTools()

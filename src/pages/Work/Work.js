@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import StateContext from '../../context/StateContext'
 import WorkHeader from '../../components/WorkHeader'
 import Grid from '@material-ui/core/Grid'
@@ -10,13 +10,14 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import CompleteTestDialog from '../../components/CompleteTestDialog'
 import styles from './Work.style'
 const Work = () =>{
+  const {tests, students} = React.useContext(StateContext)
   // Получение id теста и id студента из url,  который проходит студент
   const link = window.location.href
   let indexes = link.split("?")
   indexes = indexes[1].split("&")
   const testId = indexes[0].split('test=')
   const studId = indexes[1].split('student=')
-  const {tests, students} = React.useContext(StateContext)
+  
   // Запись актуального теста
   const workTest = tests.filter(test => test._id == testId[1])
   // Запись актуального студента
@@ -36,14 +37,17 @@ const Work = () =>{
     <div>
      <WorkHeader workTestTheme={workTest[0].theme} workTestTime={workTest[0].time} workStudent ={workStudent[0]}/>
      <Grid container style={{padding:20, height:'90vh'}}>
-       
        <Grid item xs={12}  style = {styles.question}>
-         {actionTask.question}
-         <Grid container  justify="center" alignItems="center">
-          <Grid item xs={12} > 
-            <img style = {{width:'100%'}} src='file://D:\Diplom_2.0\Tester-students\public\img\Screenshot_2.png'/>
-          </Grid>
-        </Grid>
+        <div>
+          {actionTask.question}
+        </div>
+        <div id="image_container">
+          <div id="imageMin" onClick={()=>{
+            window.open('file://E:/programming/Tester-students/public/assets/img/scr1.png', '_blank')
+          }}>
+            <img style={{width:'100%'}} src='file://E:/programming/Tester-students/public/assets/img/scr1.png'/>
+          </div>
+        </div>
        </Grid>
        <Grid item xs={12} style = {styles.workAnswers}>
         { 
@@ -64,7 +68,6 @@ const Work = () =>{
                       taskCounter++
                       setTaskCounter(taskCounter)
                       setActionTask(workTest[0].tasks[taskCounter])
-                      
                     }}>
                     <NavigateNextIcon/>
                  </Button>}

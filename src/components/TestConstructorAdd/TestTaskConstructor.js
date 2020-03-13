@@ -46,7 +46,7 @@ const TestTaskConstructor = (props) => {
                 />
                 <label htmlFor="contained-button-file">
                   <Button variant="contained" component="span" id="taskBtnAddImg">
-                  <AddPhotoAlternateIcon/>
+                    <AddPhotoAlternateIcon/>
                   </Button>
                 </label>
                 </div>

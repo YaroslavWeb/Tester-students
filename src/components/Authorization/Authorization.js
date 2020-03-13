@@ -74,7 +74,6 @@ let inputLogin,inputPassword,inputStud;
             variant="outlined" 
             inputRef={node => inputStud = node}
             fullWidth 
-            
             />
          )}/> 
           <div style={{marginTop:'20px', display:'flex',justifyContent:'flex-end'}}>
