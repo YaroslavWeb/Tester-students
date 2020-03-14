@@ -15,6 +15,8 @@ const App = () =>{
 
   const [tests, setTests] = useState([]);
 
+  const teacher = [{name:'Lu4nikov', password:'tovari6'}];
+
   useEffect(()=>{
     db.students.find({}, (err, docs)=>{setStudents(docs)})
     db.tests.find({}, (err, docs)=>{setTests(docs)})

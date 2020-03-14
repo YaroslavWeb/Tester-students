@@ -11,7 +11,7 @@ import CompleteTestDialog from '../../components/CompleteTestDialog'
 import styles from './Work.style'
 
 const Work = () =>{
-  const {tests, students} = React.useContext(StateContext)
+  let {tests, students} = React.useContext(StateContext)
   // Получение id теста и id студента из url,  который проходит студент
   const link = window.location.href
   let indexes = link.split("?")
