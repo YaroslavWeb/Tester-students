@@ -35,23 +35,11 @@ const DialogTitle = withStyles(styles)(props => {
     </MuiDialogTitle>
   );
 });
-export default function CustomizedDialogs() {
+export default function CustomizedDialogs(props) {
   // Перенести в Work и прокидывать сюда и в хедер
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   return (
     <div>
-      <Button variant="contained" size="large" style={{alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}} onClick={handleClickOpen}>
-        Завершить тест
-      </Button>
-      <Dialog  aria-labelledby="customized-dialog-title" open={open}>
+      <Dialog  aria-labelledby="customized-dialog-title" open={props.openCompleteDialog}>
         <DialogTitle id="customized-dialog-title">
           Тест завершен!
         </DialogTitle>
@@ -67,7 +55,8 @@ export default function CustomizedDialogs() {
           </Typography>
         </MuiDialogContent>
         <MuiDialogActions>
-          <Button autoFocus onClick={handleClose} variant="outlined"  
+          <Button autoFocus  variant="outlined"  
+          onClick={()=>{window.location.replace('#/?student_id='+props.workStudent._id)}}
           style={{alignSelf: 'flex-end', color: '#006F51', borderColor:'#006F51'}} > 
             Покинуть тест
           </Button>

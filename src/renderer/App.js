@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useReducer} from "react"
+import React, {useEffect, useState} from "react"
 import Home from '../pages/Home'
 import Students from '../pages/Students'
 import Test from '../pages/Test'
@@ -132,7 +132,7 @@ const App = () =>{
 
         <Route path="/info" render={() => <Info/>}/>
                       
-        <Route path="/work" render={() => <Work/>}/>
+        <Route path="/work" render={() => <Work />}/>
         </main>
         </div>
       </Router>

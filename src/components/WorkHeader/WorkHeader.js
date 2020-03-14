@@ -12,22 +12,27 @@ function LinearDeterminate(props) {
 
   const [completedTime, setCompletedTime] = React.useState(0);
   const [completedTask, setCompletedTask] = React.useState((props.taskCounter/props.maxSteps)*100);
+  let timerSec = props.workTestTime * 60;
   React.useEffect(() => { 
-    function progress() {
-      setCompletedTime(oldCompletedTime => {
-      if   (oldCompletedTime === 100) 
-      {return 0}
-        const diff = props.workTestTime /1000; //передавать время теста делить на 10000
-        return Math.min(oldCompletedTime + diff, 100);
+    function progressTime() {
+      setCompletedTime(oldCompletedTime => {  
+      if(oldCompletedTime === 100) 
+          {
+          clearInterval(timer);
+          props.setOpenCompleteDialog(true);  
+          return 100}
+      else {
+        const diff = timerSec / 1000;
+        return Math.min(oldCompletedTime + diff, 100);}
       });
     }
 
-    const timer = setInterval(progress, 1000);
-    return () => {
-      clearInterval(timer);
-    };
+    const timer = setInterval(progressTime, 1000);
+    
   }, []);
-
+    React.useEffect(() => {
+      setCompletedTask((props.taskCounter/props.maxSteps)*100)
+    },[props.taskCounter])
   return (
     <div style={{marginTop:'10px', width:'55vw'}}>
       <LinearProgress  

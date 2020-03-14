@@ -11,7 +11,8 @@ import CompleteTestDialog from '../../components/CompleteTestDialog'
 import styles from './Work.style'
 import DescriptionIcon from '@material-ui/icons/Description';
 const Work = () =>{
-  const {tests, students} = React.useContext(StateContext)
+  const [openCompleteDialog, setOpenCompleteDialog] = React.useState(false);
+  let {tests, students} = React.useContext(StateContext)
   // Получение id теста и id студента из url,  который проходит студент
   const link = window.location.href
   let indexes = link.split("?")
@@ -21,22 +22,23 @@ const Work = () =>{
   
   // Запись актуального теста
   const workTest = tests.filter(test => test._id == testId[1])
+  
   // Запись актуального студента
   const workStudent = students.filter(student => student._id == studId[1])
+  
   /* 
   Стейт хранит список всех заданий теста 
   По умолчанию берётся первое задание
   */
-  const [actionTask, setActionTask]= useState(workTest[0].tasks[0])
+ let [actionTask, setActionTask]= useState(workTest[0].tasks[0])
  
   // Максимальное количество заданий
   let maxSteps = workTest[0].tasks.length;
 
   let [taskCounter, setTaskCounter] = useState(1);
-  
   return (
     <div>
-     <WorkHeader taskCounter = {taskCounter} maxSteps = {maxSteps} workTestTheme={workTest[0].theme} workTestTime={workTest[0].time} workStudent ={workStudent[0]}/>
+     <WorkHeader setOpenCompleteDialog = {setOpenCompleteDialog} taskCounter = {taskCounter} maxSteps = {maxSteps} workTestTheme={workTest[0].theme} workTestTime={workTest[0].time} workStudent ={workStudent[0]}/>
      <Grid container style={{padding:20, height:'90vh'}}>
       {/* <webview style={{width:'500px', height:'500px'}} src="file://D:/Diplom_2.0/Tester-students/public/assets/doc/док.pdf" plugins="true"></webview> */}
       {/* src="file://E:/programming/Tester-students/public/assets/doc/док.pdf" */}
@@ -49,9 +51,6 @@ const Work = () =>{
         <div>
          {actionTask.question}
         </div>
-        
-      
-      
         <div id="image_container">
           <div id="imageMin" onClick={()=>{
             window.open('file://D:/Diplom_2.0/Tester-students/public/assets/img/scr1.png', 'Изображение')
@@ -71,22 +70,29 @@ const Work = () =>{
           <WorkAnswersText actionTask={actionTask}/>
         }
         </Grid>
-       
         <Grid item xs={12} > 
           <Grid container direction="row" justify="flex-end" alignItems="flex-end" style={{height:'100%'}}>   
               {taskCounter == maxSteps
-                ?<CompleteTestDialog  workStudent ={workStudent[0]}/>
+                ? <Button variant="contained" size="large" 
+                onClick={()=>{
+                  setOpenCompleteDialog(true)
+                }}
+                style={{marginBottom:'15px',alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}} 
+                >
+                Завершить тест
+                </Button>
                 :<Button variant="contained" size="large" style={{alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}}
                     onClick={()=>{
                       taskCounter++
                       setTaskCounter(taskCounter)
-                      setActionTask(workTest[0].tasks[taskCounter])
+                      setActionTask(workTest[0].tasks[--taskCounter])
                     }}>
                     <NavigateNextIcon/>
                  </Button>}
           </Grid>    
         </Grid>
        </Grid>
+       <CompleteTestDialog workStudent = {workStudent} openCompleteDialog = {openCompleteDialog} setOpenCompleteDialog = {setOpenCompleteDialog} workStudent ={workStudent[0]}/>
     </div>
   )
 } 

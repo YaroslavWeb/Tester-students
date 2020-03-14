@@ -62,7 +62,7 @@ const Home =() => {
                         Кол-во вопросов: {test.tasks.length}
                       </Typography>
                       <Typography variant="body2" component="p">
-                        Длительность теста: {test.time} сек.
+                        Длительность теста: {test.time} мин.
                       </Typography>
                       <Typography variant="body2" component="p">
                         Оценка: {markArray.length ? markArray[0].mark : '-'}%
