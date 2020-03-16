@@ -56,6 +56,7 @@ function createWindow() {
         show: false,
         icon: "",
         webPreferences: {
+            nativeWindowOpen:true,
             plugins:true,
             webSecurity:false,
             nodeIntegration: true,

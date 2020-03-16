@@ -41,7 +41,6 @@ const Home =() => {
   return (      
     <div>
         <MainHeader stud={stud} setStud={setStud} authVisible={authVisible} setAuthVisible={setAuthVisible} setCurTest={setCurTest} />
-        {/* <h1>{teachers[0].username, teachers[0].password}</h1> */}
         {authVisible
         ?<Authorization setStud={setStud} setCurTest={setCurTest} setAuthVisible={setAuthVisible}/>
         :
