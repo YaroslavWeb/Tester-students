@@ -65,7 +65,7 @@ export default function MainHeader(props) {
     else if (timerText.sec == 0) {
       setTimerText({min:--timerText.min, sec: timerText.sec = 59})
   }   else if (timerText.min <10 || timerText.sec < 10) {
-    setTimerText({min:timerText.min, sec: '0' + timerText.sec--})
+    setTimerText({min:'0' + timerText.min, sec: '0' + timerText.sec--})
   } else 
       {console.log(timerText.min, timerText.sec)
       setTimerText({min: timerText.min , sec: timerText.sec--})}
