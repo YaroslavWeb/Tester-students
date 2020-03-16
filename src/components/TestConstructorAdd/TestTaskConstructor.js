@@ -14,17 +14,11 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 const TestTaskConstructor = (props) => {
-  function getImg(evt){
-    var files = evt.target.files;
-    var file = files[0];
-    console.log(file.name);
-
-}
   const taskTypes = [
     {taskType:"Одиночный выбор"},
     {taskType:"Множественный выбор"},
     {taskType:"Ввод текста"}
-]
+  ]
       return (
         <Slide direction="right" timeout={1000} in={true} mountOnEnter unmountOnExit>
           <Grid container style={{padding:'10px'}}>
@@ -57,7 +51,7 @@ const TestTaskConstructor = (props) => {
             </Grid>
             <Grid style={{padding:5}} item xs={12} md={4}>
               <TextField inputRef={node => props.task.score = node} fullWidth={true} type = "number" label="Кол-во баллов" variant="outlined" margin="dense"/> 
-              <TextField inputRef={node => props.task.section = node} fullWidth={true} type = "number" label="Секция вопроса" variant="outlined" margin="dense"/> 
+              <TextField inputRef={node => props.task.section = node} fullWidth={true} type = "number" label="Тема вопроса" variant="outlined" margin="dense"/> 
               <Autocomplete
                 options={taskTypes}
                 getOptionLabel={option => option.taskType}

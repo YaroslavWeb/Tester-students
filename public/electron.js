@@ -2,19 +2,45 @@ const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu
-const path = require("path");
-const isDev = require("electron-is-dev");
+const path = require("path")
+const isDev = require("electron-is-dev")
+const crypto = require('crypto')
+
+let algorithm = 'aes-256-cbc'
+let secret = '981127'
+let key = crypto.createHash('sha256').update(String(secret)).digest('base64').substr(0, 32)
 
 const Datastore = require('nedb');
 let db = {};
 db.students = new Datastore({
     filename:'./students.db',
-    autoload: true
+    autoload: true,
 })
 
 db.tests = new Datastore({
     filename:'./tests.db',
-    autoload: true
+    autoload: true,
+})
+
+db.teachers = new Datastore({
+    filename:'./teachers.db',
+    autoload: true,
+    afterSerialization(plaintext) {
+        const iv = crypto.randomBytes(16)
+        const aes = crypto.createCipheriv(algorithm, key, iv)
+        let ciphertext = aes.update(plaintext)
+        ciphertext = Buffer.concat([iv, ciphertext, aes.final()])
+        return ciphertext.toString('base64')
+    },
+    beforeDeserialization(ciphertext) {
+        const ciphertextBytes = Buffer.from(ciphertext, 'base64')
+        const iv = ciphertextBytes.slice(0, 16)
+        const data = ciphertextBytes.slice(16)
+        const aes = crypto.createDecipheriv(algorithm, key, iv)
+        let plaintextBytes = Buffer.from(aes.update(data))
+        plaintextBytes = Buffer.concat([plaintextBytes, aes.final()])
+        return plaintextBytes.toString()
+    },
 })
 
 global.database = db;

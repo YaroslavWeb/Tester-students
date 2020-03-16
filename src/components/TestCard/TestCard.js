@@ -33,7 +33,7 @@ export default function TestCard(props) {
           Кол-во попыток: {props.test.attempts}
         </Typography>
         <Typography variant="body2" component="p">
-          Длительность теста: {props.test.time} сек.
+          Длительность теста: {props.test.time} мин.
         </Typography>
         <hr/>
       </CardContent>

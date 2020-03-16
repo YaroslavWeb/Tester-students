@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useReducer} from "react"
+import React, {useEffect, useState} from "react"
 import Home from '../pages/Home'
 import Students from '../pages/Students'
 import Test from '../pages/Test'
@@ -10,14 +10,14 @@ import StateContext from '../context/StateContext'
 const db = window.require('electron').remote.getGlobal('database');
 
 const App = () =>{
-  
+  const [teachers, setTeachers] = useState([])
+
   const [students, setStudents] = useState([]);
 
   const [tests, setTests] = useState([]);
 
-  const teacher = [{name:'Lu4nikov', password:'tovari6'}];
-
   useEffect(()=>{
+    db.teachers.find({}, (err,docs)=>{setTeachers(docs)})
     db.students.find({}, (err, docs)=>{setStudents(docs)})
     db.tests.find({}, (err, docs)=>{setTests(docs)})
   },[])
@@ -53,22 +53,12 @@ const App = () =>{
         .map(val => val.trim())
         .filter(val => val !== '')
       
-    let puplesObj = [],
-        markID = 1;
+    let puplesObj = []
     namesArr.forEach(puple => {
-      markID = 1;
       puplesObj.push({
         name:puple,
         group,
-        marks: tests.map(test=>{
-          return{
-            id: markID++,
-            id_test:test._id,
-            theme: test.theme,
-            attempts:test.attempts,
-            mark:'-'
-          }
-        })
+        marks: []
       })
     });
     db.students.insert(puplesObj)
@@ -78,7 +68,6 @@ const App = () =>{
     students.forEach(student => {
       if(student._id == id){
         const newStudent ={...student, name, group}
-        // изменяет существующую оценку
         for (const key in student.marks) {
           newStudent.marks[key].mark = newMarks[key]
           newStudent.marks[key].attempts = newAttempts[key]
@@ -116,7 +105,7 @@ const App = () =>{
   }
  
   return(
-    <StateContext.Provider value={{students, tests, addTest, removeTest, editTest}}>
+    <StateContext.Provider value={{students, tests, teachers, addTest, removeTest, editTest}}>
       <Router>
         <div>
         <main>
@@ -134,7 +123,7 @@ const App = () =>{
 
         <Route path="/info" render={() => <Info/>}/>
                       
-        <Route path="/work" render={() => <Work/>}/>
+        <Route path="/work" render={() => <Work />}/>
         </main>
         </div>
       </Router>

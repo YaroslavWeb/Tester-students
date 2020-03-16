@@ -100,32 +100,35 @@ const TableDialogEdit = (props) => {
           {tests.map(test => {
             listCounter++
             const markArray = props.student.marks.filter(mark => mark.id_test === test._id)
-            return(
-              <Grid container key={test._id}>
-                <Grid item xs={12} style={{borderTop: '2px solid #E0E0E0', paddingTop:'5px'}}>
-                  <Typography variant="h6">{test.theme}</Typography>
+            if(markArray.length){
+              return(
+                <Grid container key={test._id}>
+                  <Grid item xs={12} style={{borderTop: '2px solid #E0E0E0', paddingTop:'5px'}}>
+                    <Typography variant="h6">{test.theme}</Typography>
+                  </Grid>
+                  
+                  <Grid item xs={6}>
+                    <TextField
+                      defaultValue={markArray[0].mark}
+                      inputRef={node => editMarks[listCounter] = node}
+                      margin="normal"
+                      label='Оценка'
+                      variant="outlined" 
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      defaultValue={markArray[0].attempts}
+                      inputRef={node => editAttempts[listCounter] = node}
+                      margin="normal"
+                      label='Попытки'
+                      variant="outlined" 
+                    />
+                  </Grid>
                 </Grid>
-                
-                <Grid item xs={6}>
-                  <TextField
-                    defaultValue={markArray.length ? markArray[0].mark : '-'}
-                    inputRef={node => editMarks[listCounter] = node}
-                    margin="normal"
-                    label='Оценка'
-                    variant="outlined" 
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    defaultValue={markArray.length ? markArray[0].attempts : test.attempts}
-                    inputRef={node => editAttempts[listCounter] = node}
-                    margin="normal"
-                    label='Попытки'
-                    variant="outlined" 
-                  />
-                </Grid>
-              </Grid>
-            )
+                )
+            }
+            else{return null}
           })}
         </form>
         </DialogContent>

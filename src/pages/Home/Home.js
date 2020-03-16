@@ -23,10 +23,12 @@ const Home =() => {
   const [authVisible, setAuthVisible] = React.useState(true)
   const [stud, setStud] = React.useState()
   const [curTest, setCurTest] = React.useState([])
-  const {tests, students} = React.useContext(StateContext)
+  const {tests, students, teachers} = React.useContext(StateContext)
   const classes = useStyles()
   const link = window.location.href
   const index = link.split("student_id=")
+  
+  console.log(teachers);
   
   useEffect(()=>{
     if (index[1]){
@@ -39,7 +41,7 @@ const Home =() => {
   return (      
     <div>
         <MainHeader stud={stud} setStud={setStud} authVisible={authVisible} setAuthVisible={setAuthVisible} setCurTest={setCurTest} />
-         
+        {/* <h1>{teachers[0].username, teachers[0].password}</h1> */}
         {authVisible
         ?<Authorization setStud={setStud} setCurTest={setCurTest} setAuthVisible={setAuthVisible}/>
         :
@@ -62,7 +64,7 @@ const Home =() => {
                         Кол-во вопросов: {test.tasks.length}
                       </Typography>
                       <Typography variant="body2" component="p">
-                        Длительность теста: {test.time} сек.
+                        Длительность теста: {test.time} мин.
                       </Typography>
                       <Typography variant="body2" component="p">
                         Оценка: {markArray.length ? markArray[0].mark : '-'}%
