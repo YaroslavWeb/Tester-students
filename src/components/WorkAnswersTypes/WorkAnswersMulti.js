@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Checkbox from '@material-ui/core/Radio';
+import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -14,7 +14,7 @@ const WorkAnswersSingle =(props) => {
                 {props.actionTask.answers.map(answer=>{
                     return(
                         
-                        <FormControlLabel value={answer.answer} key = {answer.id} control={<Checkbox />} label={answer.answer} />
+                        <FormControlLabel value={answer.answer} key = {answer.id} control={<Checkbox color="primary"/>} label={answer.answer} />
                     )
                 })} </Grid>
         </FormControl>
