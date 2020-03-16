@@ -9,7 +9,10 @@ import WorkAnswersText from '../../components/WorkAnswersTypes/WorkAnswersText'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import CompleteTestDialog from '../../components/CompleteTestDialog'
 import styles from './Work.style'
-import DescriptionIcon from '@material-ui/icons/Description';
+import DescriptionIcon from '@material-ui/icons/Description'
+// import PDFViewer from 'pdf-viewer-reactjs'
+{/* <PDFViewer document={{url: "file://E:/programming/Tester-students/public/assets/doc/док.pdf"}}/> */}
+
 const Work = () =>{
   const [openCompleteDialog, setOpenCompleteDialog] = React.useState(false);
   let {tests, students} = React.useContext(StateContext)
@@ -40,13 +43,16 @@ const Work = () =>{
     <div>
      <WorkHeader setOpenCompleteDialog = {setOpenCompleteDialog} taskCounter = {taskCounter} maxSteps = {maxSteps} workTestTheme={workTest[0].theme} workTestTime={workTest[0].time} workStudent ={workStudent[0]}/>
      <Grid container style={{padding:20, height:'90vh'}}>
-      {/* <webview style={{width:'500px', height:'500px'}} src="file://E:/programming/Tester-students/public/assets/doc/док.pdf" plugins="true"></webview> */}
       {/* src="file://E:/programming/Tester-students/public/assets/doc/док.pdf" */}
       {/* src="file://D:/Diplom_2.0/Tester-students/public/assets/doc/док.pdf" */}
         <Grid item xs={12}  style = {styles.question}>
         <Grid container  justify="flex-end" alignItems="flex-end" >  
           <Button>
-            <DescriptionIcon style = {{color :'#006F51'}}/>
+            <DescriptionIcon 
+            onClick={()=>{
+              window.open('file://E:/programming/Tester-students/public/assets/doc/док.pdf', 'manual')
+            }} 
+            style = {{color :'#006F51'}}/>
           </Button>
         </Grid>
         <div>

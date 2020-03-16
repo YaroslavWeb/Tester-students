@@ -46,6 +46,7 @@ const {students,tests} = React.useContext(StateContext)
 
 
 let inputLogin,inputPassword,inputStud;
+
   return (
       <Grid container justify="center" alignItems="center" style={{marginTop:'20px'}} >
         
@@ -74,7 +75,7 @@ let inputLogin,inputPassword,inputStud;
             variant="outlined" 
             inputRef={node => inputStud = node}
             fullWidth 
-            />
+          />
          )}/> 
           <div style={{marginTop:'20px', display:'flex',justifyContent:'flex-end'}}>
             <Button
@@ -111,19 +112,23 @@ let inputLogin,inputPassword,inputStud;
             fullWidth
           />
           <div style={{marginTop:'20px', display:'flex',justifyContent:'flex-end'}}>
-              <Link to='/students'>
-              <Button
-              style ={{marginTop:'10px'}}
-               variant="outlined"
-               style ={{color: '#006F51'}}>
-               Войти
-               </Button>
-              </Link>  
-              </div>
+            <Button
+              style ={{color: '#006F51', marginTop:'10px'}}
+              variant="outlined"
+              onClick={()=>{
+                if(inputPassword.value == '' && inputLogin.value == ''){
+                  window.location.replace('#/students');
+                }
+              }}
+            >
+              Войти
+            </Button>
+          </div>
         </TabPanel>
         </Grid>
         </form>
         
       </Grid>
-   );}
+   );
+  }
     export default Authorization
