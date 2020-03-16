@@ -53,6 +53,27 @@ function LinearDeterminate(props) {
   );
 }
 export default function MainHeader(props) {
+
+  let [timerText, setTimerText] = React.useState({min: props.workTestTime-1, sec: 59 })
+
+  React.useEffect(() => {
+    function timerTextValue (props) {
+      if (timerText.sec == 0 && timerText.min == 0 ) {
+        setTimerText({min:'0'+timerText.min, sec: '0' + timerText.sec})
+        clearInterval(timer);
+    }
+    else if (timerText.sec == 0) {
+      setTimerText({min:--timerText.min, sec: timerText.sec = 59})
+  }   else if (timerText.min <10 || timerText.sec < 10) {
+    setTimerText({min:timerText.min, sec: '0' + timerText.sec--})
+  } else 
+      {console.log(timerText.min, timerText.sec)
+      setTimerText({min: timerText.min , sec: timerText.sec--})}
+      
+  }  
+  const timer = setInterval(timerTextValue, 10);
+    
+}, []);
   return (
     <div >
       <AppBar position="static" style = {{background:'#006F51'}}>
@@ -67,7 +88,7 @@ export default function MainHeader(props) {
                   {props.taskCounter}/{props.maxSteps}
                 </div>
                 <div style = {{paddingLeft:'10px'}}>
-                  15:00
+                  {timerText.min}:{timerText.sec}
                 </div>
               </div>
             </div>
