@@ -1,12 +1,10 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { blue } from '@material-ui/core/colors';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import ExitWorkDialog from './ExitWorkDialog'
 import LinearProgress from "@material-ui/core/LinearProgress";
-import CompleteTestDialog from '../CompleteTestDialog/CompleteTestDialog'
+import WorkManualDialog from '../../components/WorkManualDialog'
 
 function LinearDeterminate(props) {
 
@@ -92,7 +90,10 @@ export default function MainHeader(props) {
                 </div>
               </div>
             </div>
-           <ExitWorkDialog workStudent = {props.workStudent}/>
+            <div style={{display:'flex' ,flexDirection:'row'}}>
+              <WorkManualDialog/>
+              <ExitWorkDialog workStudent = {props.workStudent}/>
+            </div>
         </Toolbar>
      </AppBar>
    </div>

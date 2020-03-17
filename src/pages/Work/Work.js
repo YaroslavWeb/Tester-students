@@ -8,10 +8,9 @@ import WorkAnswersMulti from '../../components/WorkAnswersTypes/WorkAnswersMulti
 import WorkAnswersText from '../../components/WorkAnswersTypes/WorkAnswersText'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import CompleteTestDialog from '../../components/CompleteTestDialog'
+import PDFViewer from 'pdf-viewer-reactjs'
+
 import styles from './Work.style'
-import DescriptionIcon from '@material-ui/icons/Description'
-// import PDFViewer from 'pdf-viewer-reactjs'
-{/* <PDFViewer document={{url: "file://E:/programming/Tester-students/public/assets/doc/док.pdf"}}/> */}
 
 const Work = () =>{
   const [openCompleteDialog, setOpenCompleteDialog] = React.useState(false);
@@ -43,30 +42,19 @@ const Work = () =>{
     <div>
      <WorkHeader setOpenCompleteDialog = {setOpenCompleteDialog} taskCounter = {taskCounter} maxSteps = {maxSteps} workTestTheme={workTest[0].theme} workTestTime={workTest[0].time} workStudent ={workStudent[0]}/>
      <Grid container style={{padding:20, height:'90vh'}}>
-      {/* src="file://E:/programming/Tester-students/public/assets/doc/док.pdf" */}
-      {/* src="file://D:/Diplom_2.0/Tester-students/public/assets/doc/док.pdf" */}
         <Grid item xs={12}  style = {styles.question}>
-        <Grid container  justify="flex-end" alignItems="flex-end" >  
-          <Button>
-            <DescriptionIcon 
-            onClick={()=>{
-              window.open('file://E:/programming/Tester-students/public/assets/doc/док.pdf', 'manual')
-            }} 
-            style = {{color :'#006F51'}}/>
-          </Button>
-        </Grid>
-        <div>
-         {actionTask.question}
-        </div>
-        <div id="image_container">
-          <div id="imageMin" onClick={()=>{
-            window.open('file://E:/programming/Tester-students/public/assets/img/scr1.png', 'Изображение')
-            //file://E:/programming/Tester-students/public/assets/img/scr1.png
-            //file://D:/Diplom_2.0/Tester-students/public/assets/img/scr1.png
-          }}>
-            <img style={{width:'100%'}} src='file://E:/programming/Tester-students/public/assets/img/scr1.png'/>
+          <div>
+            {actionTask.question}
           </div>
-        </div>
+          <div id="image_container">
+            <div id="imageMin" onClick={()=>{
+              window.open('file://E:/programming/Tester-students/public/assets/img/scr1.png', 'Изображение')
+              //file://E:/programming/Tester-students/public/assets/img/scr1.png
+              //file://D:/Diplom_2.0/Tester-students/public/assets/img/scr1.png
+            }}>
+              <img style={{width:'100%'}} src='file://E:/programming/Tester-students/public/assets/img/scr1.png'/>
+            </div>
+          </div>
        </Grid>
        <Grid item xs={12} style = {styles.workAnswers}>
         { 

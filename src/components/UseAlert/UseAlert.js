@@ -8,7 +8,6 @@ const UseAlert = (props) =>{
         <Slide direction="left" in={props.alertState.visible}  mountOnEnter unmountOnExit>
             <Alert style = {{position:'absolute', zIndex:9999, width: '300px', right: '0' , 
             marginRight: '20px' }} 
-             //onClick={()=>{props.setAlert({visible : false , text : '',severity: 'success'})}} 
              variant="filled" 
              severity= {props.alertState.severity}>
              {props.alertState.text}
