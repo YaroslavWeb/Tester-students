@@ -10,22 +10,11 @@ import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Authorization from '../../components/Authorization'
 import StateContext from '../../context/StateContext'
-import shadows from '@material-ui/core/styles/shadows'
-const useStyles = makeStyles({
-  card: {
-    minWidth: 275,
-    boxShadow: '0.4em 0.4em 5px rgba(122,122,122,0.5)',
-  },
-  pos: {
-    marginBottom: 12,
-  },
-});
 const Home =() => {
   const [authVisible, setAuthVisible] = React.useState(true)
   const [stud, setStud] = React.useState()
   const [curTest, setCurTest] = React.useState([])
   const {tests, students, teachers} = React.useContext(StateContext)
-  const classes = useStyles()
   const link = window.location.href
   const index = link.split("student_id=")
 
@@ -39,6 +28,14 @@ const Home =() => {
     }
   },[])
   
+  let markStyle = (markObj)=>{
+    if(markObj.value >= 90) return markObj.card ? 'greenShadowMark' : 'greenMark'
+    else if(markObj.value >= 75 && markObj.value < 90) return markObj.card ? 'salatShadowMark' : 'salatMark'
+    else if(markObj.value >= 60 && markObj.value < 75) return markObj.card ? 'orangeShadowMark' : 'orangeMark'
+    else if(markObj.value < 60) return markObj.card ? 'redShadowMark' : 'redMark'
+    else return 'noneShadowMark'
+  }
+
   return (      
     <div>
         <MainHeader stud={stud} setStud={setStud} authVisible={authVisible} setAuthVisible={setAuthVisible} setCurTest={setCurTest} />
@@ -54,18 +51,24 @@ const Home =() => {
               const markArray = stud[0].marks.filter(mark => mark.id_test === test._id)
               return(  
                 <Grid item style={{padding:20}} key={test._id} item xs={12} sm={6} md={4}>
-                  <Card test={test} className={classes.card} variant="outlined">
+                  <Card 
+                    test={test} 
+                    className={markStyle({card: true, value: markArray[0].mark})} 
+                    variant="outlined"
+                  >
                     <CardContent>
                       <Typography variant="h5" component="h2">
                         Тема:{test.theme}
                       </Typography>
                       <Typography variant="body2" component="p">
-                        Оценка: {markArray.length ? 
-                        <span style = {{color:'white', backgroundColor:'rgb(0,111,81)'}}>{markArray[0].mark+'%'} </span> : '- %'}
-                        
+                        Оценка: 
+                        {markArray.length
+                        ?<span className={markStyle({card: false, value:markArray[0].mark})}>{markArray[0].mark}%</span> 
+                        :<span style = {{color:'white', backgroundColor:'#83898B', padding:'5px'}}>-</span> 
+                        }
                       </Typography>
                       <Typography variant="body2" component="p">
-                        Оставшиеся попытки: {markArray[0].attempts}
+                        Кол-во вопросов: {markArray[0].attempts}
                       </Typography>
                       <Typography variant="body2" component="p">
                         Кол-во вопросов: {test.tasks.length}

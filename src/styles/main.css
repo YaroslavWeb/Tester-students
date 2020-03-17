@@ -79,3 +79,59 @@ nav a:hover {
     height: auto;
     opacity: 1;
 }
+
+/*Цвет оценок*/
+.greenMark{
+    color:white;
+    border-radius: 5px;
+    font-weight: bold;
+    background:rgb(0,111,81);
+    padding:5px;
+}
+.salatMark{
+    color:white;
+    border-radius: 5px;
+    font-weight: bold;
+    background:rgb(168,199,31);
+    padding:5px;
+}
+.orangeMark{
+    color:white;
+    border-radius: 5px;
+    font-weight: bold;
+    background:rgb(199,103,43);
+    padding:5px;
+}
+.redMark{
+    color:white;
+    border-radius: 5px;
+    font-weight: bold;
+    background:rgb(199,68,51);
+    padding:5px;
+}
+
+.greenShadowMark{
+    min-width: 275px;
+    border: 1.5px solid rgb(0,111,81) !important;
+    box-shadow: 0.4em 0.4em 5px rgba(0,111,81,0.8);
+}
+.salatShadowMark{
+    min-width: 275px;
+    border: 1.5px solid rgb(168,199,31) !important;
+    box-shadow: 0.4em 0.4em 5px rgba(168,199,31,0.8);
+}
+.orangeShadowMark{
+    min-width: 275px;
+    border: 1.5px solid rgb(199,103,43) !important;
+    box-shadow: 0.4em 0.4em 5px rgba(199,103,43,0.8);
+}
+.redShadowMark{
+    min-width: 275px;
+    border: 1.5px solid rgb(199,68,51) !important;
+    box-shadow: 0.4em 0.4em 5px rgba(199,68,51,0.8);
+}
+.noneShadowMark{
+    min-width: 275px;
+    border: 1.5px solid #83898B !important;
+    box-shadow: 0.4em 0.4em 5px rgba(131,137,139,0.8);
+}
