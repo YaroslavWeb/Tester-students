@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Authorization from '../../components/Authorization'
 import StateContext from '../../context/StateContext'
+import shadows from '@material-ui/core/styles/shadows'
 const useStyles = makeStyles({
   card: {
     minWidth: 275,
@@ -27,7 +28,7 @@ const Home =() => {
   const classes = useStyles()
   const link = window.location.href
   const index = link.split("student_id=")
-  
+
   console.log(teachers);
   
   useEffect(()=>{
@@ -52,24 +53,27 @@ const Home =() => {
             {curTest.map((test)=>{
               const markArray = stud[0].marks.filter(mark => mark.id_test === test._id)
               return(  
-                <Grid item style={{padding:20}} key={test._id} item xs={12} sm={6} md={4} lg={3} xl={2}>
+                <Grid item style={{padding:20}} key={test._id} item xs={12} sm={6} md={4}>
                   <Card test={test} className={classes.card} variant="outlined">
                     <CardContent>
                       <Typography variant="h5" component="h2">
                         Тема:{test.theme}
                       </Typography>
-              
+                      <Typography variant="body2" component="p">
+                        Оценка: {markArray.length ? 
+                        <span style = {{color:'white', backgroundColor:'rgb(0,111,81)'}}>{markArray[0].mark+'%'} </span> : '- %'}
+                        
+                      </Typography>
+                      <Typography variant="body2" component="p">
+                        Оставшиеся попытки: {markArray[0].attempts}
+                      </Typography>
                       <Typography variant="body2" component="p">
                         Кол-во вопросов: {test.tasks.length}
                       </Typography>
                       <Typography variant="body2" component="p">
                         Длительность теста: {test.time} мин.
                       </Typography>
-                      <Typography variant="body2" component="p">
-                        Оценка: {markArray.length ? markArray[0].mark : '-'}%
-                      </Typography>
                     </CardContent>
-            
                     <CardActions>
                       <Button variant="outlined" style = {{color:'#006F51',borderColor:'#006F51'}}
                         onClick={()=>{window.location.replace('#/work?test='+test._id +'&student='+stud[0]._id)}}>
@@ -85,6 +89,7 @@ const Home =() => {
         </Grow>
         }
       </div>
+        
     )
   }
 
