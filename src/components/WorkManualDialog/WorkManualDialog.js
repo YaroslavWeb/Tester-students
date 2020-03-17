@@ -59,12 +59,12 @@ const TableDialogEdit = (props) => {
         <DescriptionIcon/>
       </IconButton>
 
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+      <Dialog maxWidth='xl' onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
           Справка по тесту
         </DialogTitle>
         <DialogContent dividers>
-           <PDFViewer style={{height:'500px', width:'100%'}} document={{url: "file://E:/programming/Tester-students/public/assets/doc/pres.pdf"}}/> 
+           <PDFViewer document={{url: "file://E:/programming/Tester-students/public/assets/doc/pres.pdf"}}/> 
         </DialogContent>
       </Dialog>
     </div>

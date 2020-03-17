@@ -8,7 +8,6 @@ import WorkAnswersMulti from '../../components/WorkAnswersTypes/WorkAnswersMulti
 import WorkAnswersText from '../../components/WorkAnswersTypes/WorkAnswersText'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import CompleteTestDialog from '../../components/CompleteTestDialog'
-import PDFViewer from 'pdf-viewer-reactjs'
 
 import styles from './Work.style'
 
