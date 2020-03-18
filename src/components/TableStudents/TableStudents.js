@@ -103,12 +103,9 @@ export default function StudentsTable(props) {
         selected.slice(selectedIndex + 1)
       );
     }
-
     setSelected(newSelected);
   };
-
   const isSelected = id => selected.indexOf(id) !== -1;
-
   let markStyle = (markValue)=>{
     if(markValue >= 90) return 'greenMark'
     if(markValue >= 75) return 'salatMark'
@@ -144,7 +141,6 @@ export default function StudentsTable(props) {
                 (row, index) => {
                   const isItemSelected = isSelected(row._id);
                   const labelId = `enhanced-table-checkbox-${index}`;
-
                   return (
                     <TableRow
                       hover
