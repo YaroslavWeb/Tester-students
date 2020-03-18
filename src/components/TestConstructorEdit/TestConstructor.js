@@ -86,7 +86,7 @@ export default function FullScreenDialog(props) {
             alignItems="center"
             style={{padding:'10px'}}
           >
-            <Grid item style={{padding:5}} xs={12} sm={12} md={6} lg={6}>
+            <Grid item style={{padding:5}} xs={6} sm={12} lg={10}>
               <TextField
                 label="Название теста" 
                 defaultValue={props.test.theme}
@@ -96,7 +96,7 @@ export default function FullScreenDialog(props) {
               />
             </Grid>
 
-              <Grid style={{padding:5}} item xs={6} sm={4} md={2} lg={2}>
+            <Grid style={{padding:5}} item xs={6} sm={6}  lg={2}>
                 <TextField
                   label="Время" 
                   defaultValue={props.test.time}
@@ -106,7 +106,16 @@ export default function FullScreenDialog(props) {
                   fullWidth={true} 
                 />
               </Grid>
-              <Grid style={{padding:5}} item xs={6} sm={4} md={2} lg={2}>
+              <Grid style={{padding:5}} item xs={6} sm={6}  lg={4}>
+                <TextField
+                  type = "number"
+                  label="Количество выдаваемых вопросов" 
+                  inputRef={node => timeTest = node}
+                  variant="outlined" 
+                  fullWidth={true} 
+                />
+              </Grid>
+              <Grid style={{padding:5}} item xs={6} sm={6}  lg={4}>
                 <TextField
                   label="Попытки" 
                   defaultValue={props.test.attempts}
@@ -116,7 +125,7 @@ export default function FullScreenDialog(props) {
                   fullWidth={true} 
                 />
               </Grid>
-              <Grid style={{padding:5}} item xs={12} sm={4} md={2} lg={2}>
+              <Grid style={{padding:5}} item xs={12} sm={6}  lg={4}>
               <div >
                 <input style={{display: 'none'}}
                 id="contained-button-file"
