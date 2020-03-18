@@ -4,8 +4,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import ExitWorkDialog from './ExitWorkDialog'
 import LinearProgress from "@material-ui/core/LinearProgress";
-import WorkManualDialog from '../../components/WorkManualDialog'
-
+// import WorkManualDialog from '../../components/WorkManualDialog'
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
 function LinearDeterminate(props) {
 
   const [completedTime, setCompletedTime] = React.useState(0);
@@ -57,19 +58,19 @@ export default function MainHeader(props) {
   React.useEffect(() => {
     function timerTextValue (props) {
       if (timerText.sec == 0 && timerText.min == 0 ) {
-        setTimerText({min:'0'+timerText.min, sec: '0' + timerText.sec})
+        setTimerText({min:timerText.min, sec: '0' + timerText.sec})
         clearInterval(timer);
     }
     else if (timerText.sec == 0) {
       setTimerText({min:--timerText.min, sec: timerText.sec = 59})
-  }   else if (timerText.min <10 || timerText.sec < 10) {
-    setTimerText({min:'0' + timerText.min, sec: '0' + timerText.sec--})
+  }   else if ( timerText.sec < 10) {
+    setTimerText({min:timerText.min, sec: '0' + timerText.sec--})
   } else 
-      {console.log(timerText.min, timerText.sec)
+      {
       setTimerText({min: timerText.min , sec: timerText.sec--})}
       
   }  
-  const timer = setInterval(timerTextValue, 10);
+  const timer = setInterval(timerTextValue, 1000);
     
 }, []);
   return (
@@ -83,15 +84,15 @@ export default function MainHeader(props) {
                 {LinearDeterminate(props)}
               <div>
                 <div style = {{paddingLeft:'10px'}}>
-                  {props.taskCounter}/{props.maxSteps}
+                 {props.taskCounter}/{props.maxSteps}<DoneAllIcon style = {{position: 'absolute', paddingLeft: '5px'}}/> 
                 </div>
                 <div style = {{paddingLeft:'10px'}}>
-                  {timerText.min}:{timerText.sec}
+                {timerText.min}:{timerText.sec}<AccessTimeIcon style = {{position: 'absolute', paddingLeft: '3px'}}/>
                 </div>
               </div>
             </div>
             <div style={{display:'flex' ,flexDirection:'row'}}>
-              <WorkManualDialog/>
+              {/* <WorkManualDialog/> */}
               <ExitWorkDialog workStudent = {props.workStudent}/>
             </div>
         </Toolbar>

@@ -64,7 +64,7 @@ const TableDialogEdit = (props) => {
           Справка по тесту
         </DialogTitle>
         <DialogContent dividers>
-           <PDFViewer document={{url: "file://E:/programming/Tester-students/public/assets/doc/pres.pdf"}}/> 
+           <PDFViewer document={{url: "file://D:/Diplom_2.0/Tester-students/public/assets/doc/doc.pdf"}}/> 
         </DialogContent>
       </Dialog>
     </div>
@@ -75,4 +75,4 @@ export default TableDialogEdit
 
 
 {/* src="file://E:/programming/Tester-students/public/assets/doc/док.pdf" */}
-{/* src="file://D:/Diplom_2.0/Tester-students/public/assets/doc/док.pdf" */}
+{/* src="file://D:/Diplom_2.0/Tester-students/public/assets/doc/doc.pdf" */}
