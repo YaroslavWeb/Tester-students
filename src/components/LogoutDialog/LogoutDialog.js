@@ -1,43 +1,13 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import Typography from '@material-ui/core/Typography';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {Link} from 'react-router-dom'
-
-
-const styles = theme => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(2),
-  },
-  closeButton: {
-    position:'absolute',
-    right: theme.spacing(2),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
-  }
-});
-
-const DialogTitle = withStyles(styles)(props => {
-  const { children, classes, onClose, ...other } = props;
-  return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
-  );
-});
 
 const LogoutDialog = (props) => {
   const [open, setOpen] = React.useState(false);
@@ -53,18 +23,21 @@ const LogoutDialog = (props) => {
       <IconButton color = "inherit" onClick={handleClickOpen}>
         <ExitToAppIcon/>
       </IconButton>
-      {props.logoutStudent == null ? 
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
           Подтвердить выход
+          <IconButton style = {{position:'absolute', top: '2px', right : "5px"}} aria-label="close"  onClick={handleClose}>
+          <CloseIcon />
+        </IconButton>
         </DialogTitle>
-        <MuiDialogContent dividers style={{padding:'25px'}}>
+        <DialogContent dividers style={{padding:'25px'}}>
           Вы действительно хотите выйти?
-        </MuiDialogContent>
-        <MuiDialogActions style = {{paddingTop:'15px', paddingBottom:'15px'}}>
+        </DialogContent>
+        <DialogActions style = {{paddingTop:'15px', paddingBottom:'15px'}}>
           <Button variant="outlined" style = {{display:'flex', justifyContent:'space-between', marginRight:'15px'}} onClick={handleClose}>
             Отмена
           </Button>
+         { props.logoutStudent == null ?
           <Link to='/'>
           <Button
             onClick={ () => {}}
@@ -72,40 +45,20 @@ const LogoutDialog = (props) => {
             style ={{color: '#006F51',borderColor:'#006F51'}}> 
               Подтверждаю
             </Button>
-            </Link> 
-        </MuiDialogActions>
-      </Dialog>
-        : 
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-          <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-            Подтвердить выход
-          </DialogTitle>
-          <MuiDialogContent dividers>
-            Вы действительно хотите выйти?
-          </MuiDialogContent>
-          <MuiDialogActions style = {{paddingBottom: '0', justifyContent:'space-between'}}>
-          
-            <Button autoFocus variant="outlined" onClick={handleClose} >
-              Отмена
-            </Button>
-            
-            <Button
-              onClick={
-                ()=>{
+            </Link> :  
+            <Button onClick={()=>{
                   props.setCurTest([])
                   props.setStud(null)
                   props.setAuthVisible(true)
                 }}
               autoFocus
               variant="outlined"
-              style ={{color: '#006F51'}}> 
+              style ={{color: '#006F51', borderColor:'#006F51'}}> 
                 Подтверждаю
-              </Button>
-            
-          </MuiDialogActions>
-        </Dialog>}  
-      </div>
-        );
-      }
+              </Button> }
+        </DialogActions>
+      </Dialog>
+    </div>)}
+
 export default LogoutDialog
 
