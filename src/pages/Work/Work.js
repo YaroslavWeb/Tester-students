@@ -31,8 +31,8 @@ const Work = () =>{
   Стейт хранит список всех заданий теста 
   По умолчанию берётся первое задание
   */
- let [actionTask, setActionTask]= useState(workTest[0].tasks[0])
- 
+  let [actionTask, setActionTask]= useState(workTest[0].tasks[0])
+  
   // Максимальное количество заданий
   let maxSteps = workTest[0].tasks.length;
 

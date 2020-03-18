@@ -29,12 +29,12 @@ const Home =() => {
     }
   },[])
   
-  let markStyle = (markObj)=>{
+  let markStyle = (markObj  = {card: true, value: -1})=>{
     if(markObj.value >= 90) return markObj.card ? 'greenShadowMark' : 'greenMark'
     else if(markObj.value >= 75 && markObj.value < 90) return markObj.card ? 'salatShadowMark' : 'salatMark'
     else if(markObj.value >= 60 && markObj.value < 75) return markObj.card ? 'orangeShadowMark' : 'orangeMark'
-    else if(markObj.value < 60) return markObj.card ? 'redShadowMark' : 'redMark'
-    else return 'noneShadowMark'
+    else if(markObj.value < 60 && markObj.value >= 0) return markObj.card ? 'redShadowMark' : 'redMark'
+    else if(markObj.value == -1) return 'noneShadowMark'
   }
 
   return (      
@@ -54,7 +54,11 @@ const Home =() => {
                 <Grid item style={{padding:20}} key={test._id} item xs={12} sm={6} md={4}>
                   <Card 
                     test={test} 
-                    className={markStyle({card: true, value: markArray[0].mark})} 
+                    className={
+                      markArray.length
+                      ?markStyle({card: true, value: markArray[0].mark})
+                      :markStyle()
+                    } 
                     variant="outlined"
                   >
                     <CardContent>
@@ -63,13 +67,18 @@ const Home =() => {
                       </Typography>
                       <Typography variant="body2" component="p">
                         Оценка: 
-                        {markArray.length
+                        {
+                        markArray.length
                         ?<span className={markStyle({card: false, value:markArray[0].mark})}>{markArray[0].mark}%</span> 
                         :<span style = {{color:'white', backgroundColor:'#83898B', padding:'5px'}}>-</span> 
                         }
                       </Typography>
                       <Typography variant="body2" component="p">
-                        Кол-во вопросов: {markArray[0].attempts}
+                        Кол-во вопросов: {
+                        markArray.length
+                        ?markArray[0].attempts
+                        :test.attempts
+                        }
                       </Typography>
                       <Typography variant="body2" component="p">
                         Кол-во вопросов: {test.tasks.length}

@@ -1,4 +1,8 @@
 /*#FBF5E7*/
+html{
+    overflow-y: auto !important;
+}
+
 body{
     background: #fff;
     margin:0 !important;
