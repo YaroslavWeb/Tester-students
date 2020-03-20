@@ -103,14 +103,12 @@ const App = () =>{
     db.tests.remove({_id:id_test})
     db.tests.find({}, (err, docs)=>{setTests(docs)})
   }
- 
   return(
     <StateContext.Provider value={{students, tests, teachers, addTest, removeTest, editTest}}>
       <Router>
         <div>
         <main>
         <Route exact path="/" render={() => <Home/>}/>
-
         <Route path="/students" render={() => 
           <Students
             editStudent={editStudent}
@@ -122,10 +120,10 @@ const App = () =>{
         <Route path="/test" render={() => <Test/>}/>
 
         <Route path="/info" render={() => <Info/>}/>
-                      
+                     
         <Route path="/work" render={() => <Work />}/>
         </main>
-        </div>
+       </div>
       </Router>
 
     </StateContext.Provider>

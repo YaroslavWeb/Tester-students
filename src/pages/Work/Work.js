@@ -62,7 +62,7 @@ const Work = () =>{
           actionTask.type == 'Множественный выбор'? 
           <WorkAnswersMulti actionTask={actionTask}/>:
           <WorkAnswersText actionTask={actionTask}/>
-        }
+        } {console.log('work')}
         </Grid>
         <Grid item xs={12} > 
           <Grid container direction="row" justify="flex-end" alignItems="flex-end" style={{height:'100%'}}>   
