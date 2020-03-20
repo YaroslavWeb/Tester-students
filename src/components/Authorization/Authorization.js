@@ -90,7 +90,7 @@ let inputLogin,inputPassword,inputStud;
                 }
                }}
                variant="outlined"
-               style ={{color: '#006F51'}}>
+               style ={{color: '#006F51', borderColor:'#006F51'}}>
                Войти
             </Button>
            </div>
@@ -112,8 +112,8 @@ let inputLogin,inputPassword,inputStud;
           />
           <div style={{marginTop:'20px', display:'flex',justifyContent:'flex-end'}}>
             <Button
-              style ={{color: '#006F51', marginTop:'10px'}}
-              variant="outlined"
+              variant="outlined" 
+              style ={{color: '#006F51', marginTop:'10px', borderColor:'#006F51'}}
               onClick={()=>{
                 if(inputPassword.value == '' && inputLogin.value == ''){
                   window.location.replace('#/students');

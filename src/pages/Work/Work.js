@@ -13,7 +13,8 @@ import styles from './Work.style'
 
 const Work = () =>{
   const [openCompleteDialog, setOpenCompleteDialog] = React.useState(false);
-  let {tests, students} = React.useContext(StateContext)
+  let {tests, students, setMarkStudent} = React.useContext(StateContext)
+
   // Получение id теста и id студента из url,  который проходит студент
   const link = window.location.href
   let indexes = link.split("?")
@@ -35,6 +36,9 @@ const Work = () =>{
 
   // Максимальное количество заданий
   let maxSteps = workTest[0].tasks.length
+  // Максимальное кол-во баллов
+  let maxScore = 0;
+  workTest[0].tasks.forEach(item => maxScore+=Number(item.score))
 
   // Счётчик актуального задания
   let [taskCounter, setTaskCounter] = useState(1)
@@ -42,24 +46,48 @@ const Work = () =>{
   // Баллы за правильный ответ
   let [correctAnswerCounter, setCorrectAnswerCounter] = useState(0)
   // Ответ студента
-  let [answerStudent, setAnswerStudent] = React.useState();
+  let [answerStudent, setAnswerStudent] = React.useState([]);
 
   // Проверка ответа студента и внесение баллов
   let checkAnswer = () => {
-    actionTask.answers.forEach(answer => {
-      if(answer.correct){
-        answerStudent == answer.answer
-        ? setCorrectAnswerCounter(correctAnswerCounter + Number(actionTask.score))
-        : setCorrectAnswerCounter(correctAnswerCounter)
-      }
-    });
+    if(actionTask.type == 'Одиночный выбор'){
+      actionTask.answers.forEach(answer => {
+          if(answer.correct){
+            // провека id правильного ответа с ответом студента
+            answerStudent[0] == answer.id
+            ? setCorrectAnswerCounter(correctAnswerCounter + Number(actionTask.score))
+            : setCorrectAnswerCounter(correctAnswerCounter)
+          }
+      });
+    }
+    else if (actionTask.type == 'Множественный выбор'){
+      // Массив с правильными ответами
+      let arrayMarkCorrect = []
+      actionTask.answers.forEach(answer => answer.correct?arrayMarkCorrect.push(String(answer.id)):false)
+      // Массив с совпалдениями
+      let correctChoise = answerStudent.filter(i => {return arrayMarkCorrect.indexOf(i) < 0;});
+      correctChoise.length === 0 
+      ? setCorrectAnswerCounter(correctAnswerCounter + Number(actionTask.score))
+      : setCorrectAnswerCounter(correctAnswerCounter)
+    }
+    else if (actionTask.type == 'Ввод текста'){
+      actionTask.answers.forEach(answer => {
+        if(answer.correct){
+          answer.answer == answerStudent
+          ? setCorrectAnswerCounter(correctAnswerCounter + Number(actionTask.score))
+          : setCorrectAnswerCounter(correctAnswerCounter)
+        }
+      })
+    }
   }
+
+  let setAnswerStudentText = (inputValue) => {setAnswerStudent(inputValue)}
+  console.log(`текущие баллы: ${correctAnswerCounter}, максимум баллов:${maxScore}`);
+  
   React.useEffect(()=>{
-    setAnswerStudent()
+    setAnswerStudent([])
   }, [taskCounter])
 
-  console.log(answerStudent, correctAnswerCounter);
-  
   return (
     <div>
      <WorkHeader
@@ -86,7 +114,8 @@ const Work = () =>{
           </div>
        </Grid>
        <Grid item xs={12} style = {styles.workAnswers}>
-        { // Отрисовка ответов по типу задания
+        { 
+        // Отрисовка ответов по типу задания
           actionTask.type == 'Одиночный выбор'
           ? <WorkAnswersSingle 
               answerStudent={answerStudent}
@@ -99,8 +128,9 @@ const Work = () =>{
               setAnswerStudent={setAnswerStudent} 
               actionTask={actionTask}
             />
-          :<WorkAnswersText
-             actionTask={actionTask}
+          : <WorkAnswersText
+              setAnswerStudentText={setAnswerStudentText} 
+              actionTask={actionTask}
             />
         }
         </Grid>
@@ -129,10 +159,11 @@ const Work = () =>{
         </Grid>
        </Grid>
        <CompleteTestDialog 
-        workStudent = {workStudent} 
         openCompleteDialog = {openCompleteDialog} 
         setOpenCompleteDialog = {setOpenCompleteDialog} 
         workStudent ={workStudent[0]}
+        maxScore={maxScore}
+        correctAnswerCounter = {correctAnswerCounter}
        />
     </div>
   )

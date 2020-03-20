@@ -18,7 +18,7 @@ export default function MainHeader(props) {
           <div>
             <Typography variant='h5'>
               {props.stud[0].name} 
-              <span style ={{backgroundColor:'#006F51',fontSize:'0.9rem', color:'white', padding:'5px', boxShadow:'-1px -1px 6px #002c20,1px 1px 6px #00b282' }}>
+              <span style ={{marginLeft:'5px',backgroundColor:'#006F51',fontSize:'0.9rem', color:'white', padding:'5px', boxShadow:'-1px -1px 6px #002c20,1px 1px 6px #00b282' }}>
                 {props.stud[0].group}
               </span>
             </Typography>

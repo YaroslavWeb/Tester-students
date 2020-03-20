@@ -103,12 +103,15 @@ export default function StudentsTable(props) {
         selected.slice(selectedIndex + 1)
       );
     }
-
     setSelected(newSelected);
   };
-
   const isSelected = id => selected.indexOf(id) !== -1;
-
+  let markStyle = (markValue)=>{
+    if(markValue >= 90) return 'greenMark'
+    if(markValue >= 75) return 'salatMark'
+    if(markValue >= 60) return 'orangeMark'
+    if(markValue >= 0) return 'redMark'
+  }
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -138,7 +141,6 @@ export default function StudentsTable(props) {
                 (row, index) => {
                   const isItemSelected = isSelected(row._id);
                   const labelId = `enhanced-table-checkbox-${index}`;
-
                   return (
                     <TableRow
                       hover
@@ -170,10 +172,11 @@ export default function StudentsTable(props) {
                       {tests.map(test => {
                         const cellKey = test._id +'_' + row._id
                         const markArray = row.marks.filter(mark => mark.id_test === test._id)
-                        
                         return(
                           <TableCell key={cellKey} style={{fontWeight:'bold', fontSize:'1.5rem'}} align="left">
-                            {markArray.length ? markArray[0].mark : '-'}
+                            {markArray.length ? 
+                            <span className={markStyle(markArray[0].mark)}>{markArray[0].mark}</span> 
+                            :<span style = {{color:'white', backgroundColor:'#83898B', padding:'5px', borderRadius: '5px'}}>{'-'}</span>}
                           </TableCell>
                         )
                       })}

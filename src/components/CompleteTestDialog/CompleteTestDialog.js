@@ -36,7 +36,8 @@ const DialogTitle = withStyles(styles)(props => {
   );
 });
 export default function CustomizedDialogs(props) {
-  // Перенести в Work и прокидывать сюда и в хедер
+  // Итоговая оценка
+  let finalMarkStudnet = props.correctAnswerCounter * 100 / props.maxScore
   return (
     <div>
       <Dialog  aria-labelledby="customized-dialog-title" open={props.openCompleteDialog}>
@@ -45,13 +46,13 @@ export default function CustomizedDialogs(props) {
         </DialogTitle>
         <MuiDialogContent dividers style= {{paddingTop:'20px',  paddingRight:'80px', paddingBottom:'40px', paddingLeft:'10px'}}>
           <Typography style ={{marginBottom:'5px',  paddingRight:'80px'}} >
-           Итоговая оценка: 
+           Колличество баллов: {props.correctAnswerCounter} из {props.maxScore}
+          </Typography>
+          <Typography style ={{marginBottom:'5px',  paddingRight:'80px'}} >
+           Итоговая оценка: {finalMarkStudnet}%
           </Typography>
           <Typography style ={{marginBottom:'5px'}}>
             Потрачено времени:
-          </Typography>
-          <Typography style ={{marginBottom:'5px'}}>
-            Осталось попыток:
           </Typography>
         </MuiDialogContent>
         <MuiDialogActions>
