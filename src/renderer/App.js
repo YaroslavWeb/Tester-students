@@ -103,8 +103,11 @@ const App = () =>{
     db.tests.remove({_id:id_test})
     db.tests.find({}, (err, docs)=>{setTests(docs)})
   }
+ 
+  const setMarkStudent = (id_student, mark) =>{}
+
   return(
-    <StateContext.Provider value={{students, tests, teachers, addTest, removeTest, editTest}}>
+    <StateContext.Provider value={{students, tests, teachers, addTest, removeTest, editTest, setMarkStudent}}>
       <Router>
         <div>
         <main>

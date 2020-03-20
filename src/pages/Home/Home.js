@@ -17,8 +17,6 @@ const Home =() => {
   const link = window.location.href
   const index = link.split("student_id=")
 
-  console.log(teachers);
-  
   useEffect(()=>{
     if (index[1]){
       setStud(students.filter(student => student._id == index[1]))
@@ -68,11 +66,11 @@ const Home =() => {
                         }
                       </Typography>
                       <Typography variant="body2" component="p">
-                        Кол-во вопросов: {
+                        Кол-во попыток: {
                         markArray.length
                         ?markArray[0].attempts
                         :test.attempts
-                        }
+                        }/{test.attempts}
                       </Typography>
                       <Typography variant="body2" component="p">
                         Кол-во вопросов: {test.tasks.length}

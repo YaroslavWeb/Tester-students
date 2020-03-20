@@ -13,7 +13,8 @@ import styles from './Work.style'
 
 const Work = () =>{
   const [openCompleteDialog, setOpenCompleteDialog] = React.useState(false);
-  let {tests, students} = React.useContext(StateContext)
+  let {tests, students, setMarkStudent} = React.useContext(StateContext)
+
   // Получение id теста и id студента из url,  который проходит студент
   const link = window.location.href
   let indexes = link.split("?")
@@ -28,18 +29,75 @@ const Work = () =>{
   const workStudent = students.filter(student => student._id == studId[1])
   
   /* 
-  Стейт хранит список всех заданий теста 
+  Стейт хранит актуальное задание
   По умолчанию берётся первое задание
   */
   let [actionTask, setActionTask]= useState(workTest[0].tasks[0])
-  
-  // Максимальное количество заданий
-  let maxSteps = workTest[0].tasks.length;
 
-  let [taskCounter, setTaskCounter] = useState(1);
+  // Максимальное количество заданий
+  let maxSteps = workTest[0].tasks.length
+  // Максимальное кол-во баллов
+  let maxScore = 0;
+  workTest[0].tasks.forEach(item => maxScore+=Number(item.score))
+
+  // Счётчик актуального задания
+  let [taskCounter, setTaskCounter] = useState(1)
+
+  // Баллы за правильный ответ
+  let [correctAnswerCounter, setCorrectAnswerCounter] = useState(0)
+  // Ответ студента
+  let [answerStudent, setAnswerStudent] = React.useState([]);
+
+  // Проверка ответа студента и внесение баллов
+  let checkAnswer = () => {
+    if(actionTask.type == 'Одиночный выбор'){
+      actionTask.answers.forEach(answer => {
+          if(answer.correct){
+            // провека id правильного ответа с ответом студента
+            answerStudent[0] == answer.id
+            ? setCorrectAnswerCounter(correctAnswerCounter + Number(actionTask.score))
+            : setCorrectAnswerCounter(correctAnswerCounter)
+          }
+      });
+    }
+    else if (actionTask.type == 'Множественный выбор'){
+      // Массив с правильными ответами
+      let arrayMarkCorrect = []
+      actionTask.answers.forEach(answer => answer.correct?arrayMarkCorrect.push(String(answer.id)):false)
+      // Массив с совпалдениями
+      let correctChoise = answerStudent.filter(i => {return arrayMarkCorrect.indexOf(i) < 0;});
+      correctChoise.length === 0 
+      ? setCorrectAnswerCounter(correctAnswerCounter + Number(actionTask.score))
+      : setCorrectAnswerCounter(correctAnswerCounter)
+    }
+    else if (actionTask.type == 'Ввод текста'){
+      actionTask.answers.forEach(answer => {
+        if(answer.correct){
+          answer.answer.toUpperCase() == answerStudent
+           ? setCorrectAnswerCounter(correctAnswerCounter + Number(actionTask.score))
+           : setCorrectAnswerCounter(correctAnswerCounter)
+        }
+      })
+    }
+  }
+
+  let setAnswerStudentText = (inputValue) => {setAnswerStudent(inputValue)}
+  console.log(`текущие баллы: ${correctAnswerCounter}, максимум баллов:${maxScore}`);
+  
+  React.useEffect(()=>{
+    setAnswerStudent([])
+  }, [taskCounter])
+
   return (
     <div>
-     <WorkHeader setOpenCompleteDialog = {setOpenCompleteDialog} taskCounter = {taskCounter} maxSteps = {maxSteps} workTestTheme={workTest[0].theme} workTestTime={workTest[0].time} workStudent ={workStudent[0]}/>
+     <WorkHeader
+      setOpenCompleteDialog = {setOpenCompleteDialog}
+      taskCounter = {taskCounter}
+      maxSteps = {maxSteps}
+      workTestTheme={workTest[0].theme}
+      workTestTime={workTest[0].time}
+      workStudent ={workStudent[0]}
+     />
      <Grid container style={{padding:20, height:'90vh'}}>
         <Grid item xs={12}  style = {styles.question}>
           <div>
@@ -57,26 +115,40 @@ const Work = () =>{
        </Grid>
        <Grid item xs={12} style = {styles.workAnswers}>
         { 
-          actionTask.type == 'Одиночный выбор'? 
-          <WorkAnswersSingle actionTask={actionTask} />:
-          actionTask.type == 'Множественный выбор'? 
-          <WorkAnswersMulti actionTask={actionTask}/>:
-          <WorkAnswersText actionTask={actionTask}/>
-        } {console.log('work')}
+        // Отрисовка ответов по типу задания
+          actionTask.type == 'Одиночный выбор'
+          ? <WorkAnswersSingle 
+              answerStudent={answerStudent}
+              setAnswerStudent={setAnswerStudent} 
+              actionTask={actionTask} 
+            />
+          :actionTask.type == 'Множественный выбор'
+          ? <WorkAnswersMulti
+              answerStudent={answerStudent}
+              setAnswerStudent={setAnswerStudent} 
+              actionTask={actionTask}
+            />
+          : <WorkAnswersText
+              setAnswerStudentText={setAnswerStudentText} 
+              actionTask={actionTask}
+            />
+        }
         </Grid>
         <Grid item xs={12} > 
           <Grid container direction="row" justify="flex-end" alignItems="flex-end" style={{height:'100%'}}>   
               {taskCounter == maxSteps
-                ? <Button variant="contained" size="large" 
-                onClick={()=>{
-                  setOpenCompleteDialog(true)
-                }}
-                style={{marginBottom:'15px',alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}} 
-                >
-                Завершить тест
-                </Button>
-                :<Button variant="contained" size="large" style={{alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}}
+                ? <Button 
+                    variant="contained" size="large" 
                     onClick={()=>{
+                      setOpenCompleteDialog(true)
+                    }}
+                    style={{marginBottom:'15px',alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}} 
+                  >
+                    Завершить тест
+                  </Button>
+                : <Button variant="contained" size="large" style={{alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}}
+                    onClick={()=>{
+                      checkAnswer()
                       taskCounter++
                       setTaskCounter(taskCounter)
                       setActionTask(workTest[0].tasks[--taskCounter])
@@ -86,7 +158,13 @@ const Work = () =>{
           </Grid>    
         </Grid>
        </Grid>
-       <CompleteTestDialog workStudent = {workStudent} openCompleteDialog = {openCompleteDialog} setOpenCompleteDialog = {setOpenCompleteDialog} workStudent ={workStudent[0]}/>
+       <CompleteTestDialog 
+        openCompleteDialog = {openCompleteDialog} 
+        setOpenCompleteDialog = {setOpenCompleteDialog} 
+        workStudent ={workStudent[0]}
+        maxScore={maxScore}
+        correctAnswerCounter = {correctAnswerCounter}
+       />
     </div>
   )
 } 

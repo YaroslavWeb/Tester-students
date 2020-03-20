@@ -84,10 +84,14 @@ export default function MainHeader(props) {
                 {LinearDeterminate(props)}
               <div>
                 <div style = {{paddingLeft:'10px'}}>
-                 {props.taskCounter}/{props.maxSteps}<DoneAllIcon style = {{position: 'absolute', paddingLeft: '5px'}}/> 
+                 {props.taskCounter}/{props.maxSteps}
+                 {/* <DoneAllIcon style = {{position: 'absolute', paddingLeft: '5px'}}
+                 />  */}
                 </div>
                 <div style = {{paddingLeft:'10px'}}>
-                {timerText.min}:{timerText.sec}<AccessTimeIcon style = {{position: 'absolute', paddingLeft: '3px'}}/>
+                {timerText.min}:{timerText.sec}
+                {/* <AccessTimeIcon style = {{position: 'absolute', paddingLeft: '3px'}}
+                /> */}
                 </div>
               </div>
             </div>
