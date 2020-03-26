@@ -1,16 +1,11 @@
-{"name":"Леонович","group":"ИС-17","marks":[{"id":1,"id_test":"rfp9jgvEDT6JiS65","theme":"Тест №1 - ПРОСТОЙ","attempts":3,"mark":"100"}],"_id":"0gXR4Hdshh5CcOJ0"}
-{"name":"Акулов","group":"ИС-17","marks":[],"_id":"1Oe8zunROpTL7jQ8"}
-{"name":"Бахметев","group":"ПИ-16","marks":[],"_id":"1XgemBel7YzfsdrQ"}
-{"name":"Божич","group":"ПИ-16","marks":[],"_id":"29q7RSPafs0VAo0r"}
-{"name":"Вараксин","group":"ПИ-16","marks":[],"_id":"3c5p8LyV0qizLbiC"}
-{"name":"Березин","group":"ПИ-16","marks":[],"_id":"3nxwopf8hFHkpujC"}
-{"name":"Цуриков","group":"ИС-17","marks":[],"_id":"3qh1CSFDjx4uyLSy"}
+{"name":"Вараксин","group":"ПИ-16","marks":[{"id":1,"id_test":"rfp9jgvEDT6JiS65","attempts":3,"mark":60},{"id":2,"id_test":"8PoGZe4Od1CF9YSk","attempts":0,"mark":67}],"_id":"3c5p8LyV0qizLbiC"}
+{"name":"Березин","group":"ПИ-16","marks":[{"id":1,"id_test":"8PoGZe4Od1CF9YSk","attempts":1,"mark":67},{"id":2,"id_test":"rfp9jgvEDT6JiS65","attempts":4,"mark":30}],"_id":"3nxwopf8hFHkpujC"}
+{"name":"Цуриков","group":"ИС-17","marks":[{"id":1,"id_test":"8PoGZe4Od1CF9YSk","attempts":0,"mark":67}],"_id":"3qh1CSFDjx4uyLSy"}
 {"name":"Горихвостов","group":"ИС-17","marks":[],"_id":"6EINAQgbEP1MNI8G"}
-{"name":"Вешняков","group":"ПИ-16","marks":[],"_id":"7yLEvNx3L8xK71hC"}
-{"name":"Плещеев","group":"ПИ-16","marks":[],"_id":"AePupXSAfSHxfHam"}
+{"name":"Вешняков","group":"ПИ-16","marks":[{"id":1,"id_test":"rfp9jgvEDT6JiS65","attempts":"4","mark":"75"},{"id":2,"id_test":"8PoGZe4Od1CF9YSk","attempts":0,"mark":33}],"_id":"7yLEvNx3L8xK71hC"}
 {"name":"Тиньков","group":"ИС-17","marks":[],"_id":"Anwp1ahsP1VVUo1H"}
 {"name":"Писемский","group":"ПИ-16","marks":[],"_id":"BPmloJgaFITJAajJ"}
-{"name":"Дубасов","group":"ИС-17","marks":[],"_id":"I5Jp068r95jCrjVa"}
+{"name":"Дубасов","group":"ИС-17","marks":[{"id":1,"id_test":"rfp9jgvEDT6JiS65","attempts":4,"mark":20}],"_id":"I5Jp068r95jCrjVa"}
 {"name":"Болтов","group":"ИС-17","marks":[],"_id":"LOAdqTmVcPmPlJjE"}
 {"name":"Емельянов","group":"ИС-17","marks":[],"_id":"MWyNt4OpXyT4fSFC"}
 {"name":"Войцехович","group":"ПИ-16","marks":[],"_id":"Mzh6hNzY9tn7XRlu"}
@@ -32,5 +27,3 @@
 {"name":"Стремоухов","group":"ИС-17","marks":[],"_id":"mTTDV3DsFlDzzzXG"}
 {"name":"Черемисинов","group":"ИС-17","marks":[],"_id":"nHIR7xOnNDWPCCaN"}
 {"name":"Вояковский","group":"ИС-17","marks":[],"_id":"pxqs8RuN54tLHJ1U"}
-{"name":"Эрдман","group":"ИС-17","marks":[],"_id":"so3Rne1fHKLEHOJZ"}
-{"name":"Богданов","group":"ИС-17","marks":[],"_id":"u0SjPV51amT5p1xP"}

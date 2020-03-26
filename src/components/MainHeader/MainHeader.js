@@ -12,7 +12,7 @@ export default function MainHeader(props) {
     <div>
       <AppBar position="static" style = {{background:'#006F51'}}>
         
-        {props.authVisible == false
+        {props.authVisible === false
         ? 
          <Toolbar style = {{display: 'flex', justifyContent: 'space-between'}}>
           <div>

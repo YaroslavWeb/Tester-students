@@ -13,6 +13,7 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
+
 const TestTaskConstructor = (props) => {
   const taskTypes = [
     {taskType:"Одиночный выбор"},
@@ -20,7 +21,6 @@ const TestTaskConstructor = (props) => {
     {taskType:"Ввод текста"}
   ]
       return (
-        <Slide direction="right" timeout={1000} in={true} mountOnEnter unmountOnExit>
           <Grid container style={{padding:'10px'}}>
             <Grid style={{padding:5}} item xs={12} md={8}>
               <TextField
@@ -92,12 +92,11 @@ const TestTaskConstructor = (props) => {
             })}
             <Grid style={{padding:5}} item xs={6} md={4} lg={3}>
               <ButtonGroup style={{minHeight:'55px'}} fullWidth={true} size="large">
-                <Button onClick={()=>{props.removeAnswer(props.task.id)}} color="secondary" variant="outlined"><RemoveIcon/></Button>
-                <Button onClick={()=>{props.addAnswer(props.task.id)}} variant="outlined" style={{color: '#006F51', borderColor:'#006F51'}}><AddIcon/></Button>
+                <Button color="secondary" variant="outlined"><RemoveIcon/></Button>
+                <Button variant="outlined" style={{color: '#006F51', borderColor:'#006F51'}}><AddIcon/></Button>
               </ButtonGroup>
             </Grid>
           </Grid>
-        </Slide>
       )
     }
     export default TestTaskConstructor

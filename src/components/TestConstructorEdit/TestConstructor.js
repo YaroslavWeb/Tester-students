@@ -16,6 +16,9 @@ import StateContext from '../../context/StateContext'
 import EditIcon from '@material-ui/icons/Edit'
 import IconButton from '@material-ui/core/IconButton';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import Divider from '@material-ui/core/Divider'
+import TestTaskConstructor from "./TestTaskConstructor";
+
 const useStyles = makeStyles(theme => ({
   appBar: {
     position: 'relative',
@@ -36,16 +39,20 @@ export default function FullScreenDialog(props) {
   const classes = useStyles();
   const {editTest} = React.useContext(StateContext)
   const [open, setOpen] = React.useState(false);
+  const [tasks, setTasks] = React.useState(props.test.tasks);
   
-  let titleTest, timeTest, attemptsTest;
-
+  let titleTest, timeTest, attemptsTest, maxTasks, 
+      manualSrc = props.test.manualSrc;
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
-  
+  const getPathManual = ()=>{
+    manualSrc = document.getElementById('edit-manual').files[0].path
+  }
+
   return (
     <div>
       <IconButton aria-label="edit" onClick ={handleClickOpen}>
@@ -67,11 +74,12 @@ export default function FullScreenDialog(props) {
               </Typography>
               <Button autoFocus color="inherit" onClick={()=>{
                 if(titleTest.value!=="" && timeTest.value!=="" && attemptsTest.value!==""){
-                editTest(props.test._id, titleTest.value, timeTest.value, attemptsTest.value)
-                handleClose()                
+                  getPathManual()
+                  editTest(props.test._id, titleTest.value, timeTest.value, attemptsTest.value, maxTasks.value, manualSrc)
+                  handleClose()                
               } else {
                 props.setAlert({visible: true, text:'Проверьте введенные данные!',severity: 'error'})
-                    setTimeout(() => {props.setAlert({visible: false, text:' ',severity: 'error'})}, 5000);
+                  setTimeout(() => {props.setAlert({visible: false, text:' ',severity: 'error'})}, 5000);
               }}}>
                 Сохранить
               </Button>
@@ -110,7 +118,8 @@ export default function FullScreenDialog(props) {
                 <TextField
                   type = "number"
                   label="Количество выдаваемых вопросов" 
-                  inputRef={node => timeTest = node}
+                  defaultValue={props.test.maxTasks}
+                  inputRef={node => maxTasks = node}
                   variant="outlined" 
                   fullWidth={true} 
                 />
@@ -126,20 +135,50 @@ export default function FullScreenDialog(props) {
                 />
               </Grid>
               <Grid style={{padding:5}} item xs={12} sm={6}  lg={4}>
-              <div >
+              <div>
                 <input style={{display: 'none'}}
-                id="contained-button-file"
-                  accept="image/*"
+                  id="edit-manual"
                   multiple
                   type="file"
                 />
-                <label htmlFor="contained-button-file">
-                  <Button variant="contained" component="span" id="taskBtnAddFile"  
-                  style={{height:'56px', width:'100%', color: '#FFFFFF', borderColor:'#006F51',background: '#006F51'}} startIcon={<AddIcon />}> 
+                <label htmlFor="edit-manual">
+                  <Button 
+                    variant="contained" 
+                    component="span" 
+                    id="taskBtnAddFile"  
+                    style={{height:'56px', width:'100%', color: '#FFFFFF', borderColor:'#006F51',background: '#006F51'}} 
+                    startIcon={<AddIcon />}
+                  > 
                   <LibraryBooksIcon/>
                   </Button>
                 </label>
                 </div>
+              </Grid>
+            </Grid>
+            <Divider variant="fullWidth"/>
+{/* 
+            {tasks.map(task => 
+              <TestTaskConstructor 
+                key={task.id} 
+                task={task}
+              />
+            )} */}
+
+            <Grid 
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              style={{padding:'10px'}}
+            >
+              <Grid style={{padding:5}} item xs={12}>
+                <Button
+                  style={{height:'100%', width:'100%', minHeight:100, color: '#006F51', borderColor:'#006F51'}}
+                  variant="outlined" 
+                  startIcon={<AddIcon />}
+                >
+                  Добавить задание
+                </Button>
               </Grid>
             </Grid>
           </DialogContent>

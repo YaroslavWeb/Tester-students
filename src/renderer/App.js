@@ -17,16 +17,18 @@ const App = () =>{
   const [tests, setTests] = useState([]);
 
   useEffect(()=>{
+    db.tests.find({}, (err, docs)=>{setTests(docs)})
     db.teachers.find({}, (err,docs)=>{setTeachers(docs)})
     db.students.find({}, (err, docs)=>{setStudents(docs)})
-    db.tests.find({}, (err, docs)=>{setTests(docs)})
   },[])
 
-  const addTest = (theme, time, attempts, tasks) =>{
+  const addTest = (theme, time, attempts, maxTasksWork, manualSrc, tasks) =>{
     let newTest = {
       theme,
       time,
       attempts,
+      maxTasksWork,
+      manualSrc,
       tasks:tasks.map(task =>{
         return{
           id:task.id,
@@ -34,6 +36,7 @@ const App = () =>{
           score: task.score.value,
           section: task.section.value,
           question: task.question.value,
+          imgSrc:task.imgSrc,
           answers: task.answers.map(answer=>{
             return{
               id:answer.id,
@@ -43,7 +46,6 @@ const App = () =>{
           })
       }})
     }
-    // db.students.update({},{$push:{marks:{...newMark}}},{multi: true})
     db.tests.insert(newTest)
     db.tests.find({}, (err, docs)=>{setTests(docs)})
   }
@@ -77,19 +79,20 @@ const App = () =>{
     });
     db.students.find({}, (err, docs)=>{setStudents(docs)})
   }
-  const editTest = (id, theme, time, attempts) =>{
+
+  const editTest = (id, theme, time, attempts, maxTasksWork, manualSrc) =>{
     let editTest
     tests.forEach(test => {
       if(test._id == id){
-        editTest ={...test, theme, time, attempts}}
+        editTest ={...test, theme, time, attempts, maxTasksWork, manualSrc}}
       });
       console.log(editTest);
       
-    db.tests.update({_id:editTest._id}, {$set:editTest})
-    db.tests.find({}, (err, docs)=>{setTests(docs)})
+    // db.tests.update({_id:editTest._id}, {$set:editTest})
+    // db.tests.find({}, (err, docs)=>{setTests(docs)})
   }
+
   const removeStudents = (ids) =>{
-    console.log(ids);
     for (const key in ids) {
       db.students.remove({_id:ids[key]})
     }
@@ -103,11 +106,8 @@ const App = () =>{
     db.tests.remove({_id:id_test})
     db.tests.find({}, (err, docs)=>{setTests(docs)})
   }
- 
-  const setMarkStudent = (id_student, mark) =>{}
-
   return(
-    <StateContext.Provider value={{students, tests, teachers, addTest, removeTest, editTest, setMarkStudent}}>
+    <StateContext.Provider value={{students, setStudents, tests, setTests, teachers, addTest, removeTest, editTest}}>
       <Router>
         <div>
         <main>

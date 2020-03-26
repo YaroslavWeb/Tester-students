@@ -37,7 +37,7 @@ export default function FullScreenDialog(props) {
   const {addTest} = React.useContext(StateContext)
   const [open, setOpen] = React.useState(false);
   let [tasks, setTasks] = React.useState([
-    {id:1, title:'Задание №1', question:'', score:0, type:'', answers:[
+    {id:1, title:'Задание №1', question:'', score:0, type:'', imgSrc:'', answers:[
       {id:1, title:'Ответ №1', answer:'', correct:false},
       {id:2, title:'Ответ №2', answer:'', correct:false},
       {id:3, title:'Ответ №3', answer:'', correct:false},
@@ -45,7 +45,7 @@ export default function FullScreenDialog(props) {
     ]}
   ]);
 
-  let titleTest, timeTest, attemptsTest;
+  let titleTest, timeTest, attemptsTest, maxTasks, manualSrc;
   
   const addTask = () =>{
     let newTask = {
@@ -54,6 +54,7 @@ export default function FullScreenDialog(props) {
       type:'',
       score:0,
       question:'',
+      imgSrc:'',
       answers:[
         {id:1, title:'Ответ №1', answer:'', correct:false}
       ]
@@ -80,6 +81,9 @@ export default function FullScreenDialog(props) {
         task.answers.splice(-1,1);
         return task
     }))
+  }
+  const getPathManual = ()=>{
+    manualSrc = document.getElementById('add-manual').files[0].path
   }
   const handleClickOpen = () => {
     setOpen(true);
@@ -114,9 +118,10 @@ export default function FullScreenDialog(props) {
                 Создание теста
               </Typography>
               <Button autoFocus color="inherit" onClick={()=>{ 
-                if(titleTest.value !== ''&& timeTest.value !== ''&& attemptsTest.value !== '')
+                if(titleTest.value !== '' && timeTest.value !== '' && attemptsTest.value !== '')
                 {
-                  addTest(titleTest.value, timeTest.value, attemptsTest.value, tasks)
+                  getPathManual()
+                  addTest(titleTest.value, timeTest.value, attemptsTest.value, maxTasks.value, manualSrc, tasks)
                   handleClose() 
                   props.setAlert({visible: true, text:'Тест успешно добавлен!',severity: 'success'})
                   setTimeout(() => {props.setAlert({visible: false, text:' ',severity: 'success'})}, 5000);
@@ -124,7 +129,7 @@ export default function FullScreenDialog(props) {
                     props.setAlert({visible: true, text:'Проверьте введенные данные!',severity: 'error'})
                     setTimeout(() => {props.setAlert({visible: false, text:' ',severity: 'error'})}, 5000);
                   }
-            }
+                }
               }>
                 Добавить
               </Button>
@@ -161,7 +166,7 @@ export default function FullScreenDialog(props) {
                 <TextField
                   type = "number"
                   label="Количество выдаваемых вопросов" 
-                  inputRef={node => timeTest = node}
+                  inputRef={node => maxTasks = node}
                   variant="outlined" 
                   fullWidth={true} 
                 />
@@ -177,16 +182,21 @@ export default function FullScreenDialog(props) {
                 />
               </Grid>
               <Grid style={{padding:5}} item xs={12} sm={6}  lg={4}>
-                <div >
-                <input style={{display: 'none'}}
-                id="contained-button-file"
-                  accept="image/*"
+                <div>
+                <input 
+                  style={{display: 'none'}}
+                  id="add-manual"
                   multiple
                   type="file"
                 />
-                <label htmlFor="contained-button-file">
-                  <Button variant="contained" component="span" id="taskBtnAddFile"  
-                  style={{height:'56px', width:'100%', color: '#FFFFFF', borderColor:'#006F51',background: '#006F51'}} startIcon={<AddIcon />}> 
+                <label htmlFor="add-manual">
+                  <Button 
+                    variant="contained" 
+                    component="span" 
+                    id="taskBtnAddFile"  
+                    style={{height:'56px', width:'100%', color: '#FFFFFF', borderColor:'#006F51',background: '#006F51'}} 
+                    startIcon={<AddIcon />}
+                  > 
                   <LibraryBooksIcon/>
                   </Button>
                 </label>
@@ -195,7 +205,14 @@ export default function FullScreenDialog(props) {
             </Grid>
             <Divider variant="fullWidth"/>
 
-            {tasks.map(task => <TestTaskConstructor addAnswer={addAnswer} removeAnswer={removeAnswer} key={task.id} task={task}/>)}
+            {tasks.map(task => 
+              <TestTaskConstructor 
+                addAnswer={addAnswer} 
+                removeAnswer={removeAnswer} 
+                key={task.id} 
+                task={task}
+              />
+            )}
 
             <Grid 
               container
