@@ -20,23 +20,26 @@ const TestTaskConstructor = (props) => {
     {taskType:"Множественный выбор"},
     {taskType:"Ввод текста"}
   ]
-      return (
-          <Grid container style={{padding:'10px'}}>
-            <Grid style={{padding:5}} item xs={12} md={8}>
-              <TextField
-               inputRef={node => props.task.question = node}
-               fullWidth={true}
-               multiline rows={8}
-               label={props.task.title}
-               variant="outlined"
-               InputProps={{
-                startAdornment: (
+    return (
+      <Slide direction="right" timeout={1000} in={true} mountOnEnter unmountOnExit>
+        <Grid container style={{padding:'10px'}}>
+          <Grid style={{padding:5}} item xs={12} md={8}>
+          <TextField
+              fullWidth={true}
+              multiline 
+              onChange={event=>{props.task.question = event.target.value}}
+              rows={8}
+              label={`Задание №${props.task.id}`}
+              defaultValue={props.task.question}
+              variant="outlined"
+              InputProps={{
+              startAdornment: (
                 <div>
                   <input 
                     style={{display: 'none'}}
                     id={"img-question"+props.task.id}
-                    accept="image/*"
                     onChange={event=>{props.task.imgSrc = event.target.files[0].path}}
+                    accept="image/*"
                     multiple
                     type="file"
                   />
@@ -46,42 +49,64 @@ const TestTaskConstructor = (props) => {
                     </Button>
                   </label>
                 </div>
-                          
-                ),
-              }}
-               /> 
-            </Grid>
-            <Grid style={{padding:5}} item xs={12} md={4}>
-              <TextField inputRef={node => props.task.score = node} fullWidth={true} type = "number" label="Кол-во баллов" variant="outlined" margin="dense"/> 
-              <TextField inputRef={node => props.task.section = node} fullWidth={true} type = "number" label="Тема вопроса" variant="outlined" margin="dense"/> 
-              <Autocomplete
-                options={taskTypes}
-                getOptionLabel={option => option.taskType}
-                renderInput={params => (
-                <TextField {...params} 
-                  label='Тип ответа'
-                  margin="dense"
-                  inputRef={node => props.task.type = node}
-                  variant="outlined" 
-                  fullWidth={true}
-                />
-              )}/>
-            </Grid>
-            {props.task.answers.map(answer=>{
-              return(
+              ),
+            }}
+              /> 
+          </Grid>
+          <Grid style={{padding:5}} item xs={12} md={4}>
+            <TextField 
+              defaultValue={props.task.score}
+              fullWidth={true} 
+              type = "number" 
+              label="Кол-во баллов" 
+              variant="outlined" 
+              margin="dense"
+            /> 
+            <TextField
+              defaultValue={props.task.section}
+              fullWidth={true}
+              type="number"
+              margin="dense"
+              variant="outlined"
+              label="Тема вопроса"
+            /> 
+            <Autocomplete
+              options={taskTypes}
+              getOptionLabel={option => option.taskType}
+              defaultValue={
+                props.task.type == taskTypes[0].taskType 
+                ? taskTypes[0]
+                : props.task.type == taskTypes[1].taskType
+                ? taskTypes[1]
+                : taskTypes[2]
+              }
+              renderInput={params => (
+              <TextField {...params} 
+                label='Тип ответа'
+                margin="dense"
+                variant="outlined" 
+                fullWidth={true}
+              />
+            )}/>
+          </Grid>
+          {props.task.answers.map(answer=>{
+            return(
               <Grid key={answer.id} style={{padding:5}} item xs={6} md={4} lg={3}>
                 <TextField
+                  defaultValue={answer.answer}
                   fullWidth={true}
-                  label={answer.title}
-                  inputRef={node => answer.answer = node}
+                  label={`Ответ №${answer.id}`}
                   variant="outlined"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                         <FormControlLabel
-                          control={<Checkbox inputRef={node => answer.correct = node}
-                          icon={<DoneOutlineIcon />} 
-                          checkedIcon={<DoneIcon />} />}
+                          control={
+                          <Checkbox 
+                            checked = {answer.correct}
+                            icon = {<DoneOutlineIcon />} 
+                            checkedIcon = {<DoneIcon />} 
+                          />}
                         />
                       </InputAdornment>
                     ),
@@ -90,14 +115,25 @@ const TestTaskConstructor = (props) => {
               </Grid>
               )
             })}
-            <Grid style={{padding:5}} item xs={6} md={4} lg={3}>
-              <ButtonGroup style={{minHeight:'55px'}} fullWidth={true} size="large">
-                <Button color="secondary" variant="outlined"><RemoveIcon/></Button>
-                <Button variant="outlined" style={{color: '#006F51', borderColor:'#006F51'}}><AddIcon/></Button>
-              </ButtonGroup>
-            </Grid>
+          <Grid style={{padding:5}} item xs={6} md={4} lg={3}>
+            <ButtonGroup style={{minHeight:'55px'}} fullWidth={true} size="large">
+              <Button 
+                color="secondary" 
+                variant="outlined"
+              >
+                <RemoveIcon/>
+              </Button>
+              <Button 
+                variant="outlined" 
+                style={{color: '#006F51', borderColor:'#006F51'}}
+              >
+                <AddIcon/>
+              </Button>
+            </ButtonGroup>
           </Grid>
-      )
-    }
-    export default TestTaskConstructor
+        </Grid>
+      </Slide>
+    )
+  }
+  export default TestTaskConstructor
   

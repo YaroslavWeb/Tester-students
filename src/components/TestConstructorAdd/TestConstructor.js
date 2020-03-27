@@ -37,7 +37,7 @@ export default function FullScreenDialog(props) {
   const {addTest} = React.useContext(StateContext)
   const [open, setOpen] = React.useState(false);
   let [tasks, setTasks] = React.useState([
-    {id:1, title:'Задание №1', question:'', score:0, type:'', imgSrc:'', answers:[
+    {id:1, question:'', score:0, section:1, type:'', imgSrc:'', answers:[
       {id:1, title:'Ответ №1', answer:'', correct:false},
       {id:2, title:'Ответ №2', answer:'', correct:false},
       {id:3, title:'Ответ №3', answer:'', correct:false},
@@ -50,9 +50,9 @@ export default function FullScreenDialog(props) {
   const addTask = () =>{
     let newTask = {
       id: tasks.length+1,
-      title:`Задание №${tasks.length+1}`,
       type:'',
       score:0,
+      section:1,
       question:'',
       imgSrc:'',
       answers:[
@@ -64,7 +64,6 @@ export default function FullScreenDialog(props) {
   const addAnswer = (id_task) =>{
     let newAnswer = {
       id:tasks[id_task-1].answers.length+1,
-      title: `Ответ №${tasks[id_task-1].answers.length+1}`,
       answer:'',
       correct:false
     }

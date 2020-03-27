@@ -27,7 +27,7 @@ const TestTaskConstructor = (props) => {
                inputRef={node => props.task.question = node}
                fullWidth={true}
                multiline rows={8}
-               label={props.task.title}
+               label={`Задание №${props.task.id}`}
                variant="outlined"
                InputProps={{
                 startAdornment: (
@@ -72,7 +72,7 @@ const TestTaskConstructor = (props) => {
               <Grid key={answer.id} style={{padding:5}} item xs={6} md={4} lg={3}>
                 <TextField
                   fullWidth={true}
-                  label={answer.title}
+                  label={`Ответ №${answer.id}`}
                   inputRef={node => answer.answer = node}
                   variant="outlined"
                   InputProps={{

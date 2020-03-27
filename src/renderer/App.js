@@ -80,11 +80,11 @@ const App = () =>{
     db.students.find({}, (err, docs)=>{setStudents(docs)})
   }
 
-  const editTest = (id, theme, time, attempts, maxTasksWork, manualSrc) =>{
+  const editTest = (id, theme, time, attempts, maxTasksWork, manualSrc, tasks) =>{
     let editTest
     tests.forEach(test => {
       if(test._id == id){
-        editTest ={...test, theme, time, attempts, maxTasksWork, manualSrc}}
+        editTest ={...test, theme, time, attempts, maxTasksWork, manualSrc, tasks}}
       });
       console.log(editTest);
       

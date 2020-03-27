@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -39,10 +39,11 @@ export default function FullScreenDialog(props) {
   const classes = useStyles();
   const {editTest} = React.useContext(StateContext)
   const [open, setOpen] = React.useState(false);
-  const [tasks, setTasks] = React.useState(props.test.tasks);
-  
+  let [tasks, setTasks] = React.useState(props.test.tasks)
+
   let titleTest, timeTest, attemptsTest, maxTasks, 
-      manualSrc = props.test.manualSrc;
+      manualSrc, changeFile = false;
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -74,8 +75,11 @@ export default function FullScreenDialog(props) {
               </Typography>
               <Button autoFocus color="inherit" onClick={()=>{
                 if(titleTest.value!=="" && timeTest.value!=="" && attemptsTest.value!==""){
-                  getPathManual()
-                  editTest(props.test._id, titleTest.value, timeTest.value, attemptsTest.value, maxTasks.value, manualSrc)
+                  if(changeFile)getPathManual();
+                  else manualSrc = props.test.manualSrc;
+                  console.log(props.test.manualSrc);
+                  
+                  editTest(props.test._id, titleTest.value, timeTest.value, attemptsTest.value, maxTasks.value, manualSrc, tasks)
                   handleClose()                
               } else {
                 props.setAlert({visible: true, text:'Проверьте введенные данные!',severity: 'error'})
@@ -138,6 +142,7 @@ export default function FullScreenDialog(props) {
               <div>
                 <input style={{display: 'none'}}
                   id="edit-manual"
+                  onChange={()=>{changeFile= true}}
                   multiple
                   type="file"
                 />
@@ -156,31 +161,13 @@ export default function FullScreenDialog(props) {
               </Grid>
             </Grid>
             <Divider variant="fullWidth"/>
-{/* 
+
             {tasks.map(task => 
               <TestTaskConstructor 
                 key={task.id} 
                 task={task}
               />
-            )} */}
-
-            <Grid 
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              style={{padding:'10px'}}
-            >
-              <Grid style={{padding:5}} item xs={12}>
-                <Button
-                  style={{height:'100%', width:'100%', minHeight:100, color: '#006F51', borderColor:'#006F51'}}
-                  variant="outlined" 
-                  startIcon={<AddIcon />}
-                >
-                  Добавить задание
-                </Button>
-              </Grid>
-            </Grid>
+            )}
           </DialogContent>
       </Dialog>
     </div>
