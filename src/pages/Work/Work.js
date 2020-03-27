@@ -109,7 +109,7 @@ const Work = () =>{
               //file://E:/programming/Tester-students/public/assets/img/scr1.png
               //file://D:/Diplom_2.0/Tester-students/public/assets/img/scr1.png
             }}>
-              <img style={{width:'100%'}} src='file://E:/programming/Tester-students/public/assets/img/scr1.png'/>
+              {/* <img style={{width:'100%'}} src='file://E:/programming/Tester-students/public/assets/img/scr1.png'/> */}
             </div>
           </div>
        </Grid>
