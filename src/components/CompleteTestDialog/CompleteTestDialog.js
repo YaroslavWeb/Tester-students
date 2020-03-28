@@ -19,7 +19,7 @@ const styles = theme => ({
     right: theme.spacing(1),
     top: theme.spacing(1),
     color: theme.palette.grey[500],
-  },
+  }
 });
 
 const DialogTitle = withStyles(styles)(props => {
@@ -36,8 +36,7 @@ const DialogTitle = withStyles(styles)(props => {
   );
 });
 export default function CustomizedDialogs(props) {
-  // Итоговая оценка
-  let finalMarkStudnet = Math.round(props.correctAnswerCounter * 100 / props.maxScore)
+
   return (
     <div>
       <Dialog  aria-labelledby="customized-dialog-title" open={props.openCompleteDialog}>
@@ -49,7 +48,7 @@ export default function CustomizedDialogs(props) {
            Колличество баллов: {props.correctAnswerCounter} из {props.maxScore}
           </Typography>
           <Typography style ={{marginBottom:'5px',  paddingRight:'80px'}} >
-           Итоговая оценка: {finalMarkStudnet}%
+           Итоговая оценка: {props.finalMarkStudnet}%
           </Typography>
           <Typography style ={{marginBottom:'5px'}}>
             Потрачено времени:

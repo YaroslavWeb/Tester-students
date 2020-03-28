@@ -10,10 +10,12 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import CompleteTestDialog from '../../components/CompleteTestDialog'
 
 import styles from './Work.style'
+const db = window.require('electron').remote.getGlobal('database');
 
 const Work = () =>{
+  
   const [openCompleteDialog, setOpenCompleteDialog] = React.useState(false);
-  let {tests, students, setMarkStudent} = React.useContext(StateContext)
+  let {tests, students, setStudents} = React.useContext(StateContext)
 
   // Получение id теста и id студента из url,  который проходит студент
   const link = window.location.href
@@ -28,10 +30,8 @@ const Work = () =>{
   // Запись актуального студента
   const workStudent = students.filter(student => student._id == studId[1])
   
-  /* 
-  Стейт хранит актуальное задание
-  По умолчанию берётся первое задание
-  */
+  // Стейт хранит актуальное задание
+  // По умолчанию берётся первое задание
   let [actionTask, setActionTask]= useState(workTest[0].tasks[0])
 
   // Максимальное количество заданий
@@ -65,8 +65,9 @@ const Work = () =>{
       let arrayMarkCorrect = []
       actionTask.answers.forEach(answer => answer.correct?arrayMarkCorrect.push(String(answer.id)):false)
       // Массив с совпалдениями
-      let correctChoise = answerStudent.filter(i => {return arrayMarkCorrect.indexOf(i) < 0;});
-      correctChoise.length === 0 
+      answerStudent.sort((a,b)=>Number(a)-Number(b))
+      
+      JSON.stringify(answerStudent) === JSON.stringify(arrayMarkCorrect)
       ? setCorrectAnswerCounter(correctAnswerCounter + Number(actionTask.score))
       : setCorrectAnswerCounter(correctAnswerCounter)
     }
@@ -88,15 +89,48 @@ const Work = () =>{
     setAnswerStudent([])
   }, [taskCounter])
 
+  let finalMarkStudnet = Math.round(correctAnswerCounter * 100 / maxScore)
+
+  let setMarkStudent = () =>{
+    // Ищем нужну оценку у студента
+      workStudent[0].marks.forEach(mark =>{
+        // Находим
+        if (mark.id_test == workTest[0]._id){
+          // Если оценка больше оценки, которая уже имеется
+          // ТО заносим новую оценку в БД
+            if(finalMarkStudnet > Number(mark.mark)){
+            let newMark = {
+              ...mark,
+              attempts:Number(mark.attempts),
+              mark:finalMarkStudnet
+            }
+            let newMarks = workStudent[0].marks.map(mark=>{
+              if(mark.id == newMark.id) 
+                return (newMark) 
+              else 
+                return (mark)
+            })
+
+            let newStudent = {
+              ...workStudent[0],
+              marks: newMarks
+            }
+            db.students.update({_id:workStudent[0]._id}, newStudent)
+            db.students.find({}, (err, docs)=>{setStudents(docs)})
+          }
+        }
+      })
+  }
+
   return (
     <div>
      <WorkHeader
-      setOpenCompleteDialog = {setOpenCompleteDialog}
-      taskCounter = {taskCounter}
       maxSteps = {maxSteps}
-      workTestTheme={workTest[0].theme}
-      workTestTime={workTest[0].time}
-      workStudent ={workStudent[0]}
+      taskCounter = {taskCounter}
+      workStudent = {workStudent[0]}
+      workTestTime = {workTest[0].time}
+      workTestTheme = {workTest[0].theme}
+      setOpenCompleteDialog = {setOpenCompleteDialog}
      />
      <Grid container style={{padding:20, height:'90vh'}}>
         <Grid item xs={12}  style = {styles.question}>
@@ -140,30 +174,36 @@ const Work = () =>{
                 ? <Button 
                     variant="contained" size="large" 
                     onClick={()=>{
+                      setMarkStudent()
                       setOpenCompleteDialog(true)
                     }}
                     style={{marginBottom:'15px',alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}} 
                   >
                     Завершить тест
                   </Button>
-                : <Button variant="contained" size="large" style={{alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}}
+                : <Button 
+                    variant="contained" 
+                    size="large" 
+                    style={{alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}}
                     onClick={()=>{
                       checkAnswer()
                       taskCounter++
                       setTaskCounter(taskCounter)
                       setActionTask(workTest[0].tasks[--taskCounter])
-                    }}>
+                    }}
+                  >
                     <NavigateNextIcon/>
                  </Button>}
           </Grid>    
         </Grid>
        </Grid>
        <CompleteTestDialog 
-        openCompleteDialog = {openCompleteDialog} 
-        setOpenCompleteDialog = {setOpenCompleteDialog} 
-        workStudent ={workStudent[0]}
-        maxScore={maxScore}
-        correctAnswerCounter = {correctAnswerCounter}
+          maxScore = {maxScore}
+          workStudent = {workStudent[0]}
+          finalMarkStudnet = {finalMarkStudnet}
+          openCompleteDialog = {openCompleteDialog} 
+          correctAnswerCounter = {correctAnswerCounter}
+          setOpenCompleteDialog = {setOpenCompleteDialog} 
        />
     </div>
   )
