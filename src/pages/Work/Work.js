@@ -45,8 +45,12 @@ const Work = () =>{
 
   // Баллы за правильный ответ
   let [correctAnswerCounter, setCorrectAnswerCounter] = useState(0)
+
   // Ответ студента
   let [answerStudent, setAnswerStudent] = React.useState([]);
+
+  // Таймер текста
+  let [timerText, setTimerText] = React.useState({min: workTest[0].time-1, sec: 59 })
 
   // Проверка ответа студента и внесение баллов
   let checkAnswer = () => {
@@ -83,9 +87,9 @@ const Work = () =>{
   }
 
   let setAnswerStudentText = (inputValue) => {setAnswerStudent(inputValue)}
-  console.log(`текущие баллы: ${correctAnswerCounter}, максимум баллов:${maxScore}`);
   
   React.useEffect(()=>{
+    console.log(`текущие баллы: ${correctAnswerCounter}, максимум баллов:${maxScore}`);
     setAnswerStudent([])
   }, [taskCounter])
 
@@ -131,6 +135,9 @@ const Work = () =>{
       workTestTime = {workTest[0].time}
       workTestTheme = {workTest[0].theme}
       setOpenCompleteDialog = {setOpenCompleteDialog}
+      openCompleteDialog = {openCompleteDialog}
+      setTimerText = {setTimerText}
+      timerText = {timerText}
      />
      <Grid container style={{padding:20, height:'90vh'}}>
         <Grid item xs={12}  style = {styles.question}>
@@ -204,6 +211,8 @@ const Work = () =>{
           openCompleteDialog = {openCompleteDialog} 
           correctAnswerCounter = {correctAnswerCounter}
           setOpenCompleteDialog = {setOpenCompleteDialog} 
+          timerText = {timerText}
+          workTestTime = {workTest[0].time}
        />
     </div>
   )

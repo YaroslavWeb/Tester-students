@@ -77,11 +77,11 @@ export default function FullScreenDialog(props) {
                 if(titleTest.value!=="" && timeTest.value!=="" && attemptsTest.value!==""){
                   if(changeFile)getPathManual();
                   else manualSrc = props.test.manualSrc;
-                  console.log(props.test.manualSrc);
                   
                   editTest(props.test._id, titleTest.value, timeTest.value, attemptsTest.value, maxTasks.value, manualSrc, tasks)
                   handleClose()                
-              } else {
+              } 
+              else {
                 props.setAlert({visible: true, text:'Проверьте введенные данные!',severity: 'error'})
                   setTimeout(() => {props.setAlert({visible: false, text:' ',severity: 'error'})}, 5000);
               }}}>
@@ -166,6 +166,7 @@ export default function FullScreenDialog(props) {
               <TestTaskConstructor 
                 key={task.id} 
                 task={task}
+                setTasks={setTasks}
               />
             )}
           </DialogContent>
