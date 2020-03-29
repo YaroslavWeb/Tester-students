@@ -51,7 +51,7 @@ export default function CustomizedDialogs(props) {
            Итоговая оценка: {props.finalMarkStudnet}%
           </Typography>
           <Typography style ={{marginBottom:'5px'}}>
-            Потрачено времени:
+            Потрачено времени: 
           </Typography>
         </MuiDialogContent>
         <MuiDialogActions>

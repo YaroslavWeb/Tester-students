@@ -29,7 +29,9 @@ const Work = () =>{
   
   // Запись актуального студента
   const workStudent = students.filter(student => student._id == studId[1])
-  
+
+  // Начальное время таймера
+  let [timerText, setTimerText] = React.useState({min: workTest[0].time-1, sec: 59 })
   // Стейт хранит актуальное задание
   // По умолчанию берётся первое задание
   let [actionTask, setActionTask]= useState(workTest[0].tasks[0])
@@ -39,7 +41,10 @@ const Work = () =>{
   // Максимальное кол-во баллов
   let maxScore = 0;
   workTest[0].tasks.forEach(item => maxScore+=Number(item.score))
-
+ let intervalTimer ;
+  let timer = (func, trigger) => {
+    trigger ? setInterval(func, 1000) : clearInterval(intervalTimer)
+  }
   // Счётчик актуального задания
   let [taskCounter, setTaskCounter] = useState(1)
 
@@ -83,9 +88,10 @@ const Work = () =>{
   }
 
   let setAnswerStudentText = (inputValue) => {setAnswerStudent(inputValue)}
-  console.log(`текущие баллы: ${correctAnswerCounter}, максимум баллов:${maxScore}`);
+ 
   
-  React.useEffect(()=>{
+  React.useEffect(()=>{ 
+    console.log(`текущие баллы: ${correctAnswerCounter}, максимум баллов:${maxScore}`);
     setAnswerStudent([])
   }, [taskCounter])
 
@@ -128,9 +134,14 @@ const Work = () =>{
       maxSteps = {maxSteps}
       taskCounter = {taskCounter}
       workStudent = {workStudent[0]}
-      workTestTime = {workTest[0].time}
       workTestTheme = {workTest[0].theme}
+      workTestTime = {workTest[0].time}
       setOpenCompleteDialog = {setOpenCompleteDialog}
+      openCompleteDialog = {openCompleteDialog}
+      timerText = {timerText} 
+      setTimerText = {setTimerText}
+      intervalTimer = {intervalTimer}
+      timer = {timer}
      />
      <Grid container style={{padding:20, height:'90vh'}}>
         <Grid item xs={12}  style = {styles.question}>
@@ -204,6 +215,7 @@ const Work = () =>{
           openCompleteDialog = {openCompleteDialog} 
           correctAnswerCounter = {correctAnswerCounter}
           setOpenCompleteDialog = {setOpenCompleteDialog} 
+          
        />
     </div>
   )

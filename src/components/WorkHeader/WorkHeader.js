@@ -5,8 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import ExitWorkDialog from './ExitWorkDialog'
 import LinearProgress from "@material-ui/core/LinearProgress";
 // import WorkManualDialog from '../../components/WorkManualDialog'
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import DoneAllIcon from '@material-ui/icons/DoneAll';
+
 function LinearDeterminate(props) {
 
   const [completedTime, setCompletedTime] = React.useState(0);
@@ -52,25 +51,22 @@ function LinearDeterminate(props) {
   );
 }
 export default function MainHeader(props) {
-
-  let [timerText, setTimerText] = React.useState({min: props.workTestTime-1, sec: 59 })
-
-  React.useEffect(() => {
-    function timerTextValue (props) {
-      if (timerText.sec == 0 && timerText.min == 0 ) {
-        setTimerText({min:timerText.min, sec: '0' + timerText.sec})
-        clearInterval(timer);
+ function timerTextValue () {
+      if (props.timerText.sec == 0 && props.timerText.min == 0 ) {
+        props.setTimerText({min:props.timerText.min, sec: '0' + props.timerText.sec})
+        clearInterval(props.intervalTimer);
     }
-    else if (timerText.sec == 0) {
-      setTimerText({min:--timerText.min, sec: timerText.sec = 59})
-  }   else if ( timerText.sec < 10) {
-    setTimerText({min:timerText.min, sec: '0' + timerText.sec--})
+    else if (props.timerText.sec == 0) {
+      props.setTimerText({min:--props.timerText.min, sec: props.timerText.sec = 59})
+  } else if ( props.timerText.sec < 10) {
+    props.setTimerText({min:props.timerText.min, sec: '0' + props.timerText.sec--})
   } else 
       {
-      setTimerText({min: timerText.min , sec: timerText.sec--})}
+        props.setTimerText({min: props.timerText.min , sec: props.timerText.sec--})}
       
   }  
-  const timer = setInterval(timerTextValue, 1000);
+  React.useEffect(() => {
+   props.intervalTimer = props.timer(timerTextValue, true);
     
 }, []);
   return (
@@ -89,7 +85,7 @@ export default function MainHeader(props) {
                  />  */}
                 </div>
                 <div style = {{paddingLeft:'10px'}}>
-                {timerText.min}:{timerText.sec}
+                {props.timerText.min}:{props.timerText.sec}
                 {/* <AccessTimeIcon style = {{position: 'absolute', paddingLeft: '3px'}}
                 /> */}
                 </div>
