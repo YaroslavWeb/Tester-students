@@ -33,7 +33,7 @@ const TestTaskConstructor = (props) => {
               defaultValue={props.task.question}
               variant="outlined"
               InputProps={{
-              startAdornment: (
+              startAdornment:(
                 <div>
                   <input 
                     style={{display: 'none'}}
@@ -56,6 +56,7 @@ const TestTaskConstructor = (props) => {
           <Grid style={{padding:5}} item xs={12} md={4}>
             <TextField 
               defaultValue={props.task.score}
+              onChange={event=>{props.task.score = event.target.value}}
               fullWidth={true} 
               type = "number" 
               label="Кол-во баллов" 
@@ -64,6 +65,7 @@ const TestTaskConstructor = (props) => {
             /> 
             <TextField
               defaultValue={props.task.section}
+              onChange={event=>{props.task.section = event.target.value}}
               fullWidth={true}
               type="number"
               margin="dense"
@@ -71,6 +73,7 @@ const TestTaskConstructor = (props) => {
               label="Тема вопроса"
             /> 
             <Autocomplete
+              disabled
               options={taskTypes}
               getOptionLabel={option => option.taskType}
               defaultValue={
@@ -89,13 +92,14 @@ const TestTaskConstructor = (props) => {
               />
             )}/>
           </Grid>
-          {props.task.answers.map(answer=>{
+          {props.task.answers.map((answer,index)=>{
             return(
               <Grid key={answer.id} style={{padding:5}} item xs={6} md={4} lg={3}>
                 <TextField
+                  onChange={event=>{answer.answer = event.target.value}}
                   defaultValue={answer.answer}
                   fullWidth={true}
-                  label={`Ответ №${answer.id}`}
+                  label={`Ответ №${index+1}`}
                   variant="outlined"
                   InputProps={{
                     startAdornment: (
@@ -115,22 +119,6 @@ const TestTaskConstructor = (props) => {
               </Grid>
               )
             })}
-          <Grid style={{padding:5}} item xs={6} md={4} lg={3}>
-            <ButtonGroup style={{minHeight:'55px'}} fullWidth={true} size="large">
-              <Button 
-                color="secondary" 
-                variant="outlined"
-              >
-                <RemoveIcon/>
-              </Button>
-              <Button 
-                variant="outlined" 
-                style={{color: '#006F51', borderColor:'#006F51'}}
-              >
-                <AddIcon/>
-              </Button>
-            </ButtonGroup>
-          </Grid>
         </Grid>
       </Slide>
     )

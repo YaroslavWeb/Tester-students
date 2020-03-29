@@ -29,9 +29,7 @@ const Work = () =>{
   
   // Запись актуального студента
   const workStudent = students.filter(student => student._id == studId[1])
-
-  // Начальное время таймера
-  let [timerText, setTimerText] = React.useState({min: workTest[0].time-1, sec: 59 })
+  
   // Стейт хранит актуальное задание
   // По умолчанию берётся первое задание
   let [actionTask, setActionTask]= useState(workTest[0].tasks[0])
@@ -41,18 +39,20 @@ const Work = () =>{
   // Максимальное кол-во баллов
   let maxScore = 0;
   workTest[0].tasks.forEach(item => maxScore+=Number(item.score))
- let intervalTimer ;
-  let timer = (func, trigger) => {
-    trigger ? setInterval(func, 1000) : clearInterval(intervalTimer)
-  }
+
   // Счётчик актуального задания
   let [taskCounter, setTaskCounter] = useState(1)
 
   // Баллы за правильный ответ
   let [correctAnswerCounter, setCorrectAnswerCounter] = useState(0)
+
   // Ответ студента
   let [answerStudent, setAnswerStudent] = React.useState([]);
 
+  // Таймер текста
+  let [timerText, setTimerText] = React.useState({min: workTest[0].time-1, sec: 59 })
+  // массив, в котором хранятся абзацы вопроса
+  let questionText = actionTask.question.split('\n')
   // Проверка ответа студента и внесение баллов
   let checkAnswer = () => {
     if(actionTask.type == 'Одиночный выбор'){
@@ -88,9 +88,8 @@ const Work = () =>{
   }
 
   let setAnswerStudentText = (inputValue) => {setAnswerStudent(inputValue)}
- 
   
-  React.useEffect(()=>{ 
+  React.useEffect(()=>{
     console.log(`текущие баллы: ${correctAnswerCounter}, максимум баллов:${maxScore}`);
     setAnswerStudent([])
   }, [taskCounter])
@@ -134,19 +133,22 @@ const Work = () =>{
       maxSteps = {maxSteps}
       taskCounter = {taskCounter}
       workStudent = {workStudent[0]}
-      workTestTheme = {workTest[0].theme}
       workTestTime = {workTest[0].time}
+      workTestTheme = {workTest[0].theme}
       setOpenCompleteDialog = {setOpenCompleteDialog}
       openCompleteDialog = {openCompleteDialog}
-      timerText = {timerText} 
       setTimerText = {setTimerText}
-      intervalTimer = {intervalTimer}
-      timer = {timer}
+      timerText = {timerText}
      />
      <Grid container style={{padding:20, height:'90vh'}}>
         <Grid item xs={12}  style = {styles.question}>
           <div>
-            {actionTask.question}
+            {questionText.map((item, index) => {
+              return (
+                <p key = {`itemQuestion${index}`} style ={{margin:'0px'}}>{item}</p>
+              );
+            })
+            }
           </div>
           <div id="image_container">
             <div id="imageMin" onClick={()=>{
@@ -154,7 +156,7 @@ const Work = () =>{
               //file://E:/programming/Tester-students/public/assets/img/scr1.png
               //file://D:/Diplom_2.0/Tester-students/public/assets/img/scr1.png
             }}>
-              {/* <img style={{width:'100%'}} src='file://E:/programming/Tester-students/public/assets/img/scr1.png'/> */}
+              <img style={{width:'100%'}} src='file://E:/programming/Tester-students/public/assets/img/scr1.png'/>
             </div>
           </div>
        </Grid>
@@ -215,7 +217,8 @@ const Work = () =>{
           openCompleteDialog = {openCompleteDialog} 
           correctAnswerCounter = {correctAnswerCounter}
           setOpenCompleteDialog = {setOpenCompleteDialog} 
-          
+          timerText = {timerText}
+          workTestTime = {workTest[0].time}
        />
     </div>
   )

@@ -4,7 +4,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import ExitWorkDialog from './ExitWorkDialog'
 import LinearProgress from "@material-ui/core/LinearProgress";
-// import WorkManualDialog from '../../components/WorkManualDialog'
 
 function LinearDeterminate(props) {
 
@@ -12,6 +11,9 @@ function LinearDeterminate(props) {
   const [completedTask, setCompletedTask] = React.useState((props.taskCounter/props.maxSteps)*100);
   let timerSec = props.workTestTime * 60;
   let curentTimerSec = 0;
+  let [timerState, setTimerState]= React.useState()
+  if(props.openCompleteDialog) clearInterval(timerState.timer)
+
   React.useEffect(() => { 
     function progressTime() {
       setCompletedTime(() => {
@@ -27,13 +29,12 @@ function LinearDeterminate(props) {
       }
       });
     }
-
-    const timer = setInterval(progressTime, 1000);
-    
+   let timer = setInterval(progressTime, 1000);
+   setTimerState({timer})
   }, []);
-    React.useEffect(() => {
-      setCompletedTask((props.taskCounter/props.maxSteps)*100)
-    },[props.taskCounter])
+  React.useEffect(() => {
+    setCompletedTask((props.taskCounter/props.maxSteps)*100)
+  },[props.taskCounter])
   return (
     <div style={{marginTop:'10px', width:'55vw'}}>
       <LinearProgress  
@@ -51,24 +52,28 @@ function LinearDeterminate(props) {
   );
 }
 export default function MainHeader(props) {
- function timerTextValue () {
-      if (props.timerText.sec == 0 && props.timerText.min == 0 ) {
-        props.setTimerText({min:props.timerText.min, sec: '0' + props.timerText.sec})
-        clearInterval(props.intervalTimer);
+  let [timerState, setTimerState]= React.useState()
+  
+  if(props.openCompleteDialog) clearInterval(timerState.timer)
+
+  React.useEffect(() => {
+   function timerTextValue () {
+    if (props.timerText.sec == 0 && props.timerText.min == 0) {
+      props.setTimerText({min:props.timerText.min, sec: '0' + props.timerText.sec})
+      clearInterval(timer);
     }
     else if (props.timerText.sec == 0) {
       props.setTimerText({min:--props.timerText.min, sec: props.timerText.sec = 59})
-  } else if ( props.timerText.sec < 10) {
-    props.setTimerText({min:props.timerText.min, sec: '0' + props.timerText.sec--})
-  } else 
-      {
-        props.setTimerText({min: props.timerText.min , sec: props.timerText.sec--})}
-      
-  }  
-  React.useEffect(() => {
-   props.intervalTimer = props.timer(timerTextValue, true);
-    
-}, []);
+    }   
+    else if (props.timerText.sec < 10) {
+      props.setTimerText({min:props.timerText.min, sec: '0' + props.timerText.sec--})
+    } 
+    else{
+      props.setTimerText({min: props.timerText.min, sec: props.timerText.sec--})}
+    }  
+  let timer = setInterval(timerTextValue, 1000);
+  setTimerState({timer})
+  },[]);
   return (
     <div >
       <AppBar position="static" style = {{background:'#006F51'}}>

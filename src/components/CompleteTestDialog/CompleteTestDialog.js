@@ -35,8 +35,9 @@ const DialogTitle = withStyles(styles)(props => {
     </MuiDialogTitle>
   );
 });
-export default function CustomizedDialogs(props) {
-
+export default function CustomizedDialogs(props){
+  let spendTimeSec = (props.workTestTime * 60) - ((Number(props.timerText.min)*60)+Number(props.timerText.sec))
+  let spendTime = {min:Math.floor(spendTimeSec/60), sec:spendTimeSec%60}
   return (
     <div>
       <Dialog  aria-labelledby="customized-dialog-title" open={props.openCompleteDialog}>
@@ -51,7 +52,10 @@ export default function CustomizedDialogs(props) {
            Итоговая оценка: {props.finalMarkStudnet}%
           </Typography>
           <Typography style ={{marginBottom:'5px'}}>
-            Потрачено времени: 
+            Потрачено времени: {spendTime.min}:{spendTime.sec}
+          </Typography>
+          <Typography style ={{marginBottom:'5px'}}>
+            Осталось времени: {props.timerText.min}:{props.timerText.sec}
           </Typography>
         </MuiDialogContent>
         <MuiDialogActions>
