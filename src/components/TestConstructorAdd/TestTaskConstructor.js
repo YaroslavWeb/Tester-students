@@ -67,12 +67,12 @@ const TestTaskConstructor = (props) => {
                 />
               )}/>
             </Grid>
-            {props.task.answers.map(answer=>{
+            {props.task.answers.map((answer,index)=>{
               return(
-              <Grid key={answer.id} style={{padding:5}} item xs={6} md={4} lg={3}>
+              <Grid key={index} style={{padding:5}} item xs={6} md={4} lg={3}>
                 <TextField
                   fullWidth={true}
-                  label={`Ответ №${answer.id}`}
+                  label={`Ответ №${index+1}`}
                   inputRef={node => answer.answer = node}
                   variant="outlined"
                   InputProps={{

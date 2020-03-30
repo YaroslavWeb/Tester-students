@@ -86,10 +86,9 @@ const App = () =>{
       if(test._id == id){
         editTest ={...test, theme, time, attempts, maxTasksWork, manualSrc, tasks}}
       });
-      console.log(editTest);
       
-    // db.tests.update({_id:editTest._id}, {$set:editTest})
-    // db.tests.find({}, (err, docs)=>{setTests(docs)})
+    db.tests.update({_id:editTest._id}, {$set:editTest})
+    db.tests.find({}, (err, docs)=>{setTests(docs)})
   }
 
   const removeStudents = (ids) =>{
