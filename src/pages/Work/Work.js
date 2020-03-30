@@ -51,7 +51,8 @@ const Work = () =>{
 
   // Таймер текста
   let [timerText, setTimerText] = React.useState({min: workTest[0].time-1, sec: 59 })
-
+  // массив, в котором хранятся абзацы вопроса
+  let questionText = actionTask.question.split('\n')
   // Проверка ответа студента и внесение баллов
   let checkAnswer = () => {
     if(actionTask.type == 'Одиночный выбор'){
@@ -142,7 +143,12 @@ const Work = () =>{
      <Grid container style={{padding:20, height:'90vh'}}>
         <Grid item xs={12}  style = {styles.question}>
           <div>
-            {actionTask.question}
+            {questionText.map((item, index) => {
+              return (
+                <p key = {`itemQuestion${index}`} style ={{margin:'0px'}}>{item}</p>
+              );
+            })
+            }
           </div>
           <div id="image_container">
             <div id="imageMin" onClick={()=>{

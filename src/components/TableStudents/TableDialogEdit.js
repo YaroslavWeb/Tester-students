@@ -75,7 +75,7 @@ const TableDialogEdit = (props) => {
 
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Изменить студентика
+          Изменить информацию о студенте
         </DialogTitle>
         <DialogContent dividers>
         <form autoComplete="off">

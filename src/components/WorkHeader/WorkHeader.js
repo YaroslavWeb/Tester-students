@@ -71,7 +71,7 @@ export default function MainHeader(props) {
     else{
       props.setTimerText({min: props.timerText.min, sec: props.timerText.sec--})}
     }  
-  let timer = setInterval(timerTextValue, 100);
+  let timer = setInterval(timerTextValue, 1000);
   setTimerState({timer})
   },[]);
   return (
