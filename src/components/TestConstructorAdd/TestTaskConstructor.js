@@ -53,7 +53,7 @@ const TestTaskConstructor = (props) => {
             </Grid>
             <Grid style={{padding:5}} item xs={12} md={4}>
               <TextField inputRef={node => props.task.score = node} fullWidth={true} type = "number" label="Кол-во баллов" variant="outlined" margin="dense"/> 
-              <TextField inputRef={node => props.task.section = node} fullWidth={true} type = "number" label="Тема вопроса" variant="outlined" margin="dense"/> 
+              <TextField inputRef={node => props.task.section = node} fullWidth={true} type = "number" label="Тема задания" variant="outlined" margin="dense"/> 
               <Autocomplete
                 options={taskTypes}
                 getOptionLabel={option => option.taskType}

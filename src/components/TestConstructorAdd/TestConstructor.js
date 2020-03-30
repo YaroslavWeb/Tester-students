@@ -192,7 +192,7 @@ export default function FullScreenDialog(props) {
               <Grid style={{padding:5}} item xs={6} sm={6}  lg={4}>
                 <TextField
                   type = "number"
-                  label="Количество выдаваемых вопросов" 
+                  label="Количество выдаваемых заданий" 
                   inputRef={node => maxTasks = node}
                   variant="outlined" 
                   fullWidth={true} 
