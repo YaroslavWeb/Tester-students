@@ -45,7 +45,7 @@ export default function FullScreenDialog(props) {
     ]}
   ]);
 
-  let titleTest, timeTest, attemptsTest, maxTasks, manualSrc;
+  let titleTest, timeTest, attemptsTest, maxTasks, manualSrc,changeFile = false;
   
   const addTask = () =>{
     let newTask = {
@@ -119,7 +119,8 @@ export default function FullScreenDialog(props) {
               <Button autoFocus color="inherit" onClick={()=>{ 
                 if(titleTest.value !== '' && timeTest.value !== '' && attemptsTest.value !== '')
                 {
-                  getPathManual()
+                  if(changeFile)getPathManual();
+                  else manualSrc = '';
                   addTest(titleTest.value, timeTest.value, attemptsTest.value, maxTasks.value, manualSrc, tasks)
                   handleClose() 
                   props.setAlert({visible: true, text:'Тест успешно добавлен!',severity: 'success'})
@@ -185,6 +186,7 @@ export default function FullScreenDialog(props) {
                 <input 
                   style={{display: 'none'}}
                   id="add-manual"
+                  onChange={()=>{changeFile= true}}
                   multiple
                   type="file"
                 />
