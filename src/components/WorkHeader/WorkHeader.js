@@ -1,16 +1,19 @@
-import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import React from 'react'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
 import ExitWorkDialog from './ExitWorkDialog'
-import LinearProgress from "@material-ui/core/LinearProgress";
+import LinearProgress from "@material-ui/core/LinearProgress"
+import IconButton from '@material-ui/core/IconButton'
+import DescriptionIcon from '@material-ui/icons/Description'
+import { PDFReader } from 'reactjs-pdf-reader'
+import NewWindow from 'react-new-window'
 
 function LinearDeterminate(props) {
-
-  const [completedTime, setCompletedTime] = React.useState(0);
-  const [completedTask, setCompletedTask] = React.useState((props.taskCounter/props.maxSteps)*100);
-  let timerSec = props.workTestTime * 60;
-  let curentTimerSec = 0;
+  const [completedTime, setCompletedTime] = React.useState(0)
+  const [completedTask, setCompletedTask] = React.useState((props.taskCounter/props.maxSteps)*100)
+  let timerSec = props.workTestTime * 60
+  let curentTimerSec = 0
   let [timerState, setTimerState]= React.useState()
   if(props.openCompleteDialog) clearInterval(timerState.timer)
 
@@ -52,7 +55,8 @@ function LinearDeterminate(props) {
   );
 }
 export default function MainHeader(props) {
-  let [timerState, setTimerState]= React.useState()
+  let [timerState, setTimerState] = React.useState()
+  const [manuals, setManuals] = React.useState([])
   
   if(props.openCompleteDialog) clearInterval(timerState.timer)
 
@@ -75,7 +79,16 @@ export default function MainHeader(props) {
   setTimerState({timer})
   },[]);
   return (
-    <div >
+    <div>
+      <div id="target">
+        {manuals.map((manual,index)=>{
+          return(
+            <NewWindow key={index} title={manual.title}>
+              <PDFReader url={props.pathManual} showAllPage={true}/>
+            </NewWindow>
+          )
+        })}
+      </div>
       <AppBar position="static" style = {{background:'#006F51'}}>
         <Toolbar style = {{ display: 'flex', justifyContent: 'space-between'}}>
           <Typography variant='h5' style ={{paddingRight:'5px'}} >
@@ -86,18 +99,20 @@ export default function MainHeader(props) {
               <div>
                 <div style = {{paddingLeft:'10px'}}>
                  {props.taskCounter}/{props.maxSteps}
-                 {/* <DoneAllIcon style = {{position: 'absolute', paddingLeft: '5px'}}
-                 />  */}
                 </div>
-                <div style = {{paddingLeft:'10px'}}>
+                <div style = {{paddingLeft:'10px'}}> 
                 {props.timerText.min}:{props.timerText.sec}
-                {/* <AccessTimeIcon style = {{position: 'absolute', paddingLeft: '3px'}}
-                /> */}
                 </div>
               </div>
             </div>
+
             <div style={{display:'flex' ,flexDirection:'row'}}>
-              {/* <WorkManualDialog/> */}
+              <IconButton color = "inherit" onClick = {()=>{
+                manuals.push({title:'Справка'})
+                setManuals(manuals)
+                }}>
+                <DescriptionIcon/>
+              </IconButton>
               <ExitWorkDialog workStudent = {props.workStudent}/>
             </div>
         </Toolbar>

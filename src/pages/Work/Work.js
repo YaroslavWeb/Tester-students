@@ -8,13 +8,11 @@ import WorkAnswersMulti from '../../components/WorkAnswersTypes/WorkAnswersMulti
 import WorkAnswersText from '../../components/WorkAnswersTypes/WorkAnswersText'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import CompleteTestDialog from '../../components/CompleteTestDialog'
-
 import styles from './Work.style'
-const db = window.require('electron').remote.getGlobal('database');
 
 const Work = () =>{
+  const [openCompleteDialog, setOpenCompleteDialog] = React.useState(false)
   
-  const [openCompleteDialog, setOpenCompleteDialog] = React.useState(false);
   let {tests, students, setStudents} = React.useContext(StateContext)
 
   // Получение id теста и id студента из url,  который проходит студент
@@ -34,8 +32,17 @@ const Work = () =>{
   // По умолчанию берётся первое задание
   let [actionTask, setActionTask]= useState(workTest[0].tasks[0])
 
+  let [allAttempts, setAllAttempts] = React.useState({
+    studAttempts:workStudent[0].marks.map(mark=>{
+      if(mark.id_test == workTest[0]._id) return mark.attempts
+      else return false
+    }),
+    maxAttempts: workTest[0].attempts
+  })
+
   // Максимальное количество заданий
   let maxSteps = workTest[0].tasks.length
+
   // Максимальное кол-во баллов
   let maxScore = 0;
   workTest[0].tasks.forEach(item => maxScore+=Number(item.score))
@@ -51,8 +58,9 @@ const Work = () =>{
 
   // Таймер текста
   let [timerText, setTimerText] = React.useState({min: workTest[0].time-1, sec: 59 })
-  // массив, в котором хранятся абзацы вопроса
+  // Массив, в котором хранятся абзацы вопроса
   let questionText = actionTask.question.split('\n')
+
   // Проверка ответа студента и внесение баллов
   let checkAnswer = () => {
     if(actionTask.type == 'Одиночный выбор'){
@@ -94,40 +102,7 @@ const Work = () =>{
     setAnswerStudent([])
   }, [taskCounter])
 
-  
-  let setMarkStudent = () =>{
-    let finalMarkStudent = Math.round(correctAnswerCounter * 100 / maxScore);
-    // Ищем нужну оценку у студента
-      workStudent[0].marks.forEach(mark =>{
-        // Находим
-        if (mark.id_test == workTest[0]._id){
-          console.log('Оценка найдена')
-          // Если оценка больше оценки, которая уже имеется
-          // ТО заносим новую оценку в БД
-            if(finalMarkStudent > Number(mark.mark)){
-              console.log('Оценка больше' + finalMarkStudent)
-            let newMark = {
-              ...mark,
-              attempts:Number(mark.attempts),
-              mark:finalMarkStudent
-            }
-            let newMarks = workStudent[0].marks.map(mark=>{
-              if(mark.id == newMark.id) 
-                return (newMark) 
-              else 
-                return (mark)
-            })
-
-            let newStudent = {
-              ...workStudent[0],
-              marks: newMarks
-            }
-            db.students.update({_id:workStudent[0]._id}, newStudent)
-            db.students.find({}, (err, docs)=>{setStudents(docs)})
-          }
-        }
-      })
-  }
+  let finalMarkStudnet = Math.round(correctAnswerCounter * 100 / maxScore);
 
   return (
     <div>
@@ -139,26 +114,26 @@ const Work = () =>{
       workTestTheme = {workTest[0].theme}
       setOpenCompleteDialog = {setOpenCompleteDialog}
       openCompleteDialog = {openCompleteDialog}
+      pathManual = {workTest[0].manualSrc}
       setTimerText = {setTimerText}
       timerText = {timerText}
      />
+     {/* workTest[0].manualSrc */}
+
      <Grid container style={{padding:20, height:'90vh'}}>
-        <Grid item xs={12}  style = {styles.question}>
+
+        <Grid item xs={12} style = {styles.question}>
           <div>
             {questionText.map((item, index) => {
-              return (
-                <p key = {`itemQuestion${index}`} style ={{margin:'0px'}}>{item}</p>
-              );
+              return (<p key = {`itemQuestion${index}`} style ={{margin:'0px'}}>{item}</p>);
             })
             }
           </div>
           <div id="image_container">
             <div id="imageMin" onClick={()=>{
-              window.open('file://E:/programming/Tester-students/public/assets/img/scr1.png', 'Изображение')
-              //file://E:/programming/Tester-students/public/assets/img/scr1.png
-              //file://D:/Diplom_2.0/Tester-students/public/assets/img/scr1.png
+              window.open(actionTask.imgSrc, 'Изображение')
             }}>
-              <img style={{width:'100%'}} src='file://E:/programming/Tester-students/public/assets/img/scr1.png'/>
+              <img style={{width:'100%'}} src={actionTask.imgSrc}/>
             </div>
           </div>
        </Grid>
@@ -190,7 +165,6 @@ const Work = () =>{
                     variant="contained" size="large" 
                     onClick={()=>{
                       checkAnswer()
-                      setMarkStudent()
                       setOpenCompleteDialog(true)
                     }}
                     style={{marginBottom:'15px',alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}} 
@@ -214,17 +188,18 @@ const Work = () =>{
         </Grid>
        </Grid>
        <CompleteTestDialog 
-       correctAnswerCounter = {correctAnswerCounter}
+          allAttempts = {allAttempts}
           maxScore = {maxScore}
           workStudent = {workStudent[0]}
+          finalMarkStudnet = {finalMarkStudnet}
           openCompleteDialog = {openCompleteDialog} 
           correctAnswerCounter = {correctAnswerCounter}
           setOpenCompleteDialog = {setOpenCompleteDialog} 
           timerText = {timerText}
-          workTestTime = {workTest[0].time}
+          workTest = {workTest[0]}
+          setStudents={setStudents}
        />
     </div>
   )
 } 
 export default Work;
-

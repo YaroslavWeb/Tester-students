@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import TeacherHeader from '../../components/TeacherHeader'
 
 const Info = props =>{
+  if(document.cookie != '')
   return (
     <div>
      <TeacherHeader/>
@@ -72,6 +73,11 @@ const Info = props =>{
          
       </Grid>
      </Grid>
+    </div>
+  )
+  else return(
+    <div>
+      {window.location.replace('#/')}
     </div>
   )
 } 

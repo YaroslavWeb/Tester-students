@@ -10,7 +10,8 @@ import TestAlert from '../../components/UseAlert'
 const Test = () => {
   const {tests} = React.useContext(StateContext)
  const[open, setOpen]= React.useState({visible: false, text:'',severity:''});
-  return (
+ if(document.cookie != '')
+ return (
     <div> 
       <TestAlert 
         alertState = {open}
@@ -47,6 +48,11 @@ const Test = () => {
         </Grid>
         </Grow>
       </Grid>
+    </div>
+  )
+  else return(
+    <div>
+      {window.location.replace('#/')}
     </div>
   )
 } 

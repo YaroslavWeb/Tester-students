@@ -7,11 +7,10 @@ import TeacherHeader from '../../components/TeacherHeader'
 
 const Students = (props) =>{
     const [open, setOpen] = React.useState({visible: false, text:'',severity:''});
-
+    if(document.cookie != '')
     return(
-    <div>
+      <div>
       <TeacherHeader/>
-
       <StudentAlert 
         alertState = {open}
         setAlert = {setOpen}
@@ -34,6 +33,11 @@ const Students = (props) =>{
         setAlert = {setOpen}
       />
     </div>
+    )
+    else return(
+      <div>
+        {window.location.replace('#/')}
+      </div>
     )
 } 
 export default Students;

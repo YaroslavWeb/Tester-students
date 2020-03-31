@@ -40,9 +40,9 @@ export default function FullScreenDialog(props) {
   const {editTest} = React.useContext(StateContext)
   const [open, setOpen] = React.useState(false);
   let [tasks, setTasks] = React.useState(props.test.tasks)
+  let [changeFile, setChangeFile] = React.useState(false)
 
-  let titleTest, timeTest, attemptsTest, maxTasks, 
-      manualSrc, changeFile = false;
+  let titleTest, timeTest, attemptsTest, maxTasks, manualSrc;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -142,7 +142,7 @@ export default function FullScreenDialog(props) {
               <div>
                 <input style={{display: 'none'}}
                   id="edit-manual"
-                  onChange={()=>{changeFile= true}}
+                  onChange={()=>{setChangeFile(true)}}
                   multiple
                   type="file"
                 />
