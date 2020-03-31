@@ -74,7 +74,7 @@ const App = () =>{
           newStudent.marks[key].mark = newMarks[key]
           newStudent.marks[key].attempts = newAttempts[key]
         }
-        db.students.update({_id:newStudent._id},{$set:newStudent})
+        db.students.update({_id:newStudent._id},{newStudent})
       }
     });
     db.students.find({}, (err, docs)=>{setStudents(docs)})
@@ -87,7 +87,7 @@ const App = () =>{
         editTest ={...test, theme, time, attempts, maxTasksWork, manualSrc, tasks}}
       });
       
-    db.tests.update({_id:editTest._id}, {$set:editTest})
+    db.tests.update({_id:editTest._id}, {editTest})
     db.tests.find({}, (err, docs)=>{setTests(docs)})
   }
 

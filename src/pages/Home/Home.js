@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import Authorization from '../../components/Authorization'
 import StateContext from '../../context/StateContext'
+
 const db = window.require('electron').remote.getGlobal('database');
 
 const Home =() => {

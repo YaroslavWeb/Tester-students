@@ -72,7 +72,7 @@ const TestTaskConstructor = (props) => {
               <Grid key={index} style={{padding:5}} item xs={6} md={4} lg={3}>
                 <TextField
                   fullWidth={true}
-                  label={`Ответ №${index}`}
+                  label={`Ответ №${index+1}`}
                   inputRef={node => answer.answer = node}
                   variant="outlined"
                   InputProps={{
