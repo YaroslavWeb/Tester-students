@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import TeacherHeader from '../../components/TeacherHeader'
 
 const Info = props =>{
+  if(document.cookie != '')
   return (
     <div>
      <TeacherHeader/>
@@ -70,6 +71,11 @@ const Info = props =>{
         При введении в поле "количество выдаваемых заданий" числа 10 вероятность того, что при повторном прохождении теста построится идентичный тест становится крайне мала<br/>
       </Grid>
      </Grid>
+    </div>
+  )
+  else return(
+    <div>
+      {window.location.replace('#/')}
     </div>
   )
 } 

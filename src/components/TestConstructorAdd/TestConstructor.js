@@ -46,13 +46,8 @@ export default function FullScreenDialog(props) {
       {id:4, title:'Ответ №4', answer:'', correct:false}
     ]}
   ]);
-<<<<<<< HEAD
   let [changeFile, setChangeFile] = React.useState(false)
   let titleTest, timeTest, attemptsTest, maxTasks, manualSrc;
-=======
-
-  let titleTest, timeTest, attemptsTest, maxTasks, manualSrc,changeFile = false ;
->>>>>>> da552789d325f4fadc70508f27f4a123bcef9f6b
   
   const addTask = () =>{
     let newTask = {

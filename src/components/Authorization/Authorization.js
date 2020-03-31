@@ -41,7 +41,7 @@ const [loginStudent, setLoginStudent] = React.useState(false);
 
 const handleChange = (event, newValue) => {setValue(newValue)};
 
-const {students,tests} = React.useContext(StateContext)
+const {students, tests, teachers} = React.useContext(StateContext)
 
 
 let inputLogin,inputPassword,inputStud;
@@ -115,8 +115,12 @@ let inputLogin,inputPassword,inputStud;
               variant="outlined" 
               style ={{color: '#006F51', marginTop:'10px', borderColor:'#006F51'}}
               onClick={()=>{
-                if(inputPassword.value == '' && inputLogin.value == ''){
-                  window.location.replace('#/students');
+                console.log(teachers);
+                
+                if(inputPassword.value == '' && inputLogin.value == '' ||
+                   inputLogin.value === teachers[0].username && inputPassword.value === teachers[0].password){
+                    document.cookie = `user=${teachers[0].username}`;
+                    window.location.replace('#/students');
                 }
               }}
             >

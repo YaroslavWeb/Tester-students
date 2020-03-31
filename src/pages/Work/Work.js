@@ -10,8 +10,6 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import CompleteTestDialog from '../../components/CompleteTestDialog'
 import styles from './Work.style'
 
-const db = window.require('electron').remote.getGlobal('database');
-
 const Work = () =>{
   const [openCompleteDialog, setOpenCompleteDialog] = React.useState(false)
   
@@ -34,8 +32,17 @@ const Work = () =>{
   // По умолчанию берётся первое задание
   let [actionTask, setActionTask]= useState(workTest[0].tasks[0])
 
+  let [allAttempts, setAllAttempts] = React.useState({
+    studAttempts:workStudent[0].marks.map(mark=>{
+      if(mark.id_test == workTest[0]._id) return mark.attempts
+      else return false
+    }),
+    maxAttempts: workTest[0].attempts
+  })
+
   // Максимальное количество заданий
   let maxSteps = workTest[0].tasks.length
+
   // Максимальное кол-во баллов
   let maxScore = 0;
   workTest[0].tasks.forEach(item => maxScore+=Number(item.score))
@@ -80,7 +87,7 @@ const Work = () =>{
     else if (actionTask.type == 'Ввод текста'){
       actionTask.answers.forEach(answer => {
         if(answer.correct){
-          answer.answer.toUpperCase() == answerStudent
+          answer.answer == answerStudent
            ? setCorrectAnswerCounter(correctAnswerCounter + Number(actionTask.score))
            : setCorrectAnswerCounter(correctAnswerCounter)
         }
@@ -95,38 +102,7 @@ const Work = () =>{
     setAnswerStudent([])
   }, [taskCounter])
 
-  let finalMarkStudnet = Math.round(correctAnswerCounter * 100 / maxScore)
-
-  let setMarkStudent = () =>{
-    // Ищем нужну оценку у студента
-      workStudent[0].marks.forEach(mark =>{
-        // Находим
-        if (mark.id_test == workTest[0]._id){
-          // Если оценка больше оценки, которая уже имеется
-          // ТО заносим новую оценку в БД
-            if(finalMarkStudnet > Number(mark.mark)){
-            let newMark = {
-              ...mark,
-              attempts:Number(mark.attempts),
-              mark:finalMarkStudnet
-            }
-            let newMarks = workStudent[0].marks.map(mark=>{
-              if(mark.id == newMark.id) 
-                return (newMark) 
-              else 
-                return (mark)
-            })
-
-            let newStudent = {
-              ...workStudent[0],
-              marks: newMarks
-            }
-            db.students.update({_id:workStudent[0]._id}, newStudent)
-            db.students.find({}, (err, docs)=>{setStudents(docs)})
-          }
-        }
-      })
-  }
+  let finalMarkStudnet = Math.round(correctAnswerCounter * 100 / maxScore);
 
   return (
     <div>
@@ -188,7 +164,7 @@ const Work = () =>{
                 ? <Button 
                     variant="contained" size="large" 
                     onClick={()=>{
-                      setMarkStudent()
+                      checkAnswer()
                       setOpenCompleteDialog(true)
                     }}
                     style={{marginBottom:'15px',alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}} 
@@ -212,6 +188,7 @@ const Work = () =>{
         </Grid>
        </Grid>
        <CompleteTestDialog 
+          allAttempts = {allAttempts}
           maxScore = {maxScore}
           workStudent = {workStudent[0]}
           finalMarkStudnet = {finalMarkStudnet}
@@ -219,7 +196,8 @@ const Work = () =>{
           correctAnswerCounter = {correctAnswerCounter}
           setOpenCompleteDialog = {setOpenCompleteDialog} 
           timerText = {timerText}
-          workTestTime = {workTest[0].time}
+          workTest = {workTest[0]}
+          setStudents={setStudents}
        />
     </div>
   )
