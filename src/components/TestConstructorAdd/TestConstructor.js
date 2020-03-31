@@ -16,6 +16,8 @@ import Divider from '@material-ui/core/Divider'
 import TestCancelDialog from './TestCancelDialog';
 import StateContext from '../../context/StateContext'
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
 const useStyles = makeStyles(theme => ({
   appBar: {
     position: 'relative',
@@ -44,8 +46,13 @@ export default function FullScreenDialog(props) {
       {id:4, title:'Ответ №4', answer:'', correct:false}
     ]}
   ]);
+<<<<<<< HEAD
   let [changeFile, setChangeFile] = React.useState(false)
   let titleTest, timeTest, attemptsTest, maxTasks, manualSrc;
+=======
+
+  let titleTest, timeTest, attemptsTest, maxTasks, manualSrc,changeFile = false ;
+>>>>>>> da552789d325f4fadc70508f27f4a123bcef9f6b
   
   const addTask = () =>{
     let newTask = {
@@ -74,6 +81,13 @@ export default function FullScreenDialog(props) {
        }
     ))
   }
+
+  function uniques(array, key) {
+    return array.reduce((acc, curr) => {
+        if (!acc.find(item => item[key] === curr[key])) { acc.push(curr); }
+        return acc;
+      }, []);
+    }
   const removeAnswer = (id_task) =>{
     setTasks(tasks.map(task=>{
       if(task.id === id_task)
@@ -90,6 +104,7 @@ export default function FullScreenDialog(props) {
   const handleClose = () => {
     setOpen(false);
   };
+  const {students} = React.useContext(StateContext)
   
   return (
     <div style={{height:'100%', width:'100%'}}>
@@ -117,7 +132,7 @@ export default function FullScreenDialog(props) {
                 Создание теста
               </Typography>
               <Button autoFocus color="inherit" onClick={()=>{ 
-                if(titleTest.value !== '' && timeTest.value !== '' && attemptsTest.value !== '')
+                if(titleTest.value !== '' && timeTest.value !== '' && attemptsTest.value !== '' )
                 {
                   console.log(changeFile);
                   
@@ -146,7 +161,7 @@ export default function FullScreenDialog(props) {
             alignItems="center"
             style={{padding:'10px'}}
           >
-            <Grid item style={{padding:5}} xs={6} sm={12} lg={10}>
+            <Grid item style={{padding:5}} xs={4} sm={8} lg={6}>
               <TextField
                 label="Название теста" 
                 inputRef={node =>titleTest = node}
@@ -154,7 +169,24 @@ export default function FullScreenDialog(props) {
                 fullWidth={true} 
               />
             </Grid>
-
+            <Grid item style={{padding:5}} xs={2} sm={4} lg={4}>
+               <Autocomplete
+                  multiple
+                  id="tags-outlined"
+                  options={uniques(students, 'group')}
+                  getOptionLabel={option => option.group}
+                  filterSelectedOptions
+                  renderInput={(params) => (
+                    <TextField
+                    fullWidth={true} 
+                      {...params}
+                      variant="outlined"
+                      label="Группы"
+                    />
+                  )}
+                />
+                
+            </Grid>
               <Grid style={{padding:5}} item xs={6} sm={6}  lg={2}>
                 <TextField
                   type = "number"
@@ -167,7 +199,7 @@ export default function FullScreenDialog(props) {
               <Grid style={{padding:5}} item xs={6} sm={6}  lg={4}>
                 <TextField
                   type = "number"
-                  label="Количество выдаваемых вопросов" 
+                  label="Количество выдаваемых заданий" 
                   inputRef={node => maxTasks = node}
                   variant="outlined" 
                   fullWidth={true} 
@@ -235,8 +267,11 @@ export default function FullScreenDialog(props) {
                 </Button>
               </Grid>
             </Grid>
+            
           </DialogContent>
+          
       </Dialog>
+      
     </div>
   );
 }
