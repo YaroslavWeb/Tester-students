@@ -104,7 +104,9 @@ const StudentDialogRemove = (props) => {
       />
         </DialogContent>
         <DialogActions>
-          <Button autoFocus variant="outlined" onClick={handleClose}>
+          <Button autoFocus variant="outlined" 
+          onClick={handleClose}
+          style = {{color: 'black', borderColor:'#83898B'}}>
             Отмена
           </Button>
           <Button

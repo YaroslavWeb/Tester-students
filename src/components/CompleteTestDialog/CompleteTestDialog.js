@@ -38,6 +38,15 @@ const DialogTitle = withStyles(styles)(props => {
 export default function CustomizedDialogs(props){
   let spendTimeSec = (props.workTestTime * 60) - ((Number(props.timerText.min)*60)+Number(props.timerText.sec))
   let spendTime = {min:Math.floor(spendTimeSec/60), sec:spendTimeSec%60}
+  let finalMark = Math.round(props.correctAnswerCounter * 100 / props.maxScore)
+  let markStyle = (markObj)=>{
+    if(markObj.value >= 90) return markObj.card ? 'greenShadowMark' : 'greenMark'
+    if(markObj.value >= 75) return markObj.card ? 'salatShadowMark' : 'salatMark'
+    if(markObj.value >= 60) return markObj.card ? 'orangeShadowMark' : 'orangeMark'
+    if(markObj.value >= 0) return markObj.card ? 'redShadowMark' : 'redMark'
+    return 'noneShadowMark'
+  }
+  
   return (
     <div>
       <Dialog  aria-labelledby="customized-dialog-title" open={props.openCompleteDialog}>
@@ -49,13 +58,18 @@ export default function CustomizedDialogs(props){
            Колличество баллов: {props.correctAnswerCounter} из {props.maxScore}
           </Typography>
           <Typography style ={{marginBottom:'5px',  paddingRight:'80px'}} >
-           Итоговая оценка: {props.finalMarkStudnet}%
+           Итоговая оценка: 
+          <span className={markStyle({card: false, value:finalMark})}>{finalMark}%</span>
           </Typography>
           <Typography style ={{marginBottom:'5px'}}>
-            Потрачено времени: {spendTime.min}:{spendTime.sec}
+            Осталось попыток:
           </Typography>
           <Typography style ={{marginBottom:'5px'}}>
-            Осталось времени: {props.timerText.min}:{props.timerText.sec}
+            Потрачено времени: {spendTime.min < 10 ? "0" +spendTime.min : spendTime.min}:{spendTime.sec < 10 ? "0" +spendTime.sec : spendTime.sec}
+          </Typography>
+
+          <Typography style ={{marginBottom:'5px'}}>
+            Осталось времени: {props.timerText.min < 10 ? "0" +props.timerText.min : props.timerText.min}:{props.timerText.sec< 10 ? "0" +props.timerText.sec : props.timerText.sec}
           </Typography>
         </MuiDialogContent>
         <MuiDialogActions>

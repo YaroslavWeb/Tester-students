@@ -66,7 +66,7 @@ const StudentDialogAdd = (props) => {
   
   return (
     <div>
-      <Button style={{margin:'10px', color: '#006F51'}} size="large" startIcon={<PersonAddIcon />} variant="outlined" onClick={handleClickOpen}>
+      <Button style={{margin:'10px', color: '#006F51' , borderColor:'#006F51'  } } size="large" startIcon={<PersonAddIcon />} variant="outlined" onClick={handleClickOpen}>
         Добавить студентов
       </Button>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
@@ -92,7 +92,10 @@ const StudentDialogAdd = (props) => {
             />
         </DialogContent>
         <DialogActions>
-          <Button autoFocus variant="outlined" onClick={handleClose}>
+          <Button autoFocus variant="outlined" 
+          onClick={handleClose}
+          style = {{color: 'black', borderColor:'#83898B'}}>
+          
             Отмена
           </Button>
           <Button
@@ -114,7 +117,7 @@ const StudentDialogAdd = (props) => {
             }
             autoFocus
             variant="outlined"
-            style = {{color: '#006F51'}}>
+            style = {{color: '#006F51', borderColor:'#006F51'}}>
             Добавить
           </Button>
         </DialogActions>

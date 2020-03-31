@@ -79,7 +79,7 @@ const Work = () =>{
     else if (actionTask.type == 'Ввод текста'){
       actionTask.answers.forEach(answer => {
         if(answer.correct){
-          answer.answer.toUpperCase() == answerStudent
+          answer.answer == answerStudent
            ? setCorrectAnswerCounter(correctAnswerCounter + Number(actionTask.score))
            : setCorrectAnswerCounter(correctAnswerCounter)
         }
@@ -94,20 +94,22 @@ const Work = () =>{
     setAnswerStudent([])
   }, [taskCounter])
 
-  let finalMarkStudnet = Math.round(correctAnswerCounter * 100 / maxScore)
-
+  
   let setMarkStudent = () =>{
+    let finalMarkStudent = Math.round(correctAnswerCounter * 100 / maxScore);
     // Ищем нужну оценку у студента
       workStudent[0].marks.forEach(mark =>{
         // Находим
         if (mark.id_test == workTest[0]._id){
+          console.log('Оценка найдена')
           // Если оценка больше оценки, которая уже имеется
           // ТО заносим новую оценку в БД
-            if(finalMarkStudnet > Number(mark.mark)){
+            if(finalMarkStudent > Number(mark.mark)){
+              console.log('Оценка больше' + finalMarkStudent)
             let newMark = {
               ...mark,
               attempts:Number(mark.attempts),
-              mark:finalMarkStudnet
+              mark:finalMarkStudent
             }
             let newMarks = workStudent[0].marks.map(mark=>{
               if(mark.id == newMark.id) 
@@ -187,6 +189,7 @@ const Work = () =>{
                 ? <Button 
                     variant="contained" size="large" 
                     onClick={()=>{
+                      checkAnswer()
                       setMarkStudent()
                       setOpenCompleteDialog(true)
                     }}
@@ -211,9 +214,9 @@ const Work = () =>{
         </Grid>
        </Grid>
        <CompleteTestDialog 
+       correctAnswerCounter = {correctAnswerCounter}
           maxScore = {maxScore}
           workStudent = {workStudent[0]}
-          finalMarkStudnet = {finalMarkStudnet}
           openCompleteDialog = {openCompleteDialog} 
           correctAnswerCounter = {correctAnswerCounter}
           setOpenCompleteDialog = {setOpenCompleteDialog} 
