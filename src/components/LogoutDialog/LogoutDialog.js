@@ -34,7 +34,8 @@ const LogoutDialog = (props) => {
           Вы действительно хотите выйти?
         </DialogContent>
         <DialogActions style = {{paddingTop:'15px', paddingBottom:'15px'}}>
-          <Button variant="outlined" style = {{display:'flex', justifyContent:'space-between', marginRight:'15px'}} onClick={handleClose}>
+          <Button variant="outlined" style = {{display:'flex', justifyContent:'space-between', marginRight:'15px',color: 'black', borderColor:'#83898B'}} 
+          onClick={handleClose}>
             Отмена
           </Button>
          { props.logoutStudent == null ?

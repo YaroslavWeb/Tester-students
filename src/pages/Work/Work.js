@@ -33,22 +33,25 @@ const Work = () =>{
     workTest[0].maxTasksWork != "" 
     ? Number(workTest[0].maxTasksWork) 
     : workTest[0].tasks.length
-  )
-  
-  // Массив для id заданий
-
-  // Внесение id заданий относительно maxSteps
-  React.useEffect(()=>{
-    let arrayWorkTasks = []
+    )
+    let setArrayTasks = ()=> {
+    let arrayAllTasks = []
     for (let index = 0; index < workTest[0].tasks.length; index++) {
-      arrayWorkTasks.push(workTest[0].tasks[index].id)
+      arrayAllTasks.push(workTest[0].tasks[index])
     }
-    console.log(arrayWorkTasks);
-  },[])
-  
+    // Мешаем мешок
+    for (let i = arrayAllTasks.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [arrayAllTasks[i], arrayAllTasks[j]] = [arrayAllTasks[j], arrayAllTasks[i]];
+    }
+    return(arrayAllTasks)
+  }
+  // Массив для id заданий
+  let [arrayWorkTasks, setArrayWorkTasks] = React.useState(setArrayTasks)
+
   // Стейт хранит актуальное задание
   // По умолчанию берётся первое задание
-  let [actionTask, setActionTask]= useState(workTest[0].tasks[0])
+  let [actionTask, setActionTask]= useState(arrayWorkTasks[0])
   
   // Счётчик актуального задания
   let [taskCounter, setTaskCounter] = useState(1)
@@ -56,7 +59,7 @@ const Work = () =>{
   // Максимальное кол-во баллов
   // TODO ПЕРЕДЕЛАТЬ СЧЁТЧИК
   let maxScore = 0;
-  workTest[0].tasks.forEach(item => maxScore+=Number(item.score))
+  arrayWorkTasks.forEach(item => maxScore+=Number(item.score))
   
   // Попытки студента и теста
   let [allAttempts, setAllAttempts] = React.useState({
@@ -198,7 +201,7 @@ const Work = () =>{
                       checkAnswer()
                       taskCounter++
                       setTaskCounter(taskCounter)
-                      setActionTask(workTest[0].tasks[--taskCounter])
+                      setActionTask(arrayWorkTasks[--taskCounter])
                     }}
                   >
                     <NavigateNextIcon/>
@@ -222,4 +225,3 @@ const Work = () =>{
   )
 } 
 export default Work;
-

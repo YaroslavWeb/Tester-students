@@ -133,7 +133,8 @@ const TableDialogEdit = (props) => {
         </form>
         </DialogContent>
         <DialogActions>
-          <Button variant="outlined" onClick={handleClose}>
+          <Button variant="outlined" onClick={handleClose}
+          style = {{color: 'black', borderColor:'#83898B'}}>
             Отмена
           </Button>
           <Button
@@ -153,7 +154,7 @@ const TableDialogEdit = (props) => {
                 }
             }}
             variant="outlined"
-            color="primary">
+            style ={{color: '#006F51',borderColor:'#006F51'}}>
             Сохранить
           </Button>
         </DialogActions>

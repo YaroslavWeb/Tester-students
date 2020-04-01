@@ -72,6 +72,13 @@ export default function CustomizedDialogs(props){
         }
       })
   }
+  let markStyle = (markObj)=>{
+    if(markObj.value >= 90) return markObj.card ? 'greenShadowMark' : 'greenMark'
+    if(markObj.value >= 75) return markObj.card ? 'salatShadowMark' : 'salatMark'
+    if(markObj.value >= 60) return markObj.card ? 'orangeShadowMark' : 'orangeMark'
+    if(markObj.value >= 0) return markObj.card ? 'redShadowMark' : 'redMark'
+    return 'noneShadowMark'
+  }
   setMarkStudent()
   return (
     <div>
@@ -84,7 +91,7 @@ export default function CustomizedDialogs(props){
            Колличество баллов: {props.correctAnswerCounter} из {props.maxScore}
           </Typography>
           <Typography style ={{marginBottom:'5px',  paddingRight:'80px'}} >
-           Итоговая оценка: {props.finalMarkStudnet}%
+           Итоговая оценка:<span className={markStyle({card: false, value:props.finalMarkStudnet})}>{props.finalMarkStudnet}%</span> 
           </Typography>
           <Typography style ={{marginBottom:'5px',  paddingRight:'80px'}} >
            Осталось попыток: {props.allAttempts.studAttempts} из {props.allAttempts.maxAttempts}

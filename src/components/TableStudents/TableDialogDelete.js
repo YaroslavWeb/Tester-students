@@ -75,7 +75,9 @@ const TableDialogDelete = (props) => {
          </Typography>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus variant="outlined" onClick={handleClose}>
+          <Button autoFocus variant="outlined" 
+          onClick={handleClose}
+          style = {{color: 'black', borderColor:'#83898B'}}>
             Отмена
           </Button>
           <Button
@@ -90,7 +92,7 @@ const TableDialogDelete = (props) => {
             }}
             autoFocus
             variant="outlined"
-            color="primary">
+            style ={{color: '#006F51',borderColor:'#006F51'}}>
             Подтверждаю
           </Button>
         </DialogActions>
