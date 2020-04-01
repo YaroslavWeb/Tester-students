@@ -74,9 +74,10 @@ const Home =() => {
                       <Typography variant="body2" component="p">
                         Кол-во попыток: {markAttempts}/{test.attempts}
                       </Typography>
-                      <Typography variant="body2" component="p">
+                      {/* Кол-во вопрососв или кол-во выдаваемых вопрососв? */}
+                      {/* <Typography variant="body2" component="p">
                         Кол-во вопросов: {test.tasks.length}
-                      </Typography>
+                      </Typography> */}
                       <Typography variant="body2" component="p">
                         Длительность теста: {test.time} мин.
                       </Typography>

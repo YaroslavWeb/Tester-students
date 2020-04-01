@@ -15,7 +15,7 @@ const Work = () =>{
   
   let {tests, students, setStudents} = React.useContext(StateContext)
 
-  // Получение id теста и id студента из url,  который проходит студент
+  // Получение id теста и id студента из url, который проходит студент
   const link = window.location.href
   let indexes = link.split("?")
   indexes = indexes[1].split("&")
@@ -28,10 +28,37 @@ const Work = () =>{
   // Запись актуального студента
   const workStudent = students.filter(student => student._id == studId[1])
   
+  // Кол-во выдоваемых вопрососв студенту
+  let [maxSteps, setMaxStep] = React.useState(
+    workTest[0].maxTasksWork != "" 
+    ? Number(workTest[0].maxTasksWork) 
+    : workTest[0].tasks.length
+  )
+  
+  // Массив для id заданий
+
+  // Внесение id заданий относительно maxSteps
+  React.useEffect(()=>{
+    let arrayWorkTasks = []
+    for (let index = 0; index < workTest[0].tasks.length; index++) {
+      arrayWorkTasks.push(workTest[0].tasks[index].id)
+    }
+    console.log(arrayWorkTasks);
+  },[])
+  
   // Стейт хранит актуальное задание
   // По умолчанию берётся первое задание
   let [actionTask, setActionTask]= useState(workTest[0].tasks[0])
-
+  
+  // Счётчик актуального задания
+  let [taskCounter, setTaskCounter] = useState(1)
+  
+  // Максимальное кол-во баллов
+  // TODO ПЕРЕДЕЛАТЬ СЧЁТЧИК
+  let maxScore = 0;
+  workTest[0].tasks.forEach(item => maxScore+=Number(item.score))
+  
+  // Попытки студента и теста
   let [allAttempts, setAllAttempts] = React.useState({
     studAttempts:workStudent[0].marks.map(mark=>{
       if(mark.id_test == workTest[0]._id) return mark.attempts
@@ -40,15 +67,6 @@ const Work = () =>{
     maxAttempts: workTest[0].attempts
   })
 
-  // Максимальное количество заданий
-  let maxSteps = workTest[0].tasks.length
-
-  // Максимальное кол-во баллов
-  let maxScore = 0;
-  workTest[0].tasks.forEach(item => maxScore+=Number(item.score))
-
-  // Счётчик актуального задания
-  let [taskCounter, setTaskCounter] = useState(1)
 
   // Баллы за правильный ответ
   let [correctAnswerCounter, setCorrectAnswerCounter] = useState(0)
@@ -56,8 +74,9 @@ const Work = () =>{
   // Ответ студента
   let [answerStudent, setAnswerStudent] = React.useState([]);
 
-  // Таймер текста
+  // Таймер текст
   let [timerText, setTimerText] = React.useState({min: workTest[0].time-1, sec: 59 })
+
   // Массив, в котором хранятся абзацы вопроса
   let questionText = actionTask.question.split('\n')
 
