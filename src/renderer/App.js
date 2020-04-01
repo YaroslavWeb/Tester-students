@@ -34,7 +34,6 @@ const App = () =>{
           id:task.id,
           type: task.type.value,
           score: task.score.value,
-          section: task.section.value,
           question: task.question.value,
           imgSrc:task.imgSrc,
           answers: task.answers.map(answer=>{

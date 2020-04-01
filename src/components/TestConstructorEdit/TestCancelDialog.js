@@ -29,14 +29,16 @@ const TestCancelDialog = (props) => {
           Вы действительно хотите выйти без сохранения теста?
         </DialogContent>
         <DialogActions>
-          <Button autoFocus variant="outlined" onClick={handleClose}>
+          <Button autoFocus variant="outlined" 
+          onClick={handleClose}
+          style = {{color: 'black', borderColor:'#83898B'}}>
             Отмена
           </Button>
           <Button
             onClick= {() => {handleClose(); props.closeConstructor()}}
             autoFocus
             variant="outlined"
-            style ={{color: '#006F51'}}> 
+            style ={{color: '#006F51', borderColor:'#006F51'}}> 
             Подтверждаю
             </Button>
         </DialogActions>
