@@ -63,15 +63,6 @@ const TestTaskConstructor = (props) => {
               variant="outlined" 
               margin="dense"
             /> 
-            <TextField
-              defaultValue={props.task.section}
-              onChange={event=>{props.task.section = event.target.value}}
-              fullWidth={true}
-              type="number"
-              margin="dense"
-              variant="outlined"
-              label="Тема вопроса"
-            /> 
             <Autocomplete
               disabled
               options={taskTypes}
