@@ -54,12 +54,7 @@ export default function FullScreenDialog(props) {
     manualSrc = document.getElementById('edit-manual').files[0].path
   }
   const {students} = React.useContext(StateContext)
-  function uniques(array, key) {
-    return array.reduce((acc, curr) => {
-        if (!acc.find(item => item[key] === curr[key])) { acc.push(curr); }
-        return acc;
-      }, []);
-    }
+
   return (
     <div>
       <IconButton aria-label="edit" onClick ={handleClickOpen}>
@@ -84,7 +79,7 @@ export default function FullScreenDialog(props) {
                   if(changeFile)getPathManual();
                   else manualSrc = props.test.manualSrc;
                   
-                  editTest(props.test._id, titleTest.value, timeTest.value, attemptsTest.value, maxTasks.value, manualSrc, tasks)
+                  editTest(props.test._id, titleTest.value, timeTest.value, attemptsTest.value, maxTasks.value, props.test.tagsGroups, manualSrc, tasks)
                   handleClose()                
               } 
               else {
@@ -114,22 +109,13 @@ export default function FullScreenDialog(props) {
               />
             </Grid>
             <Grid item style={{padding:5}} xs={2} sm={4} lg={4}>
-               <Autocomplete
-                  multiple
-                  id="tags-outlined"
-                  options={uniques(students, 'group')}
-                  getOptionLabel={option => option.group}
-                  filterSelectedOptions
-                  renderInput={(params) => (
-                    <TextField
-                    fullWidth={true} 
-                      {...params}
-                      variant="outlined"
-                      label="Группы"
-                    />
-                  )}
-                />
-                
+              <TextField
+                defaultValue = {props.test.tagsGroups}
+                disabled={true}
+                fullWidth={true} 
+                variant="outlined"
+                label="Группы"
+              />
             </Grid>
 
             <Grid style={{padding:5}} item xs={6} sm={6}  lg={2}>
@@ -146,7 +132,7 @@ export default function FullScreenDialog(props) {
                 <TextField
                   type = "number"
                   label="Количество выдаваемых вопросов" 
-                  defaultValue={props.test.maxTasks}
+                  defaultValue={props.test.maxTasksWork}
                   inputRef={node => maxTasks = node}
                   variant="outlined" 
                   fullWidth={true} 

@@ -80,11 +80,11 @@ const App = () =>{
     db.students.find({}, (err, docs)=>{setStudents(docs)})
   }
 
-  const editTest = (id, theme, time, attempts, maxTasksWork, manualSrc, tasks) =>{
+  const editTest = (id, theme, time, attempts, maxTasksWork, tagsGroups, manualSrc, tasks) =>{
     let editTest
     tests.forEach(test => {
       if(test._id == id){
-        editTest ={...test, theme, time, attempts, maxTasksWork, manualSrc, tasks}}
+        editTest ={...test, theme, time, attempts, maxTasksWork, tagsGroups, manualSrc, tasks}}
       });
       
     db.tests.update({_id:editTest._id}, {$set:{editTest}})
