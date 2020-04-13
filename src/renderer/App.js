@@ -22,12 +22,13 @@ const App = () =>{
     db.students.find({}, (err, docs)=>{setStudents(docs)})
   },[])
 
-  const addTest = (theme, time, attempts, maxTasksWork, manualSrc, tasks) =>{
+  const addTest = (theme, time, attempts, maxTasksWork, tagsGroups, manualSrc, tasks) =>{
     let newTest = {
       theme,
       time,
       attempts,
       maxTasksWork,
+      tagsGroups,
       manualSrc,
       tasks:tasks.map(task =>{
         return{

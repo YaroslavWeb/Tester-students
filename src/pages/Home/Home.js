@@ -49,77 +49,83 @@ const Home =() => {
               const markArray = stud[0].marks.filter(mark => mark.id_test === test._id)
               // Оценка студента для карточки теста
               const markMark = markArray.length ? markArray[0].mark : -1
-              // Оценка попытки к тесту
+              // Попытки к тесту
               const markAttempts = markArray.length ? markArray[0].attempts : test.attempts
+              let flagGroup = false 
+              test.tagsGroups.forEach(tag => tag === stud[0].group ? flagGroup = true : flagGroup = false)
+              
+              if(test.tagsGroups.length == 0 || flagGroup){
 
-              return(  
-                <Grid item style={{padding:20}} key={test._id} item xs={12} sm={6} lg={4}>
-                  <Card 
-                    test={test} 
-                    className={markStyle({card: true, value: markMark})} 
-                    variant="outlined"
-                  >
-                    <CardContent>
-                      <Typography variant="h5" component="h2">
-                        Тема:{test.theme}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        Оценка: 
-                        {
-                        markArray.length
-                        ?<span className={markStyle({card: false, value:markMark})}>{markMark}%</span> 
-                        :<span style = {{color:'white', backgroundColor:'#83898B', padding:'5px'}}>-</span> 
-                        }
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        Кол-во попыток: {markAttempts}/{test.attempts}
-                      </Typography>
-                      {/* Кол-во вопрососв или кол-во выдаваемых вопрососв? */}
-                      {/* <Typography variant="body2" component="p">
-                        Кол-во вопросов: {test.tasks.length}
-                      </Typography> */}
-                      <Typography variant="body2" component="p">
-                        Длительность теста: {test.time} мин.
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button 
-                        disabled={markAttempts <= 0}
-                        variant="outlined" 
-                        style = {{color:'#006F51',borderColor:'#006F51'}}
-                        onClick={()=>{
-                          if(markArray.length){
-                            // Уменьшаем кол-во попыток, ЕСЛИ ОН БЫЛ СЛЕП И ГЛУП 
-                            markArray[0].attempts -= 1
-                            db.students.update({_id:stud[0]._id}, stud[0])
-                            db.students.find({}, (err, docs)=>{
-                              setStudents(docs)
-                              window.location.replace('#/work?test='+test._id +'&student='+stud[0]._id)
-                            })
+                return(  
+                  <Grid item style={{padding:20}} key={test._id} item xs={12} sm={6} lg={4}>
+                    <Card 
+                      test={test} 
+                      className={markStyle({card: true, value: markMark})} 
+                      variant="outlined"
+                    >
+                      <CardContent>
+                        <Typography variant="h5" component="h2">
+                          Тема:{test.theme}
+                        </Typography>
+                        <Typography variant="body2" component="p">
+                          Оценка: 
+                          {
+                          markArray.length
+                          ?<span className={markStyle({card: false, value:markMark})}>{markMark}%</span> 
+                          :<span style = {{color:'white', backgroundColor:'#83898B', padding:'5px'}}>-</span> 
                           }
-                          else{
-                              // Создаём оценку ДЛЯ НЕОФИТА, который в первый раз проходит тест
-                              const newMark = {
-                                id: stud[0].marks.length+1,
-                                id_test: test._id,
-                                attempts: Number(test.attempts)-1,
-                                mark:0
-                              }
-                              db.students.update({_id:stud[0]._id}, {$push:{marks:newMark}})
+                        </Typography>
+                        <Typography variant="body2" component="p">
+                          Кол-во попыток: {markAttempts}/{test.attempts}
+                        </Typography>
+                        {/* Кол-во вопрососв или кол-во выдаваемых вопрососв? */}
+                        {/* <Typography variant="body2" component="p">
+                          Кол-во вопросов: {test.tasks.length}
+                        </Typography> */}
+                        <Typography variant="body2" component="p">
+                          Длительность теста: {test.time} мин.
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        <Button 
+                          disabled={markAttempts <= 0}
+                          variant="outlined" 
+                          style = {{color:'#006F51',borderColor:'#006F51'}}
+                          onClick={()=>{
+                            if(markArray.length){
+                              // Уменьшаем кол-во попыток, ЕСЛИ ОН БЫЛ СЛЕП И ГЛУП 
+                              markArray[0].attempts -= 1
+                              db.students.update({_id:stud[0]._id}, stud[0])
                               db.students.find({}, (err, docs)=>{
                                 setStudents(docs)
                                 window.location.replace('#/work?test='+test._id +'&student='+stud[0]._id)
                               })
                             }
-                            // Редирект с id выбранного теста и id студента
-                          }
-                        }>
-                        Начать тест
-                      </Button>
-                    </CardActions>
-                  </Card>
-                </Grid>
-                )
+                            else{
+                                // Создаём оценку ДЛЯ НЕОФИТА, который в первый раз проходит тест
+                                const newMark = {
+                                  id: stud[0].marks.length+1,
+                                  id_test: test._id,
+                                  attempts: Number(test.attempts)-1,
+                                  mark:0
+                                }
+                                db.students.update({_id:stud[0]._id}, {$push:{marks:newMark}})
+                                db.students.find({}, (err, docs)=>{
+                                  setStudents(docs)
+                                  window.location.replace('#/work?test='+test._id +'&student='+stud[0]._id)
+                                })
+                              }
+                              // Редирект с id выбранного теста и id студента
+                            }
+                          }>
+                          Начать тест
+                        </Button>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                  )
+              }
+              else return false;
               })
             }
           </Grid>

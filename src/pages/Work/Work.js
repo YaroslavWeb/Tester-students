@@ -33,8 +33,9 @@ const Work = () =>{
     workTest[0].maxTasksWork != "" 
     ? Number(workTest[0].maxTasksWork) 
     : workTest[0].tasks.length
-    )
-    let setArrayTasks = ()=> {
+  )
+
+  let setArrayTasks = ()=> {
     let arrayAllTasks = []
     for (let index = 0; index < workTest[0].tasks.length; index++) {
       arrayAllTasks.push(workTest[0].tasks[index])
@@ -44,9 +45,9 @@ const Work = () =>{
       let j = Math.floor(Math.random() * (i + 1));
       [arrayAllTasks[i], arrayAllTasks[j]] = [arrayAllTasks[j], arrayAllTasks[i]];
     }
-    return(arrayAllTasks)
+    return(arrayAllTasks.slice(workTest[0].tasks.length-maxSteps))
   }
-  // Массив для id заданий
+  // Массив выдаваемых заданий
   let [arrayWorkTasks, setArrayWorkTasks] = React.useState(setArrayTasks)
 
   // Стейт хранит актуальное задание
@@ -57,10 +58,15 @@ const Work = () =>{
   let [taskCounter, setTaskCounter] = useState(1)
   
   // Максимальное кол-во баллов
-  // TODO ПЕРЕДЕЛАТЬ СЧЁТЧИК
-  let maxScore = 0;
-  arrayWorkTasks.forEach(item => maxScore+=Number(item.score))
-  
+  let [maxScore, setMaxScore] = useState(()=>{
+    let counterMaxScore=0
+    arrayWorkTasks.forEach(item=>{
+      counterMaxScore += Number(item.score)
+    })
+    return(counterMaxScore)
+  }
+  )
+
   // Попытки студента и теста
   let [allAttempts, setAllAttempts] = React.useState({
     studAttempts:workStudent[0].marks.map(mark=>{
@@ -70,15 +76,14 @@ const Work = () =>{
     maxAttempts: workTest[0].attempts
   })
 
+  // Таймер текст
+  let [timerText, setTimerText] = React.useState({min: workTest[0].time-1, sec: 59 })
 
   // Баллы за правильный ответ
   let [correctAnswerCounter, setCorrectAnswerCounter] = useState(0)
 
   // Ответ студента
   let [answerStudent, setAnswerStudent] = React.useState([]);
-
-  // Таймер текст
-  let [timerText, setTimerText] = React.useState({min: workTest[0].time-1, sec: 59 })
 
   // Массив, в котором хранятся абзацы вопроса
   let questionText = actionTask.question.split('\n')
@@ -120,8 +125,10 @@ const Work = () =>{
   let setAnswerStudentText = (inputValue) => {setAnswerStudent(inputValue)}
   
   React.useEffect(()=>{
-    console.log(`текущие баллы: ${correctAnswerCounter}, максимум баллов:${maxScore}`);
-    setAnswerStudent([])
+    console.log(`текущие баллы: ${correctAnswerCounter}, максимум баллов:${maxScore}`)
+    console.log('Выдаваемы задание', arrayWorkTasks)
+    console.log('Все задания', workTest[0]);
+    
   }, [taskCounter])
 
   let finalMarkStudnet = Math.round(correctAnswerCounter * 100 / maxScore);
@@ -187,6 +194,7 @@ const Work = () =>{
                     variant="contained" size="large" 
                     onClick={()=>{
                       checkAnswer()
+                      setAnswerStudent([])
                       setOpenCompleteDialog(true)
                     }}
                     style={{marginBottom:'15px',alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}} 
@@ -199,6 +207,7 @@ const Work = () =>{
                     style={{alignSelf: 'flex-end', color:'white',backgroundColor:'rgba(0,113,83)'}}
                     onClick={()=>{
                       checkAnswer()
+                      setAnswerStudent([])
                       taskCounter++
                       setTaskCounter(taskCounter)
                       setActionTask(arrayWorkTasks[--taskCounter])

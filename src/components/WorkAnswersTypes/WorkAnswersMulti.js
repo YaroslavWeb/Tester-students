@@ -17,13 +17,14 @@ const WorkAnswersSingle =(props) => {
             <Grid container direction="row" justify="space-between" alignItems="flex-start" style={{marginTop:'2vh', padding:'15px',borderRadius: '25px'}}>
                 {props.actionTask.answers.map(answer=>{
                     return(
-                        <FormControlLabel 
-                            key={answer.id} 
-                            onChange={getAsnwers}
-                            value={answer.id} 
-                            control={<Checkbox color="primary"/>} 
-                            label={answer.answer} 
-                        />
+                        <Grid item xs={12} sm={6} md={3} key={answer.id}>
+                            <FormControlLabel 
+                                onChange={getAsnwers}
+                                value={answer.id} 
+                                control={<Checkbox color="primary"/>} 
+                                label={answer.answer} 
+                            />
+                        </Grid>
                     )
                 })} 
             </Grid>

@@ -47,7 +47,7 @@ export default function FullScreenDialog(props) {
     ]}
   ]);
   let [changeFile, setChangeFile] = React.useState(false)
-  let titleTest, timeTest, attemptsTest, maxTasks, manualSrc;
+  let titleTest, timeTest, attemptsTest, maxTasks, manualSrc, tagsGroups=[];
   
   const addTask = () =>{
     let newTask = {
@@ -90,6 +90,12 @@ export default function FullScreenDialog(props) {
         return task
     }))
   }
+  const getGroupsTags = (tagsStud)=>{
+    tagsGroups = []
+    tagsStud.forEach(item => {
+      tagsGroups.push(item.group)
+    })
+  }
   const getPathManual = ()=>{
     manualSrc = document.getElementById('add-manual').files[0].path
   }
@@ -99,6 +105,7 @@ export default function FullScreenDialog(props) {
   const handleClose = () => {
     setOpen(false);
   };
+  
   const {students} = React.useContext(StateContext)
   
   return (
@@ -129,11 +136,9 @@ export default function FullScreenDialog(props) {
               <Button autoFocus color="inherit" onClick={()=>{ 
                 if(titleTest.value !== '' && timeTest.value !== '' && attemptsTest.value !== '' )
                 {
-                  console.log(changeFile);
-                  
                   if(changeFile)getPathManual();
                   else manualSrc = '';
-                  addTest(titleTest.value, timeTest.value, attemptsTest.value, maxTasks.value, manualSrc, tasks)
+                  addTest(titleTest.value, timeTest.value, attemptsTest.value, maxTasks.value, tagsGroups, manualSrc, tasks)
                   handleClose() 
                   props.setAlert({visible: true, text:'Тест успешно добавлен!',severity: 'success'})
                   setTimeout(() => {props.setAlert({visible: false, text:' ',severity: 'success'})}, 5000);
@@ -171,16 +176,16 @@ export default function FullScreenDialog(props) {
                   options={uniques(students, 'group')}
                   getOptionLabel={option => option.group}
                   filterSelectedOptions
+                  onChange={(e,v) => getGroupsTags(v)}
                   renderInput={(params) => (
                     <TextField
-                    fullWidth={true} 
+                      fullWidth={true} 
                       {...params}
                       variant="outlined"
                       label="Группы"
                     />
                   )}
                 />
-                
             </Grid>
               <Grid style={{padding:5}} item xs={6} sm={6}  lg={2}>
                 <TextField
