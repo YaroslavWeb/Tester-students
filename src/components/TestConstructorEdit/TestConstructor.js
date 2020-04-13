@@ -18,7 +18,7 @@ import IconButton from '@material-ui/core/IconButton';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import Divider from '@material-ui/core/Divider'
 import TestTaskConstructor from "./TestTaskConstructor";
-
+import Autocomplete from '@material-ui/lab/Autocomplete';
 const useStyles = makeStyles(theme => ({
   appBar: {
     position: 'relative',
@@ -53,7 +53,13 @@ export default function FullScreenDialog(props) {
   const getPathManual = ()=>{
     manualSrc = document.getElementById('edit-manual').files[0].path
   }
-
+  const {students} = React.useContext(StateContext)
+  function uniques(array, key) {
+    return array.reduce((acc, curr) => {
+        if (!acc.find(item => item[key] === curr[key])) { acc.push(curr); }
+        return acc;
+      }, []);
+    }
   return (
     <div>
       <IconButton aria-label="edit" onClick ={handleClickOpen}>
@@ -98,7 +104,7 @@ export default function FullScreenDialog(props) {
             alignItems="center"
             style={{padding:'10px'}}
           >
-            <Grid item style={{padding:5}} xs={6} sm={12} lg={10}>
+            <Grid item style={{padding:5}} xs={4} sm={8} lg={6}>
               <TextField
                 label="Название теста" 
                 defaultValue={props.test.theme}
@@ -106,6 +112,24 @@ export default function FullScreenDialog(props) {
                 variant="outlined" 
                 fullWidth={true} 
               />
+            </Grid>
+            <Grid item style={{padding:5}} xs={2} sm={4} lg={4}>
+               <Autocomplete
+                  multiple
+                  id="tags-outlined"
+                  options={uniques(students, 'group')}
+                  getOptionLabel={option => option.group}
+                  filterSelectedOptions
+                  renderInput={(params) => (
+                    <TextField
+                    fullWidth={true} 
+                      {...params}
+                      variant="outlined"
+                      label="Группы"
+                    />
+                  )}
+                />
+                
             </Grid>
 
             <Grid style={{padding:5}} item xs={6} sm={6}  lg={2}>
