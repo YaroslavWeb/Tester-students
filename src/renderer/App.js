@@ -49,6 +49,7 @@ const App = () =>{
     db.tests.insert(newTest)
     db.tests.find({}, (err, docs)=>{setTests(docs)})
   }
+
   const addStudent = (name, group) =>{
     let namesArr = name
         .split("\n")
@@ -66,6 +67,7 @@ const App = () =>{
     db.students.insert(puplesObj)
     db.students.find({}, (err, docs)=>{setStudents(docs)})
   }
+
   const editStudent = (id, name, group, newMarks, newAttempts) =>{
     students.forEach(student => {
       if(student._id == id){
@@ -97,33 +99,37 @@ const App = () =>{
     }
     db.students.find({}, (err, docs)=>{setStudents(docs)})
   }
+
+
   const removeStudentsByGroup = (group) =>{
     db.students.remove({group}, {multi: true})
     db.students.find({}, (err, docs)=>{setStudents(docs)})
   }
+
   const removeTest = (id_test) =>{
     db.tests.remove({_id:id_test})
     db.tests.find({}, (err, docs)=>{setTests(docs)})
   }
+
   return(
     <StateContext.Provider value={{students, setStudents, tests, setTests, teachers, addTest, removeTest, editTest}}>
       <Router>
         <div>
         <main>
-        <Route exact path="/" render={() => <Home/>}/>
-        <Route path="/students" render={() => 
-          <Students
-            editStudent={editStudent}
-            addStudent={addStudent}
-            removeStudents={removeStudents}
-            removeStudentsByGroup={removeStudentsByGroup}
-        />}/>
+          <Route exact path="/" render={() => <Home/>}/>
+          <Route path="/students" render={() => 
+            <Students
+              editStudent={editStudent}
+              addStudent={addStudent}
+              removeStudents={removeStudents}
+              removeStudentsByGroup={removeStudentsByGroup}
+          />}/>
 
-        <Route path="/test" render={() => <Test/>}/>
+          <Route path="/test" render={() => <Test/>}/>
 
-        <Route path="/info" render={() => <Info/>}/>
-                     
-        <Route path="/work" render={() => <Work />}/>
+          <Route path="/info" render={() => <Info/>}/>
+                      
+          <Route path="/work" render={() => <Work />}/>
         </main>
        </div>
       </Router>

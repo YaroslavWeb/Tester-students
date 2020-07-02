@@ -16,7 +16,7 @@ const Info = props =>{
           Поле "Группа", также как и поле "Студент" является обязательным к заполнению. <br/>
           Пример правильного заполнения: <br/>
           <div style ={{width:'100%',display:'flex', justifyContent:'center', padding:'10px' }}>
-          <img  style = {{height:'auto', width:'75%', }} src="D:\Diplom_2.0\Tester-students\public\assets\info\addStudent.gif"/> <br/>
+          <img alt="Изображение не найдено" style = {{height:'auto', width:'75%', }} src="E:\programming\Tester-students\public\assets\info\addStudent.gif"/> <br/>
           </div>
           Удаление студента реализуется через клик на чекбокс слева от ФИО студента и нажатие кнопки с изображением мусорной корзины. <br/>
           Чтобы удалить группу студентов необходимо нажать на кноку "Удалить группу" и ввести название группы или выбрать нужную из выпадающего списка<br/>

@@ -7,7 +7,7 @@ import TeacherHeader from '../../components/TeacherHeader'
 
 const Students = (props) =>{
     const [open, setOpen] = React.useState({visible: false, text:'',severity:''});
-    if(document.cookie != '')
+    if(document.cookie !== '')
     return(
       <div>
       <TeacherHeader/>

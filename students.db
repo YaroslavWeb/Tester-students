@@ -1,3 +1,87 @@
-{"name":"Алтаев А.А.","group":"ИС-19","marks":[],"_id":"1RYJ7D7i56FBYEy7"}
-{"name":"3123","group":"HE-16","marks":[],"_id":"JAqvAha8O6IQN9xa"}
-{"name":"Татаринов Я.А.","group":"ПИ-16","marks":[],"_id":"z9wPijSgGdsaogKG"}
+{"name":"Легкодимова Марианна","group":"ИС-20","marks":[],"_id":"xsCgzBftK8LUr8qB"}
+{"name":"Изюмова Аза","group":"ИС-20","marks":[],"_id":"Rxu1ctlBRfSOlSf8"}
+{"name":"Куксов Максимильян","group":"ИС-20","marks":[],"_id":"EuvOlZQjczrah9xn"}
+{"name":"Юракин Трофим","group":"ИС-20","marks":[],"_id":"7Md4pKqO3iwYUDpT"}
+{"name":"Якунчикова Христина","group":"ИС-20","marks":[],"_id":"YpYxlat8U4cWmJrG"}
+{"name":"Просвирнина Доминика","group":"ИС-20","marks":[],"_id":"Q4l4QaRd35bRnlsw"}
+{"name":"Балабанов Владилен","group":"ИС-20","marks":[],"_id":"GkE63EakfjwFEAmd"}
+{"name":"Ретюнскиха Марианна","group":"ИС-20","marks":[],"_id":"QmdqixsrSAjo7LmC"}
+{"name":"Лескова Зинаида","group":"ИС-20","marks":[],"_id":"09Fokh7VI0Swwt66"}
+{"name":"Каценеленбоген Савелий","group":"ИС-20","marks":[],"_id":"9vfKYfv0lfC7sn4m"}
+{"name":"Коньяков Платон","group":"ИС-20","marks":[],"_id":"WFqTgIL8Y3gdN9Pn"}
+{"name":"Сиясинова Рената","group":"ИС-20","marks":[],"_id":"yE7QNPGGIfAFF6RH"}
+{"name":"Куклачёва Варвара","group":"ИС-20","marks":[],"_id":"6fd2CE6Hq3AqZ8Rs"}
+{"name":"Шарапов Сократ","group":"ИС-20","marks":[],"_id":"CapfASxJPlUg2b4L"}
+{"name":"Дубиновский Андриян","group":"ИС-20","marks":[],"_id":"kSRHGTZ0r7vaL0gP"}
+{"name":"Должикова Марианна","group":"ИС-20","marks":[],"_id":"4nhhPxkPnQXhEVxs"}
+{"name":"Балин Онуфрий","group":"ИС-20","marks":[],"_id":"NxRjgsspGLfW9df6"}
+{"name":"Куимов Наум","group":"ИС-20","marks":[],"_id":"wSzFR8vhYb8QlHPS"}
+{"name":"Толбоева Зинаида","group":"ИС-20","marks":[],"_id":"ys3DS72t0dX9VwZn"}
+{"name":"Нагиева Пелагея","group":"ИС-20","marks":[],"_id":"CQLdBJe88axm2hhv"}
+{"$$deleted":true,"_id":"09Fokh7VI0Swwt66"}
+{"$$deleted":true,"_id":"4nhhPxkPnQXhEVxs"}
+{"$$deleted":true,"_id":"6fd2CE6Hq3AqZ8Rs"}
+{"$$deleted":true,"_id":"7Md4pKqO3iwYUDpT"}
+{"$$deleted":true,"_id":"9vfKYfv0lfC7sn4m"}
+{"$$deleted":true,"_id":"CQLdBJe88axm2hhv"}
+{"$$deleted":true,"_id":"CapfASxJPlUg2b4L"}
+{"$$deleted":true,"_id":"EuvOlZQjczrah9xn"}
+{"$$deleted":true,"_id":"GkE63EakfjwFEAmd"}
+{"$$deleted":true,"_id":"NxRjgsspGLfW9df6"}
+{"$$deleted":true,"_id":"Q4l4QaRd35bRnlsw"}
+{"$$deleted":true,"_id":"QmdqixsrSAjo7LmC"}
+{"$$deleted":true,"_id":"Rxu1ctlBRfSOlSf8"}
+{"$$deleted":true,"_id":"WFqTgIL8Y3gdN9Pn"}
+{"$$deleted":true,"_id":"YpYxlat8U4cWmJrG"}
+{"$$deleted":true,"_id":"kSRHGTZ0r7vaL0gP"}
+{"$$deleted":true,"_id":"wSzFR8vhYb8QlHPS"}
+{"$$deleted":true,"_id":"xsCgzBftK8LUr8qB"}
+{"$$deleted":true,"_id":"yE7QNPGGIfAFF6RH"}
+{"$$deleted":true,"_id":"ys3DS72t0dX9VwZn"}
+{"name":"Легкодимова Марианна","group":"ПИ-20","marks":[],"_id":"obYGb5T2X8tuPJpG"}
+{"name":"Изюмова Аза","group":"ПИ-20","marks":[],"_id":"JjE8JGBUQ35MLfB9"}
+{"name":"Куксов Максимильян","group":"ПИ-20","marks":[],"_id":"3amjtleP4JSaxVef"}
+{"name":"Юракин Трофим","group":"ПИ-20","marks":[],"_id":"B2Yo19UPHur5Mfoo"}
+{"name":"Якунчикова Христина","group":"ПИ-20","marks":[],"_id":"7SAiVcqsIXSsbsl8"}
+{"name":"Просвирнина Доминика","group":"ПИ-20","marks":[],"_id":"okxnSKb7m6pKcSjG"}
+{"name":"Балабанов Владилен","group":"ПИ-20","marks":[],"_id":"l7XAJQnYkpePD6RJ"}
+{"name":"Ретюнскиха Марианна","group":"ПИ-20","marks":[],"_id":"vNLkyEr5sAfLUdLZ"}
+{"name":"Лескова Зинаида","group":"ПИ-20","marks":[],"_id":"PMQmijmIlVTpMes5"}
+{"name":"Каценеленбоген Савелий","group":"ПИ-20","marks":[],"_id":"gfEE1yrkoUOcOi1n"}
+{"name":"Коньяков Платон","group":"ПИ-20","marks":[],"_id":"MoSKCOXWdr3El789"}
+{"name":"Сиясинова Рената","group":"ПИ-20","marks":[],"_id":"VZQQlQHRWD7oArXp"}
+{"name":"Куклачёва Варвара","group":"ПИ-20","marks":[],"_id":"QgObyLWmPK0PE2aD"}
+{"name":"Шарапов Сократ","group":"ПИ-20","marks":[],"_id":"9CkUJpqpOIeXnbWS"}
+{"name":"Дубиновский Андриян","group":"ПИ-20","marks":[],"_id":"r7tmsLm1JV27RsEi"}
+{"name":"Должикова Марианна","group":"ПИ-20","marks":[],"_id":"XRKMUzoXQxnnLlFa"}
+{"name":"Балин Онуфрий","group":"ПИ-20","marks":[],"_id":"aFY0sx4sLCvicQFM"}
+{"name":"Куимов Наум","group":"ПИ-20","marks":[],"_id":"AXQkYF76JAqvOW5k"}
+{"name":"Толбоева Зинаида","group":"ПИ-20","marks":[],"_id":"yaEQtxNGuYJ6LJNf"}
+{"name":"Нагиева Пелагея","group":"ПИ-20","marks":[],"_id":"dzeeYDgXbKvBOflx"}
+{"name":"Круглова Тамара","group":"ИС-19","marks":[],"_id":"ZxVz97kO7NZQD0Ay"}
+{"name":"Соломахина Софья","group":"ИС-19","marks":[],"_id":"efPW6zfEgW1VMVrl"}
+{"name":"Болотников Архип","group":"ИС-19","marks":[],"_id":"QVPoxn0T8808m80S"}
+{"name":"Ахвледиани Марина","group":"ИС-19","marks":[],"_id":"MNfEbNRCTKY8B9rW"}
+{"name":"Бондарчука Кира","group":"ИС-19","marks":[],"_id":"pwXXfnhQqnjZl6pX"}
+{"name":"Князев Георгий","group":"ИС-19","marks":[],"_id":"PIWQDY3PNT0rsiKG"}
+{"name":"Глускина Арина","group":"ИС-19","marks":[],"_id":"g8i0Z0VnJqVVCbEN"}
+{"name":"Желвакова Лариса","group":"ИС-19","marks":[],"_id":"fgsAuuJimtfiaIii"}
+{"name":"Аспидов Аким","group":"ИС-19","marks":[],"_id":"wqKD4Bi3IIYru5Bn"}
+{"name":"Зубков Аристарх","group":"ИС-19","marks":[],"_id":"IzLIqQ7cyteJIYXG"}
+{"name":"Гориславский Моисей","group":"ИС-19","marks":[],"_id":"GAVVEeFsxKoHq5Tv"}
+{"name":"Федоренко Мартын","group":"ИС-19","marks":[],"_id":"EC600hiHefLbs74Y"}
+{"name":"Буриличева Вера","group":"ИС-19","marks":[],"_id":"wNj5dZD8AaNwNlNi"}
+{"name":"Копейкина Марфа","group":"ИС-19","marks":[],"_id":"o4vQQTeCJUDnKxJG"}
+{"name":"Кылымныка Ангелина","group":"ИС-19","marks":[],"_id":"kJOT9ar8dN9Etv6d"}
+{"name":"Якимова Ульяна","group":"ИС-19","marks":[],"_id":"p1M48w09LsivFunt"}
+{"name":"Поварницына Валерия","group":"ИС-19","marks":[],"_id":"ic0o2XBjM70EUQ7Z"}
+{"name":"Милова Ираида","group":"ИС-19","marks":[],"_id":"nCEzTLAqPaCcAAs6"}
+{"name":"Толстобров Дмитрий","group":"ИС-19","marks":[],"_id":"glKF9lerqilMSBql"}
+{"name":"Кабацкий Михей","group":"ИС-19","marks":[],"_id":"zPHj4vAAO90bBDmm"}
+{"name":"Федоренко Мартын","group":"ПИ-20","marks":[],"_id":"EC600hiHefLbs74Y"}
+{"$$deleted":true,"_id":"3amjtleP4JSaxVef"}
+{"$$deleted":true,"_id":"7SAiVcqsIXSsbsl8"}
+{"$$deleted":true,"_id":"9CkUJpqpOIeXnbWS"}
+{"$$deleted":true,"_id":"AXQkYF76JAqvOW5k"}
+{"$$deleted":true,"_id":"B2Yo19UPHur5Mfoo"}
+{"$$deleted":true,"_id":"EC600hiHefLbs74Y"}
